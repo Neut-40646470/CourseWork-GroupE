@@ -19,7 +19,7 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     
-    - name: build with Maven
+    - name: Build with Maven
       run: mvn clean package
 
     - name: Build Docker Image
