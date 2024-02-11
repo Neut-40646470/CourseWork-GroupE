@@ -19,9 +19,14 @@ jobs:
         java-version: '10'
         distribution: 'adopt'
     
-    - name: Build with Maven
+    - name: clean with Maven
       run: mvn clean package
 
 
     - name: Build Docker Image
-      run: docker build -t v0.1
+      run: docker build -t appcontimg
+
+ - name: Run image
+        run: docker run --name appcont -d appcontimg
+      - name: view logs
+        run: docker logs appcont
