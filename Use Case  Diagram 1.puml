@@ -1,0 +1,27 @@
+@startuml
+rotate
+skinparam defaultFontSize 14
+
+actor employee as "Marketing Department Employee"
+actor "Organisation" as organisation
+
+
+actor organisation
+
+rectangle "Produce Country  Population Report"  {
+    usecase "Access Database" as access_database
+    usecase "Select Area Requirement" as select_requirement
+    usecase "Retrieve Population Data" as retrieve_data
+    usecase "Organise Countries by Population" as organise_data
+    usecase "Produce Report" as produce_report
+    usecase "Present Report" as present_report
+
+    employee -> access_database: Starts request
+    access_database --> select_requirement: Selects Requirement
+    select_requirement --> retrieve_data: Determines Requirement
+    retrieve_data --> organise_data: Retrieves Population Data
+    organise_data --> produce_report: Organises Countries by Population
+    produce_report -> present_report: Produces and Presents Report
+    present_report -> organisation: Presents Report
+}
+@enduml
