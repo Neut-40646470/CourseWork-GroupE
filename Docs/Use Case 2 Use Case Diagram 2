@@ -35,30 +35,3 @@ None.
 
 **Sub-Variations:**
 None
-
-
-```
-@startuml
-skinparam actorStyle awesome
-top to bottom direction
-actor Marketing as "Marketing Employee"
-rectangle Database
-rectangle "System" {
-    usecase UC1 as "Top Population of Countries"
-    usecase UC2 as "Print Top Population by Continent"
-    usecase UC3 as "Support Business Decisions"
-    usecase UC4 as "influence Marketing Strategies"
-    Marketing - UC1
-    UC1 --|> UC2 : include
-    UC1 - Database : extend
-    UC2 - UC3 : report to help
-    UC2 - UC4 : report will help
-}
-@enduml
-```
-
-
-![Use Case1](https://github.com/Neut-40646470/CourseWork-GroupE/assets/157484405/d6895202-9319-4d70-bf11-95256b8a24ef)
-
-
-[https://github.com/40582347/Proj1/blob/master/Use%20Case.puml](url)
