@@ -1,0 +1,38 @@
+@startuml
+skinparam actorStyle awesome
+
+top to bottom direction
+
+
+actor Marketing as "Marketing Employee"
+rectangle Database
+
+rectangle "System" {
+    usecase UC1 as "Top Population of Cities"
+
+    usecase UC2 as "Print Top Populated Cities"
+
+    usecase UCworld as "Population by World"
+
+    usecase UCcontinent as "Population by Continent"
+
+    usecase UCRegioin as "Population by Region"
+
+    usecase UC3 as "Support Business Decisions"
+
+    usecase UC4 as "influence Marketing Strategies"
+
+    Marketing - UC1
+    UC1 --|> UC2 : include
+    UC1 - Database : extend
+    UC2 --> UCworld
+    UC2 --> UCcontinent
+    UC2 --> UCRegioin
+    UCworld -down->UC3 : what country can create the most revenue
+    UCworld -down->UC4 : most funded advertising
+    UCcontinent -down->UC3 : What continent to focus on
+    UCcontinent -down->UC4 : targeted advertising
+    UCRegioin -down->UC3 : refine market decisions
+    UCRegioin -down->UC4 : targeted sales campaigns
+}
+@enduml
