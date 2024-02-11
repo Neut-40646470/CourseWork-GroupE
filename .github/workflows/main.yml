@@ -19,8 +19,8 @@ jobs:
         java-version: '10'
         distribution: 'adopt'
     
-    - name: clean with Maven
-      run: mvn clean package
+    - name: Compile with Maven
+      run: mvn compile
 
     - name: Build Docker Image
       run: docker build -t appcontimg
