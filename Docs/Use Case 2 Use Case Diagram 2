@@ -1,0 +1,64 @@
+**Goal in Context**
+As a marketing department employee, I want to produce a report of a given top number of populated countries in the world/continent/region so that I can support and influence business decisions of my organisation with regards to marketing strategies.
+
+**Scope:**
+Produce a report for the organisation to list countries by population size.
+
+**Level:** 
+User goal.
+
+**Preconditions:**
+The marketing department employee (Primary Actor) has access to the data.
+
+**Success End Condition:** 
+The report is generated and available for the marketing department employee to use.
+
+**Failed End Condition:** 
+The report generation fails to generate.
+
+**Primary Actor:** 
+Marketing department employee.
+
+**Trigger:** 
+The marketing department employee starts the request to produce the report.
+
+**Main Success Scenario:**
+Marketing department employee accesses the database.
+Marketing department employee is able to choose the area requirement (world/continent/region).
+The system retrieves population data for all countries (world/continent/region).
+The system organizes the countries by population from largest to smallest.
+Marketing department employee can generate a report on country populations.
+The report is presented to the marketing department employee.
+
+**Extensions:**
+None.
+
+**Sub-Variations:**
+None
+
+
+```
+@startuml
+skinparam actorStyle awesome
+top to bottom direction
+actor Marketing as "Marketing Employee"
+rectangle Database
+rectangle "System" {
+    usecase UC1 as "Top Population of Countries"
+    usecase UC2 as "Print Top Population by Continent"
+    usecase UC3 as "Support Business Decisions"
+    usecase UC4 as "influence Marketing Strategies"
+    Marketing - UC1
+    UC1 --|> UC2 : include
+    UC1 - Database : extend
+    UC2 - UC3 : report to help
+    UC2 - UC4 : report will help
+}
+@enduml
+```
+
+
+![Use Case1](https://github.com/Neut-40646470/CourseWork-GroupE/assets/157484405/d6895202-9319-4d70-bf11-95256b8a24ef)
+
+
+[https://github.com/40582347/Proj1/blob/master/Use%20Case.puml](url)
