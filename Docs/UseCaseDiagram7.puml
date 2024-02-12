@@ -1,0 +1,36 @@
+@startuml
+skinparam actorStyle awesome
+top to bottom direction
+
+rectangle Database
+
+actor "Marketing Employee" as User
+
+rectangle "System" {
+    usecase UC1 as "Total Population Report"
+    usecase UC2 as "Filter Report Requirements"
+
+    User --> UC1 : Initiates
+
+}
+
+rectangle "System" {
+    usecase UC1 as "Total Population Report"
+    usecase UC2 as "Filter Report Requirements (Geographical Area)"
+    usecase UC4 as "Retrieve Population Data"
+    usecase UC5 as "Sort Population by City/Non-City"
+    usecase UC6 as "Generate Report"
+    usecase UC7 as "Support Strategic Business Decisions"
+    usecase UC8 as "Produce (%)"
+
+    UC1 --> UC4
+    UC5 --> UC8
+    UC5 --> UC7
+    UC4 --> UC2
+    UC2 --> UC5
+    UC1 - Database : extend
+    UC8 --> UC6
+    UC8 --> UC7
+    UC6 --> UC7
+}
+@enduml
