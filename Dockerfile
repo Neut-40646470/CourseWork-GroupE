@@ -1,5 +1,5 @@
 # Use an OpenJDK runtime as base image
-FROM openjdk:10 AS builder
+FROM openjdk:17 AS builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/seMethods-0.1.jar /app/seMethods.jar
 
 # Use an OpenJDK runtime as final base image
-FROM openjdk:10
+FROM openjdk:17
 
 # Set the working directory in the container
 WORKDIR /app
