@@ -10,9 +10,6 @@ COPY target/seMethods-0.1.jar /app/seMethods.jar
 # Use an OpenJDK runtime as final base image
 FROM openjdk:17
 
-# Set the working directory in the container
-WORKDIR /app
-
 # Copy the JAR file from the builder stage to the final container
 COPY --from=builder /app/seMethods.jar /app/seMethods.jar
 
