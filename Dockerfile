@@ -14,4 +14,4 @@ FROM openjdk:17
 COPY --from=builder /app/seMethods.jar /app/seMethods.jar
 
 # Starting command to run the application
-ENTRYPOINT ["java", "-cp", "seMethods.jar", "com.napier.sem.App"]
+ENTRYPOINT ["java", "-cp", "seMethods.jar", "com.napier.sem.Main"]
