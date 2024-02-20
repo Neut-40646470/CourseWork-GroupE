@@ -8,4 +8,4 @@ WORKDIR /app
 COPY target/seMethods-0.1.jar /app/seMethods.jar
 
 # Starting command to run the application
-CMD ["java", "-jar", "seMethods.jar"]
+CMD ["java", "-jar", "seMethods.jar", "com.napier.sem.Main"]
