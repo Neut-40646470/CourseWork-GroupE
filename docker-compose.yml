@@ -14,11 +14,8 @@ services:
   # Configuration for the database container
   db:
     image: mysql  # Use the official MySQL Docker image from Docker Hub
-<<<<<<< HEAD
     command: --default-authentication-plugin=mysql_native_password
     restart: always
-=======
->>>>>>> 4faa190 (Added docker compose to run both containers at once.)
     environment:
       MYSQL_ROOT_PASSWORD: 123  # Set the root password for MySQL
     ports:
