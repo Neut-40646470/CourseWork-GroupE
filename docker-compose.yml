@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    # Build configuration for the application container
+    build:
+      context: .  # Use the current directory as the build context
+      dockerfile: Dockerfile  # Use the Dockerfile in the current directory
+    ports:
+      - "8080:8080"  # Map port 8080 on the host to port 8080 in the container
+    depends_on:
+      - db  # Check db is started before app
+
+  # Configuration for the database container
+  db:
+    image: mysql  # Use the official MySQL Docker image from Docker Hub
+    environment:
+      MYSQL_ROOT_PASSWORD: 123  # Set the root password for MySQL
+    ports:
+      - "3306:3306"  # Map port 3306 on the host to port 3306 in the container
+    volumes:
+      - ./db/world.sql:/docker-entrypoint-initdb.d/world.sql  # Mount the SQL script into the containers init directory
