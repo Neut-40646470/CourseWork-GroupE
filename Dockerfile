@@ -5,7 +5,7 @@ FROM openjdk:17
 WORKDIR /app
 
 # Copy the built JAR file from the target directory to the container
-COPY target/seMethods-0.1.jar /app/seMethods.jar
+COPY target/seMethods-0.1-jar-with-dependencies.jar /app/seMethods.jar
 
 # Starting command to run the application
 CMD ["java", "-jar", "seMethods.jar", "com.napier.sem.Main"]
