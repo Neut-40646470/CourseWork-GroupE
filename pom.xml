@@ -43,7 +43,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.napier.sem.App</mainClass> <!-- Adjust to your main class -->
+                            <mainClass>com.napier.sem.Main</mainClass> <!-- Adjust to your main class -->
                         </manifest>
                     </archive>
                     <descriptorRefs>
