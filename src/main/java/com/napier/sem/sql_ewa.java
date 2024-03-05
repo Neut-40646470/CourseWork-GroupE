@@ -22,4 +22,13 @@ public class sql_ewa {
     "ON country.capital = city.id
     "WHERE country.region = "Caribbean"
     "ORDER BY country.Population DESC;
+
+    //DISTRICT - Fetch all CITIES from SELECTED DISTRICT
+    "SELECT city.Name, country.Name AS Country, city.District, city.Population AS Population
+    "FROM world.city
+    "JOIN world.country ON city.CountryCode = country.Code
+    "WHERE city.District = "California"
+    "ORDER BY city.Population DESC;
+
+    
 }
