@@ -6,14 +6,14 @@ public class sql_chris {
     "FROM world.city;"
 
 
-  //WORLD - Fetch population of CAPITAL CITIES
+  //WORLD - Fetch population of CAPITAL CITIES (Amended name of column to fit report requirement)
  //(Outputs country joined with its capital city followed by population in largest to smallest/DESC order)
-    "SELECT co.NAME AS Country,""
-    "p.NAME AS CapitalCity,""
-    "p.Population AS Population""
-    "FROM world.city p""
-    "JOIN world.country co ON p.ID = co.Capital""
-    "ORDER BY p.Population DESC;""
+  "SELECT co.NAME AS Country,"
+    "p.NAME AS Name,"
+    "p.Population AS Population"
+    "FROM world.city p"
+    "JOIN world.country co ON p.ID = co.Capital"
+    "ORDER BY p.Population DESC;"
 
 
      //COUNTRY - Fetch population of CITIES in SELECTED COUNTRY
