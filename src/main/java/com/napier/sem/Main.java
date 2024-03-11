@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         menuMain();
-
+//            MAIN STUFF
     }
 
     public static void menuMain(){
