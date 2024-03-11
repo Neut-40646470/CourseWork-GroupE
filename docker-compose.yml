@@ -20,5 +20,5 @@ services:
       MYSQL_ROOT_PASSWORD: 123  # Set the root password for MySQL
     ports:
       - "3306:3306"  # Map port 3306 on the host to port 3306 in the container
-#    volumes:
-#      - ./db/world.sql:/docker-entrypoint-initdb.d/world.sql  # Mount the SQL script into the containers init directory
+    volumes:
+      - ./db/world.sql:/docker-entrypoint-initdb.d/world.sql  # Mount the SQL script into the containers init directory

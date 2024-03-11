@@ -1,5 +1,8 @@
 package com.napier.sem;
+
 import java.sql.*;
+import java.util.ArrayList;
+
 public class App {
     /**
      * Connection to MySQL database.
@@ -9,39 +12,29 @@ public class App {
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
-    {
-        try
-        {
+    public void connect() {
+        try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-        }
-        catch (ClassNotFoundException e)
-        {
+        } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
         int retries = 10;
-        for (int i = 0; i < retries; ++i)
-        {
+        for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
-            try
-            {
+            try {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "123");
                 System.out.println("Successfully connected");
                 break;
-            }
-            catch (SQLException sqle)
-            {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+            } catch (SQLException sqle) {
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
-            }
-            catch (InterruptedException ie)
-            {
+            } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
@@ -50,63 +43,51 @@ public class App {
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect()
-    {
-        if (con != null)
-        {
-            try
-            {
+    public void disconnect() {
+        if (con != null) {
+            try {
                 // Close connection
                 con.close();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
         }
     }
-    public Cities getCities(int ID){
 
+    public ArrayList<Cities> getAllCities() {
         try {
-            // create an SQL statement
-
+            // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, CountryCode, District, Population "
-                            + "FROM world "
-                            + "WHERE city.ID = " + ID;
+                    "SELECT city.Name, country.Name AS Country, city.District, city.Population AS Population "
+                            + "FROM world.city"
+                            + " JOIN world.country ON city.CountryCode = country.Code "
+                            + " ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next()) {
-                Cities city = new Cities();
-                city.ID = rset.getInt("ID");
-                city.Name = rset.getString("Name");
-                city.CountryCode = rset.getString("CountryCode");
-                city.Population = rset.getInt("Population");
-                return city;
-            } else
-                return null;
-        }
-        catch (Exception e)
-        {
+            // Extract employee information
+            ArrayList<Cities> city = new ArrayList<>();
+            while (rset.next()) {
+                Cities city1 = new Cities();
+//                city1.ID = rset.getInt("city.ID");
+                city1.Name = rset.getString("city.Name");
+                city1.CountryCode = rset.getString("city.CountryCode");
+                city1.District = rset.getString("city.District");
+                city1.Population = rset.getInt("city.Population");
+                city.add(city1);
+            }
+            return city;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("FAILED TO GET CITY");
+            System.out.println("FAILED TO GET CITY ARRAY");
             return null;
         }
     }
-
-    public void displayCity(Cities city)
-    {
-        if (city != null)
-        {
-            System.out.println(
-                    city.ID + " "
-                            + city.Name + " "
-                            + city.CountryCode + "\n"
-                            + city.Population + "\n");
-        }
-    }
 }
+
+//                    "SELECT city.Name, country.Name AS Country, city.District, city.Population AS Population "
+//                    + "FROM world.city"
+//                    +" JOIN world.country ON city.CountryCode = country.Code "
+//                    +"WHERE city.ID = " + ID
+//                    +" ORDER BY city.Population DESC";
