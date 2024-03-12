@@ -1,6 +1,5 @@
 package com.napier.sem;
 
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -62,6 +61,10 @@ public void connect(String location, int delay) {
             System.out.println("Successfully connected");
             break;
         } catch (SQLException sqle) {
+            if(con == null)
+            {
+                System.out.println("Test Pass");
+            }
             System.out.println("Failed to connect to database attempt " +                                  Integer.toString(i));
             System.out.println(sqle.getMessage());
         } catch (InterruptedException ie) {
@@ -101,7 +104,7 @@ public void connect(String location, int delay) {
             ArrayList<Cities> city = new ArrayList<>();
             while (rset.next()) {
                 Cities city1 = new Cities();
-//                city1.ID = rset.getInt("ID");
+                city1.ID = rset.getInt("ID");
                 city1.Name = rset.getString("Name");
                 city1.CountryCode = rset.getString("CountryCode");
                 city1.District = rset.getString("District");
@@ -134,6 +137,7 @@ public void connect(String location, int delay) {
             System.out.println(cityString);
         }
     }
+
 }
 
 //                    "SELECT city.Name, country.Name AS Country, city.District, city.Population AS Population "
