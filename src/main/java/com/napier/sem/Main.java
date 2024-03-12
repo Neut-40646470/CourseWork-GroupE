@@ -11,7 +11,13 @@ public class Main {
         // Create new Application
         App a = new App();
         // Connect to database
-        a.connect();
+//        a.connect();
+
+        if(args.length < 1){
+            a.connect("localhost:33060", 0);
+        }else{
+            a.connect("db:3306", 30000);
+        }
 
         ArrayList<Cities> cities = a.getAllCities();
         // Print out all cities

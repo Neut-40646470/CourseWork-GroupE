@@ -1,24 +1,38 @@
-version: '3.8'
+#version: '3.8'
+#
+#services:
+#  app:
+#    # Build configuration for the application container
+#    build:
+#      context: .  # Use the current directory as the build context
+#      dockerfile: Dockerfile  # Use the Dockerfile in the current directory
+#    ports:
+#      - "8080:8080"  # Map port 8080 on the host to port 8080 in the container
+#    depends_on:
+#      - db  # Check db is started before app
+#
+#  # Configuration for the database container
+#  db:
+#    image: mysql  # Use the official MySQL Docker image from Docker Hub
+#    command: --default-authentication-plugin=mysql_native_password
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: 123  # Set the root password for MySQL
+#    ports:
+#      - "3303:3306"  # Map port 3306 on the host to port 3306 in the container
+#    volumes:
+#      - ./db/world.sql:/docker-entrypoint-initdb.d/world.sql  # Mount the SQL script into the containers init directory
 
+version: '3'
 services:
+  # Application Dockerfile is in same folder which is .
   app:
-    # Build configuration for the application container
-    build:
-      context: .  # Use the current directory as the build context
-      dockerfile: Dockerfile  # Use the Dockerfile in the current directory
-    ports:
-      - "8080:8080"  # Map port 8080 on the host to port 8080 in the container
-    depends_on:
-      - db  # Check db is started before app
+    build: .
 
-  # Configuration for the database container
+  # db is is db folder
   db:
-    image: mysql  # Use the official MySQL Docker image from Docker Hub
+    build: db/.
     command: --default-authentication-plugin=mysql_native_password
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 123  # Set the root password for MySQL
     ports:
-      - "3303:3306"  # Map port 3306 on the host to port 3306 in the container
-    volumes:
-      - ./db/world.sql:/docker-entrypoint-initdb.d/world.sql  # Mount the SQL script into the containers init directory
+      - "33060:3306"
