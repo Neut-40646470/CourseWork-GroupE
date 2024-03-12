@@ -11,6 +11,6 @@
 #CMD ["java", "-jar", "seMethods.jar", "com.napier.sem.Main"]
 
 FROM openjdk:latest
-COPY target/seMethods-0.1-jar-with-dependencies.jar /app/seMethods.jar
-WORKDIR /app
-ENTRYPOINT ["java", "-jar", "seMethods.jar", "db:3306", "30000"]
+COPY ./target/seMethods-0.1-jar-with-dependencies.jar /tmp
+WORKDIR /tmp
+ENTRYPOINT ["java", "-jar", "seMethods-0.1-jar-with-dependencies.jar", "db:3306", "30000"]
