@@ -90,18 +90,18 @@ public void connect(String location, int delay) {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT c.Name AS Name, co.Name AS Country, c.District, c.Population "
-                            + " FROM world.city c "
-                            + " JOIN world.country co ON c.CountryCode = co.Code "
-                            + " WHERE co.Name = 'Country Name Here' "
-                            + " ORDER BY c.Population DESC; ";
+                    "SELECT city.ID, city.Name AS Name, city.CountryCode, "
+                        + " country.Name AS Country, city.District, city.Population "
+                        + "FROM world.city "
+                        + "JOIN world.country ON city.CountryCode = country.Code";
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
             ArrayList<Cities> city = new ArrayList<>();
             while (rset.next()) {
                 Cities city1 = new Cities();
-//                city1.ID = rset.getInt("city.ID");
+//                city1.ID = rset.getInt("ID");
                 city1.Name = rset.getString("Name");
                 city1.CountryCode = rset.getString("CountryCode");
                 city1.District = rset.getString("District");

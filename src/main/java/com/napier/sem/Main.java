@@ -23,7 +23,8 @@ public class Main {
         // Print out all cities
         if (cities != null) {
             for (Cities city : cities) {
-                System.out.println( city.Name + ", " + city.CountryCode + ", " + city.District + ", " + city.Population);
+
+                System.out.println(city.ID + ", " + city.Name + ", " + city.CountryCode + ", " + city.District + ", " + city.Population);
             }
         } else {
             System.out.println("No cities found.");
