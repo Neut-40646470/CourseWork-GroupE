@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -60,10 +61,11 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.Name, country.Name AS Country, city.District, city.Population AS Population "
-                            + "FROM world.city"
-                            + " JOIN world.country ON city.CountryCode = country.Code "
-                            + " ORDER BY city.Population DESC";
+                    "SELECT c.Name AS Name, co.Name AS Country, c.District, c.Population"
+                            + "FROM world.city c"
+                            + "JOIN world.country co ON c.CountryCode = co.Code"
+                            + "WHERE co.Name = 'Country Name Here'"
+                            + "ORDER BY c.Population DESC;";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -71,10 +73,10 @@ public class App {
             while (rset.next()) {
                 Cities city1 = new Cities();
 //                city1.ID = rset.getInt("city.ID");
-                city1.Name = rset.getString("city.Name");
-                city1.CountryCode = rset.getString("city.CountryCode");
-                city1.District = rset.getString("city.District");
-                city1.Population = rset.getInt("city.Population");
+                city1.Name = rset.getString("Name");
+                city1.CountryCode = rset.getString("CountryCode");
+                city1.District = rset.getString("District");
+                city1.Population = rset.getInt("Population");
                 city.add(city1);
             }
             return city;
@@ -82,6 +84,25 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("FAILED TO GET CITY ARRAY");
             return null;
+        }
+    }
+
+
+    public void printCities(ArrayList<Cities> cities) {
+        if(cities == null)
+        {
+            System.out.println(("No Cities"));
+            return;
+        }
+
+        System.out.println(String.format("%-10s %-20s %-15s %-12s", "City ID", "City Name", "Country", "Population"));
+// Loop over all cities in the list
+        for (Cities city : cities)
+        {
+            String cityString =
+                    String.format("%-10s %-20s %-15s %-12s",
+                            city.ID, city.Name, city.CountryCode, city.Population);
+            System.out.println(cityString);
         }
     }
 }
