@@ -35,6 +35,7 @@ public class AppTest {
         // Ensure getAllCities returns a non-null ArrayList
         app.connect("localhost:33060", 0);
         ArrayList<Cities> cities = app.getAllCities();
+        app.printCities(cities);
         assertNotNull(cities);
     }
 }
