@@ -9,8 +9,6 @@ public class Main {
         // Create new Application
         App a = new App();
         // Connect to database
-//        a.connect();
-
         if(args.length < 1){
             a.connect("localhost:33060", 0);
         }else{
@@ -27,15 +25,6 @@ public class Main {
         } else {
             System.out.println("No cities found.");
         }
-
-
-        //ArrayList<Cities> cities = a.getAllCities();
-       //System.out.println(cities);
-//        Cities city1 = a.getCities(1);
-//        a.displayCity(city1);
-//        Cities city2 = a.getCities(2);
-//        a.displayCity(city2);
-        // Disconnect from database
         a.disconnect();
     }
 }

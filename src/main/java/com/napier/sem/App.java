@@ -12,32 +12,6 @@ public class App {
     /**
      * Connect to the MySQL database.
      */
-//    public void connect() {
-//        try {
-//            // Load Database driver
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("Could not load SQL driver");
-//            System.exit(-1);
-//        }
-//
-//        int retries = 10;
-//        for (int i = 0; i < retries; ++i) {
-//            System.out.println("Connecting to database...");
-//            try {
-//                // Wait a bit for db to start
-//                Thread.sleep(30000);
-//                // Connect to database
-//                con = DriverManager.getConnection("jdbc:mysql://db:3306/world.sql?useSSL=false", "root", "123");
-//                System.out.println("Successfully connected");
-//                break;
-//            } catch (SQLException sqle) {
-//                System.out.println("Failed to connect to database attempt " + i);
-//                System.out.println(sqle.getMessage());
-//            } catch (InterruptedException ie) {
-//                System.out.println("Thread interrupted? Should not happen.");
-//            }
-//        }
 
 public void connect(String location, int delay) {
     try {
@@ -127,21 +101,15 @@ public void connect(String location, int delay) {
             return;
         }
 
-        System.out.println(String.format("%-10s %-20s %-15s %-12s", "City ID", "City Name", "Country", "Population"));
+        System.out.println(String.format("%-10s %-20s %-15s %-10s %-12s", "City ID", "City Name", "Country", "District", "Population"));
 // Loop over all cities in the list
         for (Cities city : cities)
         {
             String cityString =
-                    String.format("%-10s %-20s %-15s %-12s",
-                            city.ID, city.Name, city.CountryCode, city.Population);
+                    String.format("%-10s %-20s %-15s %-10s %-12s",
+                            city.ID, city.Name, city.CountryCode, city.District, city.Population);
             System.out.println(cityString);
         }
     }
 
 }
-
-//                    "SELECT city.Name, country.Name AS Country, city.District, city.Population AS Population "
-//                    + "FROM world.city"
-//                    +" JOIN world.country ON city.CountryCode = country.Code "
-//                    +"WHERE city.ID = " + ID
-//                    +" ORDER BY city.Population DESC";

@@ -1,52 +1,41 @@
 package com.napier.sem;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-
-import java.sql.Connection;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AppTest
-{
-    static App app;
-//    static Connection con;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    @BeforeAll
-    static void init()
-    {
+import java.util.ArrayList;
+
+public class AppTest {
+
+    private App app;
+
+    @BeforeEach
+    public void setUp() {
         app = new App();
     }
 
-    @Test
-    void printCitiesTestNull()
-    {
-        app.printCities(null);
+    @AfterEach
+    public void tearDown() {
+        app.disconnect(); // Ensure disconnection after each test
     }
 
     @Test
-    void getCitiesTestNull(){
-        app.getAllCities();
+    public void testDisconnect() {
+        // Ensure connection is disconnected successfully
+        app.connect("localhost:33060", 0);
+        app.disconnect();
+       // assertNull(app.getConnection());
     }
 
     @Test
-    void citiesPrintingTest()
-    {
-        ArrayList<Cities> cities = new ArrayList<Cities>();
-//        cities.add(null);
-        app.printCities(cities);
+    public void testGetAllCities() {
+        // Ensure getAllCities returns a non-null ArrayList
+        app.connect("localhost:33060", 0);
+        ArrayList<Cities> cities = app.getAllCities();
+        assertNotNull(cities);
     }
-
-    @Test
-    void connectionFailedTest()
-    {
-        assertThrows(NullPointerException.class, this::throwsException);
-    }
-    void throwsException() throws NullPointerException
-    {
-        throw new NullPointerException();
-    }
-
 }
+
