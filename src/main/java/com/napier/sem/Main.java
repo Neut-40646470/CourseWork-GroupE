@@ -1,61 +1,49 @@
 package com.napier.sem;
-
-import java.util.Scanner;
+import java.util.ArrayList;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
     public static void main(String[] args) {
-        menuMain();
+        // Create new Application
+        App a = new App();
+        // Connect to database
+//        a.connect();
 
-    }
+        if(args.length < 1){
+            a.connect("localhost:33060", 0);
+        }else{
+            a.connect("db:3306", 30000);
+        }
 
-    public static void menuMain(){
+        ArrayList<Cities> cities = a.getAllCities();
+        // Print out all cities
+        if (cities != null) {
+            for (Cities city : cities) {
 
-        //Set up an integer to save the users choice from main menu
-        int userChoice;
-        Scanner userinput = new Scanner(System.in);
-        while(true) {
-            System.out.println("Choose What Menu You Would Like To See\n");
-            System.out.println("1. View Country Reports");
-            System.out.println("2. View City Reports");
-            System.out.println("3. View Capital City Reports");
-            System.out.println("4. View Population Statistics");
-            System.out.println("5. View Language Speaker Reports");
-            System.out.println("6. Exit");
-            System.out.print("Pick a Number: ");
-
-            userChoice = userinput.nextInt();
-
-            switch (userChoice) {
-                case 1:
-                    System.out.println("YOU PICKED 1");
-                    break;
-                case 2:
-                    System.out.println("YOU PICKED 2");
-                    break;
-                case 3:
-                    System.out.println("YOU PICKED 3");
-                    break;
-                case 4:
-                    System.out.println("YOU PICKED 4");
-                    break;
-                case 5:
-                    System.out.println("YOU PICKED 5");
-                    break;
-                case 6:
-                    System.out.println("YOU PICKED 6 To EXIT");
-                    userinput.close();
-                    return;
-                default:
-                    System.out.println("Invalid Choice Try Again");
-
+                System.out.println(city.ID + ", " + city.Name + ", " + city.CountryCode + ", " + city.District + ", " + city.Population);
             }
+        } else {
+            System.out.println("No cities found.");
         }
 
 
+        //ArrayList<Cities> cities = a.getAllCities();
+       //System.out.println(cities);
+//        Cities city1 = a.getCities(1);
+//        a.displayCity(city1);
+//        Cities city2 = a.getCities(2);
+//        a.displayCity(city2);
+        // Disconnect from database
+        a.disconnect();
     }
-
-
 }
+
+
+
+
+
+
+
 
