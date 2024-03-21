@@ -30,7 +30,7 @@
 //    "WHERE city.District = "California"
 //    "ORDER BY city.Population DESC;
 
-    //REGION - Fetch population for all CITIES from SELECTED REGION
+    //REGION - Fetch population for ALL CITIES from SELECTED REGION.sql
 //    "SELECT city.Name, country.Name AS Country, city.District, city.Population
 //    "FROM city
 //    "JOIN country
@@ -38,7 +38,7 @@
 //    "WHERE country.Region = "Southern Europe"
 //    "ORDER BY Population DESC;
 
-    //CITIES - Fetch ALL population from WORLD
+    //CITIES - Fetch ALL CITIES from WORLD.sql
 //    "SELECT city.Name, country.Name AS Country, city.District, city.Population AS Population
 //    "FROM world.city
 //    "JOIN world.country ON city.CountryCode = country.Code
