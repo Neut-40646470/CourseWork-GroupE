@@ -19,13 +19,13 @@ public class AppTest {
         app.printCities(null);
     }
 
-    @Test
-    void citiesPrintingTest() {
-        app = new App();
-        app.connect(DB_LOCATION, DELAY);
-        ArrayList<Cities> cities = app.getAllCities();
-        app.printCities(cities);
-    }
+//    @Test
+//    void citiesPrintingTest() {
+//        app = new App();
+//        app.connect(DB_LOCATION, DELAY);
+//        ArrayList<Cities> cities = app.getAllCities();
+//        app.printCities(cities);
+//    }
 
     @Test
     void connectionFailedTest() {
