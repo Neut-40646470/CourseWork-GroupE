@@ -78,6 +78,11 @@ public class App {
         return cities.isEmpty() ? null : cities; // Return null if cities list is empty
     }
 
+    public void getCapitalCities()
+    {
+        return;
+    }
+
     public void printCities(ArrayList<Cities> cities) {
         if (cities == null || cities.isEmpty()) {
             System.out.println("No cities");
