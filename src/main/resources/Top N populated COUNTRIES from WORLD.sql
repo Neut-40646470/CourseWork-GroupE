@@ -2,4 +2,5 @@ SELECT country.Code, country.Name, country.Continent, country.Region, country.Po
 FROM world.country
 JOIN world.city
 ON country.capital = city.id
-ORDER BY country.Population DESC;
+ORDER BY country.Population DESC
+LIMIT N;
