@@ -1,0 +1,6 @@
+SELECT city.Name AS Name, country.Name AS Country, city.Population AS Population
+FROM world.city
+JOIN world.country ON city.CountryCode = country.Code
+WHERE country.Region = 'INSERT REGION HERE' AND city.ID = country.Capital
+ORDER BY city.Population DESC
+LIMIT N;
