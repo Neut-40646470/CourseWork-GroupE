@@ -11,9 +11,9 @@ public class Main {
         // Connect to database
 //        a.connect();
 
-        if(args.length < 1){
+        if (args.length < 1) {
             a.connect("localhost:33060", 0);
-        }else{
+        } else {
             a.connect("db:3306", 30000);
         }
 
@@ -27,23 +27,5 @@ public class Main {
         } else {
             System.out.println("No cities found.");
         }
-
-
-        //ArrayList<Cities> cities = a.getAllCities();
-       //System.out.println(cities);
-//        Cities city1 = a.getCities(1);
-//        a.displayCity(city1);
-//        Cities city2 = a.getCities(2);
-//        a.displayCity(city2);
-        // Disconnect from database
-        a.disconnect();
     }
 }
-
-
-
-
-
-
-
-

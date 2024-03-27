@@ -1,55 +1,39 @@
 package com.napier.sem;
 
-import java.sql.*;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class AppTest
-{
+public class AppTest {
+
     static App app;
     static final String DB_LOCATION = "localhost:33060";
     static final int DELAY = 0; // Adjust delay as needed
 
-    @BeforeAll
-    static void init()
-    {
+    @Test
+    void printCitiesTestNull() {
         app = new App();
         app.connect(DB_LOCATION, DELAY);
+        app.printCities(null);
     }
 
     @Test
-    void printCitiesTestNull()
-    {
-            app.printCities(null);
-    }
-
-//    @Test
-//    void getCitiesTestNull(){
-//        assertNull(app.getAllCities(), "Returned cities list should be null when SQLException occurs");
-//    }
-
-    @Test
-    void citiesPrintingTest()
-    {
+    void citiesPrintingTest() {
+        app = new App();
+        app.connect(DB_LOCATION, DELAY);
         ArrayList<Cities> cities = app.getAllCities();
         app.printCities(cities);
     }
 
     @Test
-    void connectionFailedTest()
-    {
+    void connectionFailedTest() {
+        app = new App();
         assertThrows(NullPointerException.class, this::throwsException);
     }
-    void throwsException() throws NullPointerException
-    {
+
+    void throwsException() throws NullPointerException {
         throw new NullPointerException();
     }
 }
