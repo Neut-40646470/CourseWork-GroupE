@@ -27,6 +27,16 @@ public class AppTest {
         app.printCities(cities);
     }
 
+
+    //this is just to see if anything comes up in github actions
+    
+    @Test
+    void example(){
+        app = new App();
+        app.connect(DB_LOCATION, DELAY);
+        app.printCities(null);
+    }
+
     @Test
     void connectionFailedTest() {
         app = new App();
