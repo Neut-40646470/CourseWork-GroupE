@@ -29,7 +29,7 @@ public class AppTest {
 
 
     //this is just to see if anything comes up in github actions
-    
+
     @Test
     void example(){
         app = new App();
