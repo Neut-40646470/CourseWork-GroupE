@@ -1,6 +1,6 @@
 package com.napier.sem;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -14,9 +14,8 @@ public class AppTest
     static App app;
 //    static Connection con;
 
-    @BeforeAll
-    static void init()
-    {
+ @BeforeEach
+    void init() {
         app = new App();
     }
 
