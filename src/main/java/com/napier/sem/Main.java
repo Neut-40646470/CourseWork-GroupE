@@ -28,6 +28,8 @@ public class Main {
             System.out.println("No cities found.");
         }
 
-        a.printCitiesFromContinent("Europe");
+        a.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+        a.printCitiesFromDistrict("", "src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
+        a.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
     }
 }
