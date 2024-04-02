@@ -27,5 +27,7 @@ public class Main {
         } else {
             System.out.println("No cities found.");
         }
+
+        a.printCitiesFromContinent("Europe");
     }
 }

@@ -2,6 +2,9 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class App {
     private Connection con = null;
@@ -46,6 +49,46 @@ public class App {
         } catch (SQLException e) {
             System.out.println("Error closing connection to database");
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void printCitiesFromContinent(String continent) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql"));
+            StringBuilder queryBuilder = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                queryBuilder.append(line).append("\n");
+            }
+            br.close();
+            String query = queryBuilder.toString().replace("Europe", continent);
+            // Print city report header
+            System.out.println("City Report\n");
+            System.out.println(String.format("%-30s %-30s %-20s %-15s", "Name", "Country", "District", "Population"));
+            System.out.println("----------------------------------------------------------------------------");
+
+            // Connect to the database
+            connect("localhost:33060", 0); // Adjust connection details as needed
+
+            // Execute the SQL query
+            try (Statement stmt = con.createStatement()) {
+                ResultSet rs = stmt.executeQuery(query);
+                // Print cities from the ResultSet
+                while (rs.next()) {
+                    String name = rs.getString("Name");
+                    String country = rs.getString("Country");
+                    String district = rs.getString("District");
+                    int population = rs.getInt("Population");
+                    System.out.println(String.format("%-30s %-30s %-20s %-15d", name, country, district, population));
+                }
+            } catch (SQLException e) {
+                System.out.println("Error executing SQL query: " + e.getMessage());
+            }
+
+            // Disconnect from the database
+            disconnect();
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
 
