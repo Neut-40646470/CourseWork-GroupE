@@ -31,6 +31,12 @@ jobs:
       - name: Copy Output
         run: docker container cp coursework-groupe-app-1:./tmp/reports ./
 
+      - name: Debug Git
+        run: |
+          git status
+          git branch -a
+          git remote -v
+
       - name: Create and push new branch
         run: |
           git checkout -b reports
