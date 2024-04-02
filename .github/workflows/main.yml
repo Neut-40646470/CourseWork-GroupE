@@ -30,6 +30,12 @@ jobs:
 
       - name: Copy Output
         run: docker container cp coursework-groupe-app-1:./tmp/reports ./
+
+      - name: Create and push new branch
+        run: |
+          git checkout -b reports
+          git push origin reports
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
