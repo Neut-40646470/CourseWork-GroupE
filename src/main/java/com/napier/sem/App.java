@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+
 
 public class App {
     private Connection con = null;
@@ -43,6 +47,64 @@ public class App {
         } catch (SQLException e) {
             System.out.println("Error closing connection to database");
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void generateCityReportMarkdown(ArrayList<Cities> cities, String filename) {
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No cities to generate report.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("# City Report\n\n");
+        sb.append("| Name | Country | District | Population |\n");
+        sb.append("| ---- | ------- | -------- | ---------- |\n");
+        for (Cities city : cities) {
+            sb.append("| " + city.getName() + " | " + city.getCountry() + " | " +
+                    city.getDistrict() + " | " + city.getPopulation() + " |\n");
+        }
+
+        try {
+            File directory = new File("./reports");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(directory, filename)));
+            writer.write(sb.toString());
+            writer.close();
+            System.out.println("City report generated: " + filename);
+        } catch (IOException e) {
+            System.out.println("Error generating city report: " + e.getMessage());
+        }
+    }
+
+    public void outputCities(ArrayList<Cities> cities, String filename) {
+        // Check cities is not null
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No cities");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("City Report\n");
+        sb.append(String.format("%-30s %-30s %-20s %-15s\n", "Name", "Country", "District", "Population"));
+        sb.append("----------------------------------------------------------------------------\n");
+        // Loop over all cities in the list
+        for (Cities city : cities) {
+            if (city == null) continue;
+            sb.append(String.format("%-30s %-30s %-20s %-15d\n",
+                    city.getName(), city.getCountry(), city.getDistrict(), city.getPopulation()));
+        }
+        try {
+            File dir = new File("./reports/");
+            dir.mkdirs(); // Ensure the directory exists
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(dir, filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
