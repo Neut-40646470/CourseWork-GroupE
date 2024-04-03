@@ -93,4 +93,50 @@ public class App {
         citiesReport.printCitiesFromRegion(region, queryFile);
     }
 
+
+
+
+
+
+    //COUNTRY THINGS GO HERE
+    public ArrayList<Country> getAllCountries() {
+        ArrayList<Country> countries = new ArrayList<>();
+        try (Statement stmt = con.createStatement()) {
+            String strSelect = "SELECT * FROM country";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            while (rset.next()) {
+                Country country = new Country(
+                        rset.getString("Code"),
+                        rset.getString("Name"),
+                        rset.getString("Continent"),
+                        rset.getString("Region"),
+                        rset.getInt("Population"),
+                        rset.getInt("Capital")
+                );
+                countries.add(country);
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to get country array: " + e.getMessage());
+            countries.clear();
+            countries = null;
+        }
+        return countries.isEmpty() ? null : countries;
+    }
+
+    public void generateCountryReportMarkdown(ArrayList<Country> countries, String filename) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.generateCountryReportMarkdown(countries, filename);
+    }
+
+    public void printCountriesFromContinent(String continent, String queryFile) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.printCountriesFromContinent(continent, queryFile);
+    }
+
+    public void printCountriesFromRegion(String region, String queryFile) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.printCountriesFromRegion(region, queryFile);
+    }
+
 }

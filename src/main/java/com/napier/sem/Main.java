@@ -12,23 +12,37 @@ public class Main {
             app.connect("db:3306", 30000);
         }
 
+        // Generate city reports
         ArrayList<Cities> cities = app.getAllCities();
         if (cities != null) {
-            // Generate city report
             app.generateCityReportMarkdown(cities, "city_report.md");
-
-            // Print cities from continent, district, or region
             app.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+            app.generateCityReportMarkdown(app.getAllCitiesFromContinent(""), "city_by_continent.md");
             app.printCitiesFromDistrict("", "src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
+            app.generateCityReportMarkdown(app.getAllCitiesFromDistrict(""), "city_by_district.md");
             app.printCitiesFromRegion("", "src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+            app.generateCityReportMarkdown(app.getAllCitiesFromRegion(""), "city_by_region.md");
         } else {
             System.out.println("No cities found.");
+        }
+
+        // Generate country reports
+        ArrayList<Country> countries = app.getAllCountries();
+        if (countries != null) {
+            app.generateCountryReportMarkdown(countries, "country_report.md");
+            app.printCountriesFromRegion("", "src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
+            app.generateCountryReportMarkdown(app.getAllCountriesFromRegion(""), "country_by_Region.md");
+            app.printCountriesFromContinent("", "src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
+            app.generateCountryReportMarkdown(app.getAllCountriesFromContinent(""), "country_by_continent.md");
+        } else {
+            System.out.println("No countries found.");
         }
 
         // Disconnect from the database
         app.disconnect();
     }
 }
+
 
 
 
@@ -44,7 +58,7 @@ public class Main {
 //src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql
 //src/main/resources/ALLCITIESfromSELECTEDREGION.sql
 //src/main/resources/ALLCITIESfromWORLD.sql
-//src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql
+
 //src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql
 //src/main/resources/ALLCOUNTRIESfromWORLD.sql
 //src/main/resources/CONTINENT-FetchpopulationofALLCITIESfromSELECTEDCONTINENT.sql
