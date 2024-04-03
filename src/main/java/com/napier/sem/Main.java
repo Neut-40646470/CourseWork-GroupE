@@ -3,45 +3,69 @@ package com.napier.sem;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
-        App app = new App();
+        public static void main(String[] args) {
+            App a = new App();
 
-        if (args.length < 1) {
-            app.connect("localhost:33060", 0);
-        } else {
-            app.connect("db:3306", 30000);
-        }
+            if (args.length < 1) {
+                a.connect("localhost:33060", 0);
+            } else {
+                a.connect("db:3306", 30000);
+            }
 
-        // Generate city reports
-        ArrayList<Cities> cities = app.getAllCities();
-        if (cities != null) {
-            app.generateCityReportMarkdown(cities, "city_report.md");
-            app.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
-            app.generateCityReportMarkdown(app.getAllCitiesFromContinent(""), "city_by_continent.md");
-            app.printCitiesFromDistrict("", "src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
-            app.generateCityReportMarkdown(app.getAllCitiesFromDistrict(""), "city_by_district.md");
-            app.printCitiesFromRegion("", "src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
-            app.generateCityReportMarkdown(app.getAllCitiesFromRegion(""), "city_by_region.md");
-        } else {
-            System.out.println("No cities found.");
-        }
+            ArrayList<Cities> cities = a.getAllCities();
+            if (cities != null) {
+                for (Cities city : cities) {
+                    System.out.println(city.ID + ", " + city.Name + ", " + city.CountryCode + ", " + city.District + ", " + city.Population);
+                }
+            } else {
+                System.out.println("No cities found.");
+            }
 
-        // Generate country reports
-        ArrayList<Country> countries = app.getAllCountries();
-        if (countries != null) {
-            app.generateCountryReportMarkdown(countries, "country_report.md");
-            app.printCountriesFromRegion("", "src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
-            app.generateCountryReportMarkdown(app.getAllCountriesFromRegion(""), "country_by_Region.md");
-            app.printCountriesFromContinent("", "src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
-            app.generateCountryReportMarkdown(app.getAllCountriesFromContinent(""), "country_by_continent.md");
-        } else {
-            System.out.println("No countries found.");
-        }
+            // Execute queries and generate reports
+            a.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+            a.generateCityReportMarkdown(cities, "city_continent_report.md");
 
-        // Disconnect from the database
-        app.disconnect();
+            a.printCitiesFromDistrict("", "src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
+            a.generateCityReportMarkdown(cities, "city_district_report.md");
+
+            a.printCitiesFromRegion("", "src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+            a.generateCityReportMarkdown(cities, "city_region_report.md");
+
+
+            ArrayList<Country> country = a.getAllCountries("SELECT * FROM country");
+            if(country != null) {
+                for (Country countries : country) {
+                    System.out.println(countries.getCode() + ", " + countries.getName() + ", " + countries.getContinent() + ", " + countries.getRegion() + ", " + countries.getPopulation());
+                }
+            } else {
+            System.out.println("No Countries found.");
     }
-}
+
+            a.printCountriesFromRegion("", "src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
+            // Disconnect from the database
+            a.disconnect();
+        }
+    }
+    // Generate country reports
+//    ArrayList<Country> countries = app.getAllCountriesFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
+//        if (countries != null) {
+//        app.generateCountryReportMarkdown(countries, "country_report.md");
+//         Print countries from region
+//        String region = "";
+//        app.printCountriesFromRegion(region, "src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
+//        app.generateCountryReportMarkdown(app.printCountriesFromRegion(region), "country_by_Region.md");
+//         Print countries from continent
+//        String continent = "";
+//        app.printCountriesFromContinent(continent, "src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
+//        app.generateCountryReportMarkdown(app.printCountriesFromContinent(continent), "country_by_continent.md");
+//    } else {
+//        System.out.println("No countries found.");
+//    }
+//
+//     Disconnect from the database
+//        app.disconnect();
+//}
+//}
 
 
 
@@ -82,3 +106,4 @@ public class Main {
 //src/main/resources/TopNpopulatedCOUNTRIESfromWORLD.sql
 //src/main/resources/WORLD-FetchpopulationofCAPITIALCITIES.sql
 //src/main/resources/WORLD-FetchpopulationofCITIES.sql
+
