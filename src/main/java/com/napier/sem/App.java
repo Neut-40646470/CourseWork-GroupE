@@ -1,5 +1,8 @@
 package com.napier.sem;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -44,6 +47,49 @@ public class App {
         } catch (SQLException e) {
             System.out.println("Error closing connection to database");
             System.out.println(e.getMessage());
+        }
+    }
+    public ResultSet executeQueryFromFile(String filePath) {
+        try {
+            String query = readQueryFromFile(filePath);
+            Statement stmt = con.createStatement();
+            return stmt.executeQuery(query);
+        } catch (IOException | SQLException e) {
+            System.out.println("Error executing SQL query from file: " + e.getMessage());
+            return null;
+        }
+    }
+    private String readQueryFromFile(String filePath) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        StringBuilder queryBuilder = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null) {
+            queryBuilder.append(line).append("\n");
+        }
+        br.close();
+        return queryBuilder.toString();
+    }
+
+    public void generateCityReportFromResultSet(ResultSet resultSet, String filename) {
+        try {
+            ArrayList<Cities> cities = new ArrayList<>();
+            while (resultSet.next()) {
+                Cities city = new Cities();
+//                city.ID = resultSet.getInt("ID");
+                city.Name = resultSet.getString("Name");
+//                city.CountryCode = resultSet.getString("CountryCode");
+                city.CountryCode = resultSet.getString("Country");
+                city.District = resultSet.getString("District");
+                city.Population = resultSet.getInt("Population");
+                cities.add(city);
+            }
+            if (!cities.isEmpty()) {
+                generateCityReportMarkdown(cities, filename);
+            } else {
+                System.out.println("No cities found for generating report: " + filename);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error generating city report from ResultSet: " + e.getMessage());
         }
     }
 

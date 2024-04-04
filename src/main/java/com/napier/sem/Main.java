@@ -1,4 +1,6 @@
 package com.napier.sem;
+import java.io.IOException;
+import java.sql.ResultSet;
 
 import java.util.ArrayList;
 
@@ -12,18 +14,21 @@ public class Main {
             app.connect("db:3306", 30000);
         }
 
-        ArrayList<Cities> cities = app.getAllCities();
-        if (cities != null) {
-            // Generate city report
-            app.generateCityReportMarkdown(cities, "city_report.md");
+        ResultSet resultSetContinent = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+        ResultSet resultSetDistrict = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
+        ResultSet resultSetRegion = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
 
-            // Print cities from continent, district, or region
-            app.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
-            app.printCitiesFromDistrict("", "src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
-            app.printCitiesFromRegion("", "src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
-        } else {
-            System.out.println("No cities found.");
+        if (resultSetContinent != null) {
+            app.generateCityReportFromResultSet(resultSetContinent, "City_Report_Continent.md");
         }
+        if (resultSetDistrict != null) {
+            app.generateCityReportFromResultSet(resultSetDistrict, "City_Report_District.md");
+        }
+        if (resultSetRegion != null) {
+            app.generateCityReportFromResultSet(resultSetRegion, "City_Report_Region.md");
+        }
+
+
 
         // Disconnect from the database
         app.disconnect();
