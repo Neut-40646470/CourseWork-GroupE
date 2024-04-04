@@ -1,147 +1,185 @@
 package com.napier.sem;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class App {
-    /**
-     * Connection to MySQL database.
-     */
-    private Connection con = null;
+    private SingletonConnection singletonConnection;
 
-    /**
-     * Connect to the MySQL database.
-     */
-//    public void connect() {
-//        try {
-//            // Load Database driver
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("Could not load SQL driver");
-//            System.exit(-1);
-//        }
-//
-//        int retries = 10;
-//        for (int i = 0; i < retries; ++i) {
-//            System.out.println("Connecting to database...");
-//            try {
-//                // Wait a bit for db to start
-//                Thread.sleep(30000);
-//                // Connect to database
-//                con = DriverManager.getConnection("jdbc:mysql://db:3306/world.sql?useSSL=false", "root", "123");
-//                System.out.println("Successfully connected");
-//                break;
-//            } catch (SQLException sqle) {
-//                System.out.println("Failed to connect to database attempt " + i);
-//                System.out.println(sqle.getMessage());
-//            } catch (InterruptedException ie) {
-//                System.out.println("Thread interrupted? Should not happen.");
-//            }
-//        }
-
-public void connect(String location, int delay) {
-    try {
-        // Load Database driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
-    } catch (ClassNotFoundException e) {
-        System.out.println("Could not load SQL driver");
-        System.exit(-1);
+    public App() {
+        this.singletonConnection = SingletonConnection.getInstance();
     }
 
-    int retries = 10;
-    for (int i = 0; i < retries; ++i) {
-        System.out.println("Connecting to database...");
+    public void generateCityReportMarkdown(ArrayList<Cities> cities, String filename) {
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No cities to generate report.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("# City Report\n\n");
+        sb.append("| Name | Country | District | Population |\n");
+        sb.append("| ---- | ------- | -------- | ---------- |\n");
+        for (Cities city : cities) {
+            sb.append("| " + city.getName() + " | " + city.getCountry() + " | " +
+                    city.getDistrict() + " | " + city.getPopulation() + " |\n");
+        }
+
         try {
-            // Wait a bit for db to start
-            Thread.sleep(delay);
-            // Connect to database
-            con = DriverManager.getConnection("jdbc:mysql://" + location
-                            + "/world?allowPublicKeyRetrieval=true&useSSL=false",
-                    "root", "123");
-            System.out.println("Successfully connected");
-            break;
-        } catch (SQLException sqle) {
-            if(con == null)
-            {
-                System.out.println("Test Pass");
+            File directory = new File("./reports");
+            if (!directory.exists()) {
+                directory.mkdir();
             }
-            System.out.println("Failed to connect to database attempt " +                                  Integer.toString(i));
-            System.out.println(sqle.getMessage());
-        } catch (InterruptedException ie) {
-            System.out.println("Thread interrupted? Should not happen.");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(directory, filename)));
+            writer.write(sb.toString());
+            writer.close();
+            System.out.println("City report generated: " + filename);
+        } catch (IOException e) {
+            System.out.println("Error generating city report: " + e.getMessage());
         }
     }
-}
 
-    /**
-     * Disconnect from the MySQL database.
-     */
-    public void disconnect() {
-        if (con != null) {
-            try {
-                // Close connection
-                con.close();
-            } catch (Exception e) {
-                System.out.println("Error closing connection to database");
-            }
+    public void outputCities(ArrayList<Cities> cities, String filename) {
+        // Check cities is not null
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No cities");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("City Report\n");
+        sb.append(String.format("%-30s %-30s %-20s %-15s\n", "Name", "Country", "District", "Population"));
+        sb.append("----------------------------------------------------------------------------\n");
+        // Loop over all cities in the list
+        for (Cities city : cities) {
+            if (city == null) continue;
+            sb.append(String.format("%-30s %-30s %-20s %-15d\n",
+                    city.getName(), city.getCountry(), city.getDistrict(), city.getPopulation()));
+        }
+        try {
+            File dir = new File("./reports/");
+            dir.mkdirs(); // Ensure the directory exists
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(dir, filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     public ArrayList<Cities> getAllCities() {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT city.ID, city.Name AS Name, city.CountryCode, "
-                        + " country.Name AS Country, city.District, city.Population "
-                        + "FROM world.city "
-                        + "JOIN world.country ON city.CountryCode = country.Code";
+        ArrayList<Cities> cities = new ArrayList<>();
+        try (Statement stmt = singletonConnection.getConnection().createStatement()) {
+            String strSelect = "SELECT city.ID, city.Name AS Name, city.CountryCode, "
+                    + "country.Name AS Country, city.District, city.Population "
+                    + "FROM world.city "
+                    + "JOIN world.country ON city.CountryCode = country.Code";
 
-            // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
-            ArrayList<Cities> city = new ArrayList<>();
             while (rset.next()) {
-                Cities city1 = new Cities();
-                city1.ID = rset.getInt("ID");
-                city1.Name = rset.getString("Name");
-                city1.CountryCode = rset.getString("CountryCode");
-                city1.District = rset.getString("District");
-                city1.Population = rset.getInt("Population");
-                city.add(city1);
+                Cities city = new Cities();
+                city.ID = rset.getInt("ID");
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
             }
-            return city;
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println("Failed to get city array");
             System.out.println(e.getMessage());
-            System.out.println("FAILED TO GET CITY ARRAY");
-            return null;
+            cities.clear();
+            cities = null;
+        }
+        return cities.isEmpty() ? null : cities;
+    }
+
+    public void getCapitalCities(String continent) {
+        try {
+            String query = readQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest.sql").replace("INSERT CONTINENT", continent);
+            executeQuery(query, "Capital City Report");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
 
-
     public void printCities(ArrayList<Cities> cities) {
-        if(cities == null)
-        {
-            System.out.println(("No Cities"));
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No cities");
             return;
         }
 
         System.out.println(String.format("%-10s %-20s %-15s %-12s", "City ID", "City Name", "Country", "Population"));
-// Loop over all cities in the list
-        for (Cities city : cities)
-        {
-            String cityString =
-                    String.format("%-10s %-20s %-15s %-12s",
-                            city.ID, city.Name, city.CountryCode, city.Population);
+        for (Cities city : cities) {
+            String cityString = String.format("%-10s %-20s %-15s %-12s",
+                    city.ID, city.Name, city.CountryCode, city.Population);
             System.out.println(cityString);
         }
     }
 
-}
+    private String readQueryFromFile(String filePath) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        StringBuilder queryBuilder = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null) {
+            queryBuilder.append(line).append("\n");
+        }
+        br.close();
+        return queryBuilder.toString();
+    }
 
-//                    "SELECT city.Name, country.Name AS Country, city.District, city.Population AS Population "
-//                    + "FROM world.city"
-//                    +" JOIN world.country ON city.CountryCode = country.Code "
-//                    +"WHERE city.ID = " + ID
-//                    +" ORDER BY city.Population DESC";
+    private void executeQuery(String query, String reportTitle) {
+        try (Statement stmt = singletonConnection.getConnection().createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            // Print city report header
+            System.out.println(reportTitle + "\n");
+            System.out.println(String.format("%-30s %-30s %-20s %-15s", "Name", "Country", "District", "Population"));
+            System.out.println("----------------------------------------------------------------------------");
+            // Print cities from the ResultSet
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String country = rs.getString("Country");
+                String district = rs.getString("District");
+                int population = rs.getInt("Population");
+                System.out.println(String.format("%-30s %-30s %-20s %-15d", name, country, district, population));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error executing SQL query: " + e.getMessage());
+        }
+    }
+
+
+    public void printCitiesFromContinent(String continent, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", continent);
+            executeQuery(query, "City Report");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
+    public void printCitiesFromDistrict(String district, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", district);
+            executeQuery(query, "City Report");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
+    public void printCitiesFromRegion(String region, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", region);
+            executeQuery(query, "City Report");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+}
