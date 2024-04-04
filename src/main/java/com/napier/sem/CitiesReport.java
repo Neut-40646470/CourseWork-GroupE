@@ -34,13 +34,17 @@ public class CitiesReport {
                     city.getDistrict() + " | " + city.getPopulation() + " |\n");
         }
 
+        saveReportToFile(sb.toString(), filename);
+    }
+
+    private void saveReportToFile(String content, String filename) {
         try {
             File directory = new File("./reports");
             if (!directory.exists()) {
                 directory.mkdir();
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(directory, filename)));
-            writer.write(sb.toString());
+            writer.write(content);
             writer.close();
             System.out.println("City report generated: " + filename);
         } catch (IOException e) {
