@@ -21,7 +21,7 @@ public class Main {
 
         if(resultSetWorld != null){
             app.generateCityReportFromResultSet(resultSetWorld, "City_Report_World.md");
-            app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+            app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
         }
         if (resultSetContinent != null) {
             app.generateCityReportFromResultSet(resultSetContinent, "City_Report_Continent.md");

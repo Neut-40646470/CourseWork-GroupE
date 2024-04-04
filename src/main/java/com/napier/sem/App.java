@@ -93,6 +93,32 @@ public class App {
         }
     }
 
+    public ArrayList<Cities> getAllCities() {
+        ArrayList<Cities> cities = new ArrayList<>();
+        try (Statement stmt = con.createStatement()) {
+            String strSelect = "SELECT city.ID, city.Name AS Name, city.CountryCode, "
+                    + "country.Name AS Country, city.District, city.Population "
+                    + "FROM world.city "
+                    + "JOIN world.country ON city.CountryCode = country.Code";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            while (rset.next()) {
+                Cities city = new Cities();
+                city.ID = rset.getInt("ID");
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to get city array: " + e.getMessage());
+            cities.clear();
+            cities = null;
+        }
+        return cities.isEmpty() ? null : cities;
+    }
+
     public void generateCityReportMarkdown(ArrayList<Cities> cities, String filename) {
         CitiesReport citiesReport = new CitiesReport(con);
         citiesReport.generateCityReportMarkdown(cities, filename);
@@ -119,34 +145,3 @@ public class App {
     }
 
 }
-
-
-
-
-
-
-//public ArrayList<Cities> getAllCities() {
-//    ArrayList<Cities> cities = new ArrayList<>();
-//    try (Statement stmt = con.createStatement()) {
-//        String strSelect = "SELECT city.ID, city.Name AS Name, city.CountryCode, "
-//                + "country.Name AS Country, city.District, city.Population "
-//                + "FROM world.city "
-//                + "JOIN world.country ON city.CountryCode = country.Code";
-//
-//        ResultSet rset = stmt.executeQuery(strSelect);
-//        while (rset.next()) {
-//            Cities city = new Cities();
-//            city.ID = rset.getInt("ID");
-//            city.Name = rset.getString("Name");
-//            city.CountryCode = rset.getString("CountryCode");
-//            city.District = rset.getString("District");
-//            city.Population = rset.getInt("Population");
-//            cities.add(city);
-//        }
-//    } catch (SQLException e) {
-//        System.out.println("Failed to get city array: " + e.getMessage());
-//        cities.clear();
-//        cities = null;
-//    }
-//    return cities.isEmpty() ? null : cities;
-//}
