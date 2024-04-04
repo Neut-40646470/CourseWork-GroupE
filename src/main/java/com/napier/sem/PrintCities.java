@@ -2,9 +2,9 @@ package com.napier.sem;
 
 import java.util.ArrayList;
 
-public class Main {
+public class PrintCities {
 
-    public static void main(String[] args) {
+    public static void PrintCities (String[] args) {
         // Create new Application
         App a = new App();
 

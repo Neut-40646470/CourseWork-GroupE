@@ -45,4 +45,8 @@ public class Cities {
     public int getPopulation() {
         return this.Population;
     }
+
+    public int getID() {
+        return this.ID;
+    }
 }
