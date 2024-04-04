@@ -20,12 +20,15 @@ public class Main {
 
         if (resultSetContinent != null) {
             app.generateCityReportFromResultSet(resultSetContinent, "City_Report_Continent.md");
+            app.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
         }
         if (resultSetDistrict != null) {
             app.generateCityReportFromResultSet(resultSetDistrict, "City_Report_District.md");
+            app.printCitiesFromDistrict("","src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
         }
         if (resultSetRegion != null) {
             app.generateCityReportFromResultSet(resultSetRegion, "City_Report_Region.md");
+            app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
         }
 
 
