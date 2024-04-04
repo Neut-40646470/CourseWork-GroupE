@@ -12,31 +12,31 @@ public class AppTest {
     static final String DB_LOCATION = "localhost:33060";
     static final int DELAY = 0; // Adjust delay as needed
 
-//    @Test
-//    void printCitiesTestNull() {
-//        app = new App();
-//        app.connect(DB_LOCATION, DELAY);
-//        app.printCities(null);
-//    }
-//
-//    @Test
-//    void citiesPrintingTest() {
-//        app = new App();
-//        app.connect(DB_LOCATION, DELAY);
-//        ArrayList<Cities> cities = app.getAllCities();
-//        app.printCities(cities);
-//    }
-//
-//
+    @Test
+    void printCitiesTestNull() {
+        app = new App();
+        app.connect(DB_LOCATION, DELAY);
+        app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+    }
+
+    @Test
+    void citiesPrintingTest() {
+        app = new App();
+        app.connect(DB_LOCATION, DELAY);
+        ArrayList<Cities> cities = app.getAllCities();
+        app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+    }
+
+
 //    this is just to see if anything comes up in github actions
-//
-//    @Test
-//    void example(){
-//        app = new App();
-//        app.connect(DB_LOCATION, DELAY);
-//        app.printCities(null);
-//    }
-//
+
+    @Test
+    void example(){
+        app = new App();
+        app.connect(DB_LOCATION, DELAY);
+        app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+    }
+
     @Test
     void connectionFailedTest() {
         app = new App();
