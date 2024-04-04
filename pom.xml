@@ -17,6 +17,15 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Neut-40646470/CourseWork-GroupE</url>
+        </repository>
+    </distributionManagement>
+
+
 
     <!-- Targeting Java-17 -->
     <properties>
@@ -92,6 +101,7 @@
                     <target>17</target>
                 </configuration>
             </plugin>
+
 
         </plugins>
     </build>
