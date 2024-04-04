@@ -46,7 +46,7 @@ public class CitiesReport {
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(directory, filename)));
             writer.write(content);
             writer.close();
-            System.out.println("City report generated: " + filename);
+            System.out.println("\n\nCity report generated: " + filename);
         } catch (IOException e) {
             System.out.println("Error generating city report: " + e.getMessage());
         }
@@ -55,7 +55,7 @@ public class CitiesReport {
     public void printCitiesFromContinent(String continent, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", continent);
-            executeQuery(query, "City Report");
+            executeQuery(query, "City Report By Continent");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
@@ -64,7 +64,7 @@ public class CitiesReport {
     public void printCitiesFromDistrict(String district, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", district);
-            executeQuery(query, "City Report");
+            executeQuery(query, "City Report By District");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
@@ -73,7 +73,16 @@ public class CitiesReport {
     public void printCitiesFromRegion(String region, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", region);
-            executeQuery(query, "City Report");
+            executeQuery(query, "City Report By Region");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
+    public void printCitiesFromWorld(String world, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", world);
+            executeQuery(query, "City Report By World");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }

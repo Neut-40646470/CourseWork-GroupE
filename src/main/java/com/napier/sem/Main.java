@@ -14,10 +14,15 @@ public class Main {
             app.connect("db:3306", 30000);
         }
 
+        ResultSet resultSetWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql");
         ResultSet resultSetContinent = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
         ResultSet resultSetDistrict = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
         ResultSet resultSetRegion = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
 
+        if(resultSetWorld != null){
+            app.generateCityReportFromResultSet(resultSetWorld, "City_Report_World.md");
+            app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+        }
         if (resultSetContinent != null) {
             app.generateCityReportFromResultSet(resultSetContinent, "City_Report_Continent.md");
             app.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
