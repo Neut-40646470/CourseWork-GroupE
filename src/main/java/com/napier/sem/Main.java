@@ -36,15 +36,18 @@ public class Main {
             app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
         }
 
-//        ResultSet allCountriesByWorld = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
+        ResultSet allCountriesByWorld = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
         ResultSet allCountriesByContinent = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
         ResultSet allCountriesByRegion = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
 
         app.generateCountryReportFromResultSet(allCountriesByContinent, "Country_Report_Continent.md");
-        app.printCountryFromContinent("", "src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
+        app.printCountryFromContinent("src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
 
         app.generateCountryReportFromResultSet(allCountriesByRegion, "Country_Report_Region.md");
-        app.printCountryFromRegion("","src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
+        app.printCountryFromRegion("src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
+
+        app.generateCountryReportFromResultSet(allCountriesByWorld, "Country_Report_World.md");
+        app.printCountryFromWorld("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
 
         // Disconnect from the database
         app.disconnect();

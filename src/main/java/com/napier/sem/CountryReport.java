@@ -50,7 +50,7 @@ public class CountryReport {
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(directory, filename)));
             writer.write(content);
             writer.close();
-            System.out.println("Country report generated: " + filename);
+            System.out.println("\n\nCountry report generated: " + filename);
         } catch (IOException e) {
             System.out.println("Error generating country report: " + e.getMessage());
         }
@@ -73,7 +73,7 @@ public class CountryReport {
             ResultSet rs = stmt.executeQuery(query);
             // Print country report header
             System.out.println(reportTitle + "\n");
-            System.out.println(String.format("%-5s %-52s %-12s %-26s %-12s %-7s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+            System.out.println(String.format("%-5s %-40s %-18s %-26s %-12s %-7s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
             System.out.println("--------------------------------------------------------------------------------------------------");
             // Print countries from the ResultSet
             while (rs.next()) {
@@ -86,25 +86,34 @@ public class CountryReport {
                 String capitalStr = rs.getString("Capital");
                 Integer capital = capitalStr != null && capitalStr.matches("\\d+") ? Integer.parseInt(capitalStr) : null;
 
-                System.out.println(String.format("%-5s %-52s %-12s %-26s %-12d %-7d", code, name, continent, region, population, capital));
+                System.out.println(String.format("%-5s %-40s %-18s %-26s %-12d %-7d", code, name, continent, region, population, capital));
             }
         } catch (SQLException e) {
             System.out.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
-    public void printCountriesFromContinent(String continent, String queryFile) {
+        public void printCountriesFromWorld(String queryFile) {
+            try {
+                String query = readQueryFromFile(queryFile);
+                executeQuery(query, "Country Report By World");
+            } catch (IOException e) {
+                System.out.println("Error reading SQL file: " + e.getMessage());
+            }
+        }
+
+    public void printCountriesFromContinent(String queryFile) {
         try {
-            String query = readQueryFromFile(queryFile).replace("", continent);
+            String query = readQueryFromFile(queryFile);
             executeQuery(query, "Country Report By Continent");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
 
-    public void printCountriesFromRegion(String region, String queryFile) {
+    public void printCountriesFromRegion( String queryFile) {
         try {
-            String query = readQueryFromFile(queryFile).replace("", region);
+            String query = readQueryFromFile(queryFile);
             executeQuery(query, "Country Report By Region");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());

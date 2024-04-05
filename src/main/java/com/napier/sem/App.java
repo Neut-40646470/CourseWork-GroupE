@@ -160,17 +160,17 @@ public class App {
         CountryReport countryReport = new CountryReport(con);
         countryReport.generateCountryReportMarkdown(countries, filename);
     }
-//    public void printCountryFromWorld(String world, String queryFile) {
-//        CountryReport countryReport = new CountryReport(con);
-//        countryReport.printCountriesFromWorld(world, queryFile);
-//    }
-    public void printCountryFromRegion(String region, String queryFile) {
+    public void printCountryFromWorld(String queryFile) {
         CountryReport countryReport = new CountryReport(con);
-        countryReport.printCountriesFromRegion(region, queryFile);
+        countryReport.printCountriesFromWorld(queryFile);
     }
-    public void printCountryFromContinent(String continent, String queryFile) {
+    public void printCountryFromRegion(String queryFile) {
         CountryReport countryReport = new CountryReport(con);
-        countryReport.printCountriesFromContinent(continent, queryFile);
+        countryReport.printCountriesFromRegion(queryFile);
+    }
+    public void printCountryFromContinent(String queryFile) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.printCountriesFromContinent(queryFile);
     }
 
 
