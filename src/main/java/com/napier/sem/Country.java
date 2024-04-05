@@ -2,69 +2,97 @@ package com.napier.sem;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.Statement;
-
 public class Country {
-    private String code;
-    private String name;
-    private String continent;
-    private String region;
-    private int population;
-    private int capital;
 
-    public Country(String code, String name, String continent, String region, int population, int capital) {
-        this.code = code;
-        this.name = name;
-        this.continent = continent;
-        this.region = region;
-        this.population = population;
-        this.capital = capital;
+    private String Code;
+    private String Name;
+    private String Continent;
+    private String Region;
+    private int Population;
+    private Integer Capital; // Integer type to handle null values for capital
+
+    public Country(String code, String name, String continent, String region, int population, Integer capital) {
+        this.Code = code;
+        this.Name = name;
+        this.Continent = continent;
+        this.Region = region;
+        this.Population = population;
+        this.Capital = capital;
+    }
+
+    // Getter method for capital
+    public Integer getCapital() {
+        return Capital;
+    }
+    public void setCapital(Integer capital) {
+        this.Capital = capital;
     }
 
     public String getCode() {
-        return code;
+        return Code;
     }
 
     public void setCode(String code) {
-        this.code = code;
+        this.Code = code;
     }
 
     public String getName() {
-        return name;
+        return this.Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
     public String getContinent() {
-        return continent;
+        return this.Continent;
     }
 
     public void setContinent(String continent) {
-        this.continent = continent;
+        this.Continent = continent;
     }
 
     public String getRegion() {
-        return region;
+        return this.Region;
     }
 
     public void setRegion(String region) {
-        this.region = region;
+        this.Region = region;
     }
 
     public int getPopulation() {
-        return population;
+        return this.Population;
     }
 
     public void setPopulation(int population) {
-        this.population = population;
+        this.Population = population;
     }
+    // Other getter methods for code, name, continent, region, population
+    // You can generate these automatically in your IDE or write them manually
 
-    public int getCapital() {
-        return capital;
-    }
-
-    public void setCapital(int capital) {
-        this.capital = capital;
+    // Override toString method for debugging purposes or custom output
+    @Override
+    public String toString() {
+        return "Country{" +
+                "code='" + Code + '\'' +
+                ", name='" + Name + '\'' +
+                ", continent='" + Continent + '\'' +
+                ", region='" + Region + '\'' +
+                ", population=" + Population +
+                ", capital=" + Capital +
+                '}';
     }
 }
+
+
+//    public int getCapital() {
+//        return this.Capital;
+//    }
+
+//    public void setCapital(int capital) {
+//        this.Capital = capital;
+//    }
+
+
+
+

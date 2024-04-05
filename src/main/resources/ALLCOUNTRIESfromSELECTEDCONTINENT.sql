@@ -1,8 +1,6 @@
 -- Fetch all COUNTRIES from SELECTED CONTINENT
-
-SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital
-FROM world.country
-JOIN world.city
-ON country.capital = city.id
-WHERE country.continent = "South America"
-ORDER BY country.Population DESC;
+SELECT c.Code, c.Name, c.Continent, c.Region, c.Population, COALESCE(city.Name, 'Unknown') AS Capital
+FROM country c
+LEFT JOIN city ON c.Capital = city.ID
+WHERE c.Continent = 'Asia'
+ORDER BY c.Population DESC;

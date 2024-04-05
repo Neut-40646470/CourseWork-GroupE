@@ -14,35 +14,46 @@ public class Main {
             app.connect("db:3306", 30000);
         }
 
-        ResultSet resultSetWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql");
-        ResultSet resultSetContinent = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
-        ResultSet resultSetDistrict = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
-        ResultSet resultSetRegion = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+        ResultSet allCitiesByWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql");
+        ResultSet allCitiesByContinent = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+        ResultSet allCitiesByDistrict = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
+        ResultSet allCitiesByRegion = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
 
-        if(resultSetWorld != null){
-            app.generateCityReportFromResultSet(resultSetWorld, "City_Report_World.md");
+        if(allCitiesByWorld != null){
+            app.generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
             app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
         }
-        if (resultSetContinent != null) {
-            app.generateCityReportFromResultSet(resultSetContinent, "City_Report_Continent.md");
+        if (allCitiesByContinent != null) {
+            app.generateCityReportFromResultSet(allCitiesByContinent, "City_Report_Continent.md");
             app.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
         }
-        if (resultSetDistrict != null) {
-            app.generateCityReportFromResultSet(resultSetDistrict, "City_Report_District.md");
+        if (allCitiesByDistrict != null) {
+            app.generateCityReportFromResultSet(allCitiesByDistrict, "City_Report_District.md");
             app.printCitiesFromDistrict("","src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
         }
-        if (resultSetRegion != null) {
-            app.generateCityReportFromResultSet(resultSetRegion, "City_Report_Region.md");
+        if (allCitiesByRegion != null) {
+            app.generateCityReportFromResultSet(allCitiesByRegion, "City_Report_Region.md");
             app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
         }
 
+//        ResultSet allCountriesByWorld = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
+        ResultSet allCountriesByContinent = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
+        ResultSet allCountriesByRegion = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
 
+        app.generateCountryReportFromResultSet(allCountriesByContinent, "Country_Report_Continent.md");
+        app.printCountryFromContinent("", "src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
+
+        app.generateCountryReportFromResultSet(allCountriesByRegion, "Country_Report_Region.md");
+        app.printCountryFromRegion("","src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
 
         // Disconnect from the database
         app.disconnect();
     }
 }
-
+//        if(allCountriesByWorld != null){
+//            app.generateCountryReportFromResultSet(allCountriesByWorld, "City_Report_World.md");
+//            app.printCountryFromWorld("", "src/main/resources/ALLCOUNTRIESfromWORLD.sql");
+//        }
 
 
 //  List of File Paths to copy into the report printing pointer ^^
@@ -53,13 +64,11 @@ public class Main {
 //src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql
 //src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql
 //src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql
-//src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql
-//src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql
-//src/main/resources/ALLCITIESfromSELECTEDREGION.sql
-//src/main/resources/ALLCITIESfromWORLD.sql
+
 //src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql
 //src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql
 //src/main/resources/ALLCOUNTRIESfromWORLD.sql
+
 //src/main/resources/CONTINENT-FetchpopulationofALLCITIESfromSELECTEDCONTINENT.sql
 //src/main/resources/COUNTRY-FetchpopulationofCITIESinSELECTEDCOUNTRY.sql
 //src/main/resources/PopulationOfCity.sql
@@ -81,3 +90,9 @@ public class Main {
 //src/main/resources/TopNpopulatedCOUNTRIESfromWORLD.sql
 //src/main/resources/WORLD-FetchpopulationofCAPITIALCITIES.sql
 //src/main/resources/WORLD-FetchpopulationofCITIES.sql
+
+//   ** DONE LIST **
+//src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql
+//src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql
+//src/main/resources/ALLCITIESfromSELECTEDREGION.sql
+//src/main/resources/ALLCITIESfromWORLD.sql

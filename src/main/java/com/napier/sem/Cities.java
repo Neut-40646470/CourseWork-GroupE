@@ -10,15 +10,6 @@ public class Cities {
     public String District;
     public int Population;
 
-    // Constructor with arguments
-    public Cities(int ID, String Name, String CountryCode, String District, int Population) {
-        this.ID = ID;
-        this.Name = Name;
-        this.CountryCode = CountryCode;
-        this.District = District;
-        this.Population = Population;
-    }
-
     // No-argument constructor
     public Cities() {
         // Initialize variables to default values

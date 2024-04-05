@@ -52,6 +52,37 @@ public class CitiesReport {
         }
     }
 
+    private String readQueryFromFile(String filePath) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        StringBuilder queryBuilder = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null) {
+            queryBuilder.append(line).append("\n");
+        }
+        br.close();
+        return queryBuilder.toString();
+    }
+
+    private void executeQuery(String query, String reportTitle) {
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            // Print city report header
+            System.out.println(reportTitle + "\n");
+            System.out.println(String.format("%-30s %-30s %-20s %-15s", "Name", "Country", "District", "Population"));
+            System.out.println("----------------------------------------------------------------------------");
+            // Print cities from the ResultSet
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String country = rs.getString("Country");
+                String district = rs.getString("District");
+                int population = rs.getInt("Population");
+                System.out.println(String.format("%-30s %-30s %-20s %-15d", name, country, district, population));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error executing SQL query: " + e.getMessage());
+        }
+    }
+
     public void printCitiesFromContinent(String continent, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", continent);
@@ -88,34 +119,5 @@ public class CitiesReport {
         }
     }
 
-    private String readQueryFromFile(String filePath) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
-        StringBuilder queryBuilder = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null) {
-            queryBuilder.append(line).append("\n");
-        }
-        br.close();
-        return queryBuilder.toString();
-    }
 
-    private void executeQuery(String query, String reportTitle) {
-        try (Statement stmt = con.createStatement()) {
-            ResultSet rs = stmt.executeQuery(query);
-            // Print city report header
-            System.out.println(reportTitle + "\n");
-            System.out.println(String.format("%-30s %-30s %-20s %-15s", "Name", "Country", "District", "Population"));
-            System.out.println("----------------------------------------------------------------------------");
-            // Print cities from the ResultSet
-            while (rs.next()) {
-                String name = rs.getString("Name");
-                String country = rs.getString("Country");
-                String district = rs.getString("District");
-                int population = rs.getInt("Population");
-                System.out.println(String.format("%-30s %-30s %-20s %-15d", name, country, district, population));
-            }
-        } catch (SQLException e) {
-            System.out.println("Error executing SQL query: " + e.getMessage());
-        }
-    }
 }

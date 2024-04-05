@@ -93,6 +93,96 @@ public class App {
         }
     }
 
+
+    public void generateCityReportMarkdown(ArrayList<Cities> cities, String filename) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.generateCityReportMarkdown(cities, filename);
+    }
+
+    public void printCitiesFromWorld(String world, String queryFile) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.printCitiesFromWorld(world, queryFile);
+    }
+
+    public void printCitiesFromContinent(String continent, String queryFile) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.printCitiesFromContinent(continent, queryFile);
+    }
+
+    public void printCitiesFromDistrict(String district, String queryFile) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.printCitiesFromDistrict(district, queryFile);
+    }
+
+    public void printCitiesFromRegion(String region, String queryFile) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.printCitiesFromRegion(region, queryFile);
+    }
+
+    //Country reports
+    public void generateCountryReportFromResultSet(ResultSet resultSet, String filename) {
+        try {
+            ArrayList<Country> countries = new ArrayList<>();
+            while (resultSet.next()) {
+                String code = resultSet.getString("Code");
+                String name = resultSet.getString("Name");
+                String continent = resultSet.getString("Continent");
+                String region = resultSet.getString("Region");
+                int population = resultSet.getInt("Population");
+
+                // Check if Capital column is NULL or contains non-numeric values
+                String capitalStr = resultSet.getString("Capital");
+                Integer capital = null;
+                if (capitalStr != null && capitalStr.matches("\\d+")) {
+                    capital = Integer.parseInt(capitalStr);
+                }
+
+                Country country = new Country(code, name, continent, region, population, capital);
+                countries.add(country);
+            }
+            if (!countries.isEmpty()) {
+                generateCountryReportMarkdown(countries, filename);
+            } else {
+                System.out.println("No countries found for generating report: " + filename);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error generating country report from ResultSet: " + e.getMessage());
+            e.printStackTrace(); // Print stack trace for debugging
+        } catch (NumberFormatException e) {
+            System.out.println("Error parsing Capital value: " + e.getMessage());
+            e.printStackTrace(); // Print stack trace for debugging
+        }
+    }
+
+
+
+    public void generateCountryReportMarkdown(ArrayList<Country> countries, String filename) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.generateCountryReportMarkdown(countries, filename);
+    }
+//    public void printCountryFromWorld(String world, String queryFile) {
+//        CountryReport countryReport = new CountryReport(con);
+//        countryReport.printCountriesFromWorld(world, queryFile);
+//    }
+    public void printCountryFromRegion(String region, String queryFile) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.printCountriesFromRegion(region, queryFile);
+    }
+    public void printCountryFromContinent(String continent, String queryFile) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.printCountriesFromContinent(continent, queryFile);
+    }
+
+
+
+
+
+
+
+
+
+
+
     public ArrayList<Cities> getAllCities() {
         ArrayList<Cities> cities = new ArrayList<>();
         try (Statement stmt = con.createStatement()) {
@@ -119,29 +209,6 @@ public class App {
         return cities.isEmpty() ? null : cities;
     }
 
-    public void generateCityReportMarkdown(ArrayList<Cities> cities, String filename) {
-        CitiesReport citiesReport = new CitiesReport(con);
-        citiesReport.generateCityReportMarkdown(cities, filename);
-    }
 
-    public void printCitiesFromWorld(String world, String queryFile) {
-        CitiesReport citiesReport = new CitiesReport(con);
-        citiesReport.printCitiesFromWorld(world, queryFile);
-    }
-
-    public void printCitiesFromContinent(String continent, String queryFile) {
-        CitiesReport citiesReport = new CitiesReport(con);
-        citiesReport.printCitiesFromContinent(continent, queryFile);
-    }
-
-    public void printCitiesFromDistrict(String district, String queryFile) {
-        CitiesReport citiesReport = new CitiesReport(con);
-        citiesReport.printCitiesFromDistrict(district, queryFile);
-    }
-
-    public void printCitiesFromRegion(String region, String queryFile) {
-        CitiesReport citiesReport = new CitiesReport(con);
-        citiesReport.printCitiesFromRegion(region, queryFile);
-    }
 
 }

@@ -12,6 +12,7 @@ public class CountryReport {
     public CountryReport(Connection con) {
         this.con = con;
     }
+
     public void generateCountryReportMarkdown(ArrayList<Country> countries, String filename) {
         if (countries == null || countries.isEmpty()) {
             System.out.println("No countries to generate report.");
@@ -25,11 +26,20 @@ public class CountryReport {
         for (Country country : countries) {
             sb.append("| " + country.getCode() + " | " + country.getName() + " | " +
                     country.getContinent() + " | " + country.getRegion() + " | " +
-                    country.getPopulation() + " | " + country.getCapital() + " |\n");
+                    country.getPopulation() + " | ");
+
+            if (country.getCapital() != null) {
+                sb.append(country.getCapital());
+            } else {
+                sb.append("N/A"); // Replace null with a default value or placeholder
+            }
+
+            sb.append(" |\n");
         }
 
         saveReportToFile(sb.toString(), filename);
     }
+
 
     private void saveReportToFile(String content, String filename) {
         try {
@@ -72,7 +82,10 @@ public class CountryReport {
                 String continent = rs.getString("Continent");
                 String region = rs.getString("Region");
                 int population = rs.getInt("Population");
-                int capital = rs.getInt("Capital");
+                // Handle Capital as Integer, use getInt instead of getString
+                String capitalStr = rs.getString("Capital");
+                Integer capital = capitalStr != null && capitalStr.matches("\\d+") ? Integer.parseInt(capitalStr) : null;
+
                 System.out.println(String.format("%-5s %-52s %-12s %-26s %-12d %-7d", code, name, continent, region, population, capital));
             }
         } catch (SQLException e) {
@@ -83,7 +96,7 @@ public class CountryReport {
     public void printCountriesFromContinent(String continent, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", continent);
-            executeQuery(query, "Country Report");
+            executeQuery(query, "Country Report By Continent");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
@@ -92,9 +105,50 @@ public class CountryReport {
     public void printCountriesFromRegion(String region, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", region);
-            executeQuery(query, "Country Report");
+            executeQuery(query, "Country Report By Region");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
 }
+//public void generateCountryReportFromResultSet(ResultSet resultSet, String filename) {
+//    try {
+//        ArrayList<Country> countries = new ArrayList<>();
+//        while (resultSet.next()) {
+//            Country country = new Country();
+//            country.setCode(resultSet.getString("Code"));
+//            country.setName(resultSet.getString("Name"));
+//            country.setContinent(resultSet.getString("Continent"));
+//            country.setRegion(resultSet.getString("Region"));
+//            country.setPopulation(resultSet.getInt("Population"));
+//
+//             Handle Capital as Integer
+//            try {
+//                country.setCapital(resultSet.getInt("Capital"));
+//            } catch (NumberFormatException e) {
+//                country.setCapital(0); // Set a default value or handle as needed
+//                System.out.println("Error parsing Capital value: " + e.getMessage());
+//            }
+//
+//            countries.add(country);
+//        }
+//        if (!countries.isEmpty()) {
+//            generateCountryReportMarkdown(countries, filename);
+//        } else {
+//            System.out.println("No countries found for generating report: " + filename);
+//        }
+//    } catch (SQLException e) {
+//        System.out.println("Error generating country report from ResultSet: " + e.getMessage());
+//    }
+//}
+
+
+//    public void printCountriesFromWorld(String world, String queryFile) {
+//        try {
+//            String query = readQueryFromFile(queryFile).replace("", world);
+//            executeQuery(query, "Country Report By World");
+//        } catch (IOException e) {
+//            System.out.println("Error reading SQL file: " + e.getMessage());
+//        }
+//    }
+//}
