@@ -130,14 +130,12 @@ public class App {
                 String region = resultSet.getString("Region");
                 int population = resultSet.getInt("Population");
 
-                // Check if Capital column is NULL or contains non-numeric values
-                String capitalStr = resultSet.getString("Capital");
-                Integer capital = null;
-                if (capitalStr != null && capitalStr.matches("\\d+")) {
-                    capital = Integer.parseInt(capitalStr);
-                }
+                // Retrieve the capital ID
+                Integer capitalId = resultSet.getInt("Capital");
+                String capitalCityName = getCapitalCityName(capitalId); // Retrieve city name using capital ID
 
-                Country country = new Country(code, name, continent, region, population, capital);
+                Country country = new Country(code, name, continent, region, population, capitalId);
+                country.setCapitalCityName(capitalCityName); // Set the capital city name
                 countries.add(country);
             }
             if (!countries.isEmpty()) {
@@ -153,6 +151,21 @@ public class App {
             e.printStackTrace(); // Print stack trace for debugging
         }
     }
+
+    private String getCapitalCityName(Integer capitalId) {
+        try {
+            String query = "SELECT Name FROM City WHERE ID = " + capitalId;
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                return rs.getString("Name");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving capital city name: " + e.getMessage());
+        }
+        return null;
+    }
+
 
 
 
