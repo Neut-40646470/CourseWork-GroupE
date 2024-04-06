@@ -14,27 +14,19 @@ public class CountryReport {
     }
 
     public void generateCountryReportMarkdown(ArrayList<Country> countries, String filename) {
-        if (countries == null || countries.isEmpty()) {
-            System.out.println("No countries to generate report.");
-            return;
-        }
-
         StringBuilder sb = new StringBuilder();
         sb.append("# Country Report\n\n");
         sb.append("| Code | Name | Continent | Region | Population | Capital |\n");
         sb.append("| ---- | ---- | --------- | ------ | ---------- | ------- |\n");
         for (Country country : countries) {
-            sb.append("| " + country.getCode() + " | " + country.getName() + " | " +
-                    country.getContinent() + " | " + country.getRegion() + " | " +
-                    country.getPopulation() + " | ");
-
-            if (country.getCapital() != null) {
-                sb.append(country.getCapital());
-            } else {
-                sb.append("N/A"); // Replace null with a default value or placeholder
-            }
-
-            sb.append(" |\n");
+            sb.append("| ")
+                    .append(country.getCode()).append(" | ")
+                    .append(country.getName()).append(" | ")
+                    .append(country.getContinent()).append(" | ")
+                    .append(country.getRegion()).append(" | ")
+                    .append(country.getPopulation()).append(" | ")
+                    .append(country.getCapital() != null ? country.getCapital() : "N/A")
+                    .append(" |\n");
         }
 
         saveReportToFile(sb.toString(), filename);
@@ -73,8 +65,8 @@ public class CountryReport {
             ResultSet rs = stmt.executeQuery(query);
             // Print country report header
             System.out.println(reportTitle + "\n");
-            System.out.println(String.format("%-5s %-40s %-18s %-26s %-12s %-7s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
-            System.out.println("--------------------------------------------------------------------------------------------------");
+            System.out.println(String.format("%-5s %-35s %-18s %-26s %-12s %-7s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+            System.out.println("-----------------------------------------------------------------------------------------------------------------");
             // Print countries from the ResultSet
             while (rs.next()) {
                 String code = rs.getString("Code");
@@ -83,10 +75,8 @@ public class CountryReport {
                 String region = rs.getString("Region");
                 int population = rs.getInt("Population");
                 // Handle Capital as Integer, use getInt instead of getString
-                String capitalStr = rs.getString("Capital");
-                Integer capital = capitalStr != null && capitalStr.matches("\\d+") ? Integer.parseInt(capitalStr) : null;
-
-                System.out.println(String.format("%-5s %-40s %-18s %-26s %-12d %-7d", code, name, continent, region, population, capital));
+                String capital = rs.getString("Capital");
+                System.out.println(String.format("%-5s %-35s %-18s %-26s %-12d %-7s", code, name, continent, region, population, capital));
             }
         } catch (SQLException e) {
             System.out.println("Error executing SQL query: " + e.getMessage());

@@ -1,7 +1,7 @@
 -- Fetch all COUNTRIES from THE WORLD
 
-SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital
-FROM world.country
-JOIN world.city
-ON country.capital = city.id
-ORDER BY country.Population DESC;
+SELECT c.Code, c.Name, c.Continent, c.Region, c.Population, cap.Name AS Capital
+FROM country c
+JOIN city cap ON c.Capital = cap.ID
+WHERE c.Capital IS NOT NULL
+ORDER BY c.Population DESC;

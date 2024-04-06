@@ -124,18 +124,15 @@ public class App {
         try {
             ArrayList<Country> countries = new ArrayList<>();
             while (resultSet.next()) {
-                String code = resultSet.getString("Code");
-                String name = resultSet.getString("Name");
-                String continent = resultSet.getString("Continent");
-                String region = resultSet.getString("Region");
-                int population = resultSet.getInt("Population");
-
-                // Retrieve the capital ID
-                Integer capitalId = resultSet.getInt("Capital");
-                String capitalCityName = getCapitalCityName(capitalId); // Retrieve city name using capital ID
-
-                Country country = new Country(code, name, continent, region, population, capitalId);
-                country.setCapitalCityName(capitalCityName); // Set the capital city name
+                Country country = new Country();
+                country.setCode(resultSet.getString("Code"));
+                country.setName(resultSet.getString("Name"));
+                country.setContinent(resultSet.getString("Continent"));
+                country.setRegion(resultSet.getString("Region"));
+                country.setPopulation(resultSet.getInt("Population"));
+                country.setCapital(resultSet.getString("Capital")); ; // Use the alias as specified in your SQL query
+                String capitalName = resultSet.getString("Capital"); // Ensure this matches the alias in your SQL query.
+                System.out.println("Capital Name: " + capitalName); // Debug print to verify if you're getting the correct data.
                 countries.add(country);
             }
             if (!countries.isEmpty()) {
@@ -146,29 +143,8 @@ public class App {
         } catch (SQLException e) {
             System.out.println("Error generating country report from ResultSet: " + e.getMessage());
             e.printStackTrace(); // Print stack trace for debugging
-        } catch (NumberFormatException e) {
-            System.out.println("Error parsing Capital value: " + e.getMessage());
-            e.printStackTrace(); // Print stack trace for debugging
         }
     }
-
-    private String getCapitalCityName(Integer capitalId) {
-        try {
-            String query = "SELECT Name FROM City WHERE ID = " + capitalId;
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            if (rs.next()) {
-                return rs.getString("Name");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error retrieving capital city name: " + e.getMessage());
-        }
-        return null;
-    }
-
-
-
-
     public void generateCountryReportMarkdown(ArrayList<Country> countries, String filename) {
         CountryReport countryReport = new CountryReport(con);
         countryReport.generateCountryReportMarkdown(countries, filename);
@@ -185,16 +161,26 @@ public class App {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printCountriesFromContinent(queryFile);
     }
+}
+
+//
+//    private String getCapitalCityName(Integer capitalId) {
+//        try {
+//            String query = "SELECT Name FROM City WHERE ID = " + capitalId;
+//            Statement stmt = con.createStatement();
+//            ResultSet rs = stmt.executeQuery(query);
+//            if (rs.next()) {
+//                return rs.getString("Name");
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Error retrieving capital city name: " + e.getMessage());
+//        }
+//        return null;
+//    }
 
 
 
-
-
-
-
-
-
-
+/*
 
     public ArrayList<Cities> getAllCities() {
         ArrayList<Cities> cities = new ArrayList<>();
@@ -221,7 +207,4 @@ public class App {
         }
         return cities.isEmpty() ? null : cities;
     }
-
-
-
-}
+*/

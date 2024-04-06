@@ -49,6 +49,7 @@ public class Main {
         app.generateCountryReportFromResultSet(allCountriesByWorld, "Country_Report_World.md");
         app.printCountryFromWorld("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
 
+
         // Disconnect from the database
         app.disconnect();
     }
