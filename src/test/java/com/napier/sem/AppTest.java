@@ -1,6 +1,8 @@
 package com.napier.sem;
 
 import org.junit.jupiter.api.Test;
+
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,8 +25,12 @@ public class AppTest {
     void citiesPrintingTest() {
         app = new App();
         app.connect(DB_LOCATION, DELAY);
-        ArrayList<Cities> cities = app.getAllCities();
-        app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+        ResultSet allCitiesByWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql");
+        if(allCitiesByWorld != null){
+            app.generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
+            app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
+        }
+//        app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
     }
 
 
