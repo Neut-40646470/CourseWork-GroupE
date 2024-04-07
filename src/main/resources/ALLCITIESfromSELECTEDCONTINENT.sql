@@ -5,3 +5,4 @@ FROM world.city c
 JOIN world.country co ON c.CountryCode = co.Code
 WHERE co.Continent = 'Europe'
 ORDER BY c.Population DESC;
+
