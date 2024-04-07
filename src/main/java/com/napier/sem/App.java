@@ -109,6 +109,11 @@ public class App {
         citiesReport.printCitiesFromContinent(continent, queryFile);
     }
 
+    public void printCitiesFromCountry(String country, String queryFile) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.printCitiesFromCountry(country, queryFile);
+    }
+
     public void printCitiesFromDistrict(String district, String queryFile) {
         CitiesReport citiesReport = new CitiesReport(con);
         citiesReport.printCitiesFromDistrict(district, queryFile);

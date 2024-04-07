@@ -91,6 +91,7 @@ public class CitiesReport {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
+    
     public void printCitiesFromCountry(String country, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", country);
