@@ -107,10 +107,10 @@ public class App {
         citiesReport.printCitiesFromContinent(continent, queryFile);
     }
 
-    public void printTopNCitiesFromContinent(String continent, String queryFile) {
-        CitiesReport citiesReport = new CitiesReport(con);
-        citiesReport.printTopNCitiesFromContinent(continent, queryFile);
-    }
+//    public void printTopNCitiesFromContinent(String continent, String queryFile) {
+//        CitiesReport citiesReport = new CitiesReport(con);
+//        citiesReport.printTopNCitiesFromContinent(continent, queryFile);
+//    }
 
     public void printCitiesFromCountry(String country, String queryFile) {
         CitiesReport citiesReport = new CitiesReport(con);
