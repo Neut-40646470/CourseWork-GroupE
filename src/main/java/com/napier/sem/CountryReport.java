@@ -92,6 +92,15 @@ public class CountryReport {
             }
         }
 
+        public void printTopNCountriesFromWorld(String queryFile) {
+            try {
+                String query = readQueryFromFile(queryFile);
+                executeQuery(query, "Top N Country Report By World");
+            } catch (IOException e) {
+                System.out.println("Error reading SQL file: " + e.getMessage());
+            }
+        }
+
     public void printCountriesFromContinent(String queryFile) {
         try {
             String query = readQueryFromFile(queryFile);

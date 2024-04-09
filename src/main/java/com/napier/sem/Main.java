@@ -67,6 +67,7 @@ public class Main {
         }
 
         ResultSet allCountriesByWorld = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
+        ResultSet TopNCountriesByWorld = app.executeQueryFromFile("src/main/resources/TopNpopulatedCOUNTRIESfromWORLD.sql");
         ResultSet allCountriesByContinent = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
         ResultSet allCountriesByRegion = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
 
@@ -80,6 +81,8 @@ public class Main {
         app.generateCountryReportFromResultSet(allCountriesByWorld, "Country_Report_World.md");
         app.printCountryFromWorld("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
 
+        app.generateCountryReportFromResultSet(TopNCountriesByWorld, "Top_N_Countries_Report_World.md");
+        app.printTopNCountriesFromWorld("src/main/resources/TopNpopulatedCOUNTRIESfromWORLD.sql");
 
         // Disconnect from the database
         app.disconnect();

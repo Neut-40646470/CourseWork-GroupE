@@ -183,6 +183,10 @@ public class App {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printCountriesFromWorld(queryFile);
     }
+    public void printTopNCountriesFromWorld(String queryFile) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.printTopNCountriesFromWorld(queryFile);
+    }
     public void printCountryFromRegion(String queryFile) {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printCountriesFromRegion(queryFile);
