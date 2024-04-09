@@ -1,4 +1,5 @@
 package com.napier.sem;
+
 import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class CountryReport {
-    private Connection con;
+    private final Connection con;
 
     public CountryReport(Connection con) {
         this.con = con;
@@ -83,14 +84,14 @@ public class CountryReport {
         }
     }
 
-        public void printCountriesFromWorld(String queryFile) {
-            try {
-                String query = readQueryFromFile(queryFile);
-                executeQuery(query, "Country Report By World");
-            } catch (IOException e) {
-                System.out.println("Error reading SQL file: " + e.getMessage());
-            }
+    public void printCountriesFromWorld(String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile);
+            executeQuery(query, "Country Report By World");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
         }
+    }
 
     public void printCountriesFromContinent(String queryFile) {
         try {
@@ -101,7 +102,7 @@ public class CountryReport {
         }
     }
 
-    public void printCountriesFromRegion( String queryFile) {
+    public void printCountriesFromRegion(String queryFile) {
         try {
             String query = readQueryFromFile(queryFile);
             executeQuery(query, "Country Report By Region");

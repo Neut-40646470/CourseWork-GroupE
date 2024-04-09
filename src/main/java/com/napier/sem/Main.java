@@ -1,8 +1,6 @@
 package com.napier.sem;
-import java.io.IOException;
-import java.sql.ResultSet;
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,7 +18,7 @@ public class Main {
         ResultSet allCitiesByDistrict = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
         ResultSet allCitiesByRegion = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
 
-        if(allCitiesByWorld != null){
+        if (allCitiesByWorld != null) {
             app.generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
             app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
         }
@@ -30,16 +28,16 @@ public class Main {
         }
         if (allCitiesByCountry != null) {
             app.generateCityReportFromResultSet(allCitiesByCountry, "City_Report_Country.md");
-            app.printCitiesFromCountry("","src/main/resources/ALLCITIESfromSELECTEDCOUNTRY.sql");
+            app.printCitiesFromCountry("", "src/main/resources/ALLCITIESfromSELECTEDCOUNTRY.sql");
         }
 
         if (allCitiesByDistrict != null) {
             app.generateCityReportFromResultSet(allCitiesByDistrict, "City_Report_District.md");
-            app.printCitiesFromDistrict("","src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
+            app.printCitiesFromDistrict("", "src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
         }
         if (allCitiesByRegion != null) {
             app.generateCityReportFromResultSet(allCitiesByRegion, "City_Report_Region.md");
-            app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+            app.printCitiesFromRegion("", "src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
         }
 
         ResultSet allCountriesByWorld = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
@@ -69,7 +67,6 @@ public class Main {
 
 //  List of File Paths to copy into the report printing pointer ^^
 //              Delete the one you used before Commit and Push
-
 
 
 //src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql

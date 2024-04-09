@@ -1,7 +1,6 @@
 package com.napier.sem;
+
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.Statement;
 
 public class Cities {
     public int ID;

@@ -1,19 +1,18 @@
 package com.napier.sem;
 
 import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 
 
 public class CitiesReport {
-    private Connection con;
+    private final Connection con;
 
     public CitiesReport(Connection con) {
         this.con = con;
@@ -91,7 +90,7 @@ public class CitiesReport {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
-    
+
     public void printCitiesFromCountry(String country, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", country);
@@ -100,6 +99,7 @@ public class CitiesReport {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
+
     public void printCitiesFromDistrict(String district, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", district);

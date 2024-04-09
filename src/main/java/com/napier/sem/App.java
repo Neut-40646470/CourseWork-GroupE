@@ -3,12 +3,8 @@ package com.napier.sem;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class App {
     private Connection con = null;
@@ -49,6 +45,7 @@ public class App {
             System.out.println(e.getMessage());
         }
     }
+
     public ResultSet executeQueryFromFile(String filePath) {
         try {
             String query = readQueryFromFile(filePath);
@@ -59,6 +56,7 @@ public class App {
             return null;
         }
     }
+
     private String readQueryFromFile(String filePath) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         StringBuilder queryBuilder = new StringBuilder();
@@ -135,7 +133,7 @@ public class App {
                 country.setContinent(resultSet.getString("Continent"));
                 country.setRegion(resultSet.getString("Region"));
                 country.setPopulation(resultSet.getInt("Population"));
-                country.setCapital(resultSet.getString("Capital")); ; // Use the alias as specified in your SQL query
+                country.setCapital(resultSet.getString("Capital")); // Use the alias as specified in your SQL query
                 String capitalName = resultSet.getString("Capital"); // Ensure this matches the alias in your SQL query.
                 System.out.println("Capital Name: " + capitalName); // Debug print to verify if you're getting the correct data.
                 countries.add(country);
@@ -150,18 +148,22 @@ public class App {
             e.printStackTrace(); // Print stack trace for debugging
         }
     }
+
     public void generateCountryReportMarkdown(ArrayList<Country> countries, String filename) {
         CountryReport countryReport = new CountryReport(con);
         countryReport.generateCountryReportMarkdown(countries, filename);
     }
+
     public void printCountryFromWorld(String queryFile) {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printCountriesFromWorld(queryFile);
     }
+
     public void printCountryFromRegion(String queryFile) {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printCountriesFromRegion(queryFile);
     }
+
     public void printCountryFromContinent(String queryFile) {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printCountriesFromContinent(queryFile);

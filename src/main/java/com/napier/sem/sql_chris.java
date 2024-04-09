@@ -1,10 +1,10 @@
 //package com.napier.sem;
 //
 //public class sql_chris {
-    //Output for WORLD - Fetch population of CITIES
-    //Amended code below to show all required columns
+//Output for WORLD - Fetch population of CITIES
+//Amended code below to show all required columns
 
-    //"SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population"
+//"SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population"
 //    "FROM world.city""
 //    "JOIN world.country ON city.CountryCode = country.Code;""
 //
@@ -38,8 +38,6 @@
 //    "JOIN world.country co ON c.CountryCode = co.Code
 //   "WHERE co.Continent = 'Continent Here'
 //    "ORDER BY c.Population DESC;
-
-
 
 
 //}
