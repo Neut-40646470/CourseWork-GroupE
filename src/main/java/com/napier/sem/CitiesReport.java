@@ -109,6 +109,15 @@ public class CitiesReport {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
+
+    public void printTopNCitiesFromCountry(String country, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", country);
+            executeQuery(query, "Top N City Report By Country");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
     public void printCitiesFromDistrict(String district, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", district);

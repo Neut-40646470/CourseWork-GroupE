@@ -18,6 +18,7 @@ public class Main {
         ResultSet allCitiesByContinent = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
         ResultSet TopNCitiesByContinent = app.executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromCONTINENT.sql");
         ResultSet allCitiesByCountry = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCOUNTRY.sql");
+        ResultSet TopNCitiesByCountry = app.executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromCOUNTRY.sql");
         ResultSet allCitiesByDistrict = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
         ResultSet allCitiesByRegion = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
 
@@ -36,6 +37,10 @@ public class Main {
         if (allCitiesByCountry != null) {
             app.generateCityReportFromResultSet(allCitiesByCountry, "City_Report_Country.md");
             app.printCitiesFromCountry("","src/main/resources/ALLCITIESfromSELECTEDCOUNTRY.sql");
+        }
+        if (TopNCitiesByCountry != null) {
+            app.generateCityReportFromResultSet(TopNCitiesByCountry, "Top_N_City_Report_Country.md");
+            app.printTopNCitiesFromCountry("", "src/main/resources/TopNpopulatedCITIESfromCOUNTRY.sql");
         }
         if (allCitiesByDistrict != null) {
             app.generateCityReportFromResultSet(allCitiesByDistrict, "City_Report_District.md");
