@@ -1,5 +1,6 @@
-name: A workflow for my Tests
+name: A workflow for my World App
 on: push
+
 jobs:
   UnitTests:
     name: Unit Tests
@@ -15,7 +16,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Unit Tests
-        run: mvn test -X
+        run: mvn -Dtest=com.napier.sem.AppTest test
 
   build:
     name: Build and Start Using docker-compose
