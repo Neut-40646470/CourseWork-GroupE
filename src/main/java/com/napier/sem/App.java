@@ -191,11 +191,20 @@ public class App {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printCountriesFromRegion(queryFile);
     }
+    public void printTopNCountriesFromRegion(String queryFile) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.printTopNCountriesFromRegion(queryFile);
+    }
     public void printCountryFromContinent(String queryFile) {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printCountriesFromContinent(queryFile);
     }
+    public void printTopNCountriesFromContinent(String queryFile) {
+        CountryReport countryReport = new CountryReport(con);
+        countryReport.printTopNCountriesFromContinent(queryFile);
+    }
 }
+
 
 //
 //    private String getCapitalCityName(Integer capitalId) {

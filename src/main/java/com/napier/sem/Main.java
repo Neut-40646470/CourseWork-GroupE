@@ -69,19 +69,26 @@ public class Main {
         ResultSet allCountriesByWorld = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
         ResultSet TopNCountriesByWorld = app.executeQueryFromFile("src/main/resources/TopNpopulatedCOUNTRIESfromWORLD.sql");
         ResultSet allCountriesByContinent = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
+        ResultSet TopNCountriesByContinent = app.executeQueryFromFile("src/main/resources/TopNpopulatedCOUNTRIESfromCONTINENT.sql");
         ResultSet allCountriesByRegion = app.executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
-
+        ResultSet TopNCountriesByRegion = app.executeQueryFromFile("src/main/resources/TopNpopulatedCOUNTRIESfromREGION.sql");
 
         app.generateCountryReportFromResultSet(allCountriesByContinent, "Country_Report_Continent.md");
         app.printCountryFromContinent("src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
 
+        app.generateCountryReportFromResultSet(TopNCountriesByContinent, "Top_N_Country_Report_Continent.md");
+        app.printTopNCountriesFromContinent("src/main/resources/TopNpopulatedCOUNTRIESfromCONTINENT.sql");
+
         app.generateCountryReportFromResultSet(allCountriesByRegion, "Country_Report_Region.md");
         app.printCountryFromRegion("src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
+
+        app.generateCountryReportFromResultSet(TopNCountriesByRegion, "Top_N_Country_Report_Region.md");
+        app.printTopNCountriesFromRegion("src/main/resources/TopNpopulatedCOUNTRIESfromREGION.sql");
 
         app.generateCountryReportFromResultSet(allCountriesByWorld, "Country_Report_World.md");
         app.printCountryFromWorld("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
 
-        app.generateCountryReportFromResultSet(TopNCountriesByWorld, "Top_N_Countries_Report_World.md");
+        app.generateCountryReportFromResultSet(TopNCountriesByWorld, "Top_N_Country_Report_World.md");
         app.printTopNCountriesFromWorld("src/main/resources/TopNpopulatedCOUNTRIESfromWORLD.sql");
 
         // Disconnect from the database

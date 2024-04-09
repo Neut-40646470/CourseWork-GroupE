@@ -110,6 +110,15 @@ public class CountryReport {
         }
     }
 
+    public void printTopNCountriesFromContinent(String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile);
+            executeQuery(query, "Top N Country Report By Continent");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
     public void printCountriesFromRegion( String queryFile) {
         try {
             String query = readQueryFromFile(queryFile);
@@ -118,7 +127,17 @@ public class CountryReport {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
+
+    public void printTopNCountriesFromRegion(String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile);
+            executeQuery(query, "Top N Country Report By Region");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
 }
+
 //public void generateCountryReportFromResultSet(ResultSet resultSet, String filename) {
 //    try {
 //        ArrayList<Country> countries = new ArrayList<>();

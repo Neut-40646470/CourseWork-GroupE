@@ -6,4 +6,4 @@ JOIN world.city
 ON country.capital = city.id
 WHERE country.region = "Caribbean"
 ORDER BY country.Population DESC
-LIMIT N;
+LIMIT 10;
