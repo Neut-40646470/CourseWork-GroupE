@@ -4,4 +4,4 @@ SELECT city.Name, country.Name AS Country, city.District, city.Population AS Pop
 FROM world.city
 JOIN world.country ON city.CountryCode = country.Code
 ORDER BY city.Population DESC
-LIMIT N;
+LIMIT 10;

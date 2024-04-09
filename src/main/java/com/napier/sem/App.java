@@ -104,6 +104,11 @@ public class App {
         citiesReport.printCitiesFromWorld(world, queryFile);
     }
 
+    public void printTopNCitiesFromWorld(String world, String queryFile) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.printTopNCitiesFromWorld(world, queryFile);
+    }
+
     public void printCitiesFromContinent(String continent, String queryFile) {
         CitiesReport citiesReport = new CitiesReport(con);
         citiesReport.printCitiesFromContinent(continent, queryFile);
@@ -129,9 +134,19 @@ public class App {
         citiesReport.printCitiesFromDistrict(district, queryFile);
     }
 
+    public void printTopNCitiesFromDistrict(String district, String queryFile) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.printTopNCitiesFromDistrict(district, queryFile);
+    }
+
     public void printCitiesFromRegion(String region, String queryFile) {
         CitiesReport citiesReport = new CitiesReport(con);
         citiesReport.printCitiesFromRegion(region, queryFile);
+    }
+
+    public void printTopNCitiesFromRegion(String region, String queryFile) {
+        CitiesReport citiesReport = new CitiesReport(con);
+        citiesReport.printTopNCitiesFromRegion(region, queryFile);
     }
 
     //Country reports
