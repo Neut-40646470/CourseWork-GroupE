@@ -6,4 +6,4 @@ JOIN country
 ON city.CountryCode = country.Code
 WHERE country.Name = "Poland"
 ORDER BY Population DESC
-LIMIT N;
+LIMIT 10;
