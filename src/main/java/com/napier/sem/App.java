@@ -39,11 +39,13 @@ public class App {
     }
 
     public void disconnect() {
+        //try disconnect from DB
         try {
             if (con != null) {
                 con.close();
                 System.out.println("Disconnected from database");
             }
+            //error handling
         } catch (SQLException e) {
             System.out.println("Error closing connection to database");
             System.out.println(e.getMessage());

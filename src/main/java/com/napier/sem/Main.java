@@ -12,7 +12,7 @@ public class Main {
             app.connect("db:3306", 30000);
         }
 
-        ResultSet allCitiesByWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql");
+        ResultSet allCitiesByWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql"); // Print Report for allCitiesByWorld taking the file path
         ResultSet TopNCitiesByWorld = app.executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromWORLD.sql");
         ResultSet allCitiesByContinent = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
         //ResultSet TopNCitiesByContinent = app.executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromCONTINENT.sql");
@@ -93,10 +93,7 @@ public class Main {
         app.disconnect();
     }
 }
-//        if(allCountriesByWorld != null){
-//            app.generateCountryReportFromResultSet(allCountriesByWorld, "City_Report_World.md");
-//            app.printCountryFromWorld("", "src/main/resources/ALLCOUNTRIESfromWORLD.sql");
-//        }
+
 
 
 //  List of File Paths to copy into the report printing pointer ^^
