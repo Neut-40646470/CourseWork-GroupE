@@ -5,4 +5,4 @@ FROM world.country
 JOIN world.city
 ON country.capital = city.id
 ORDER BY country.Population DESC
-LIMIT N;
+LIMIT 10;

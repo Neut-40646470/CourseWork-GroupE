@@ -6,4 +6,4 @@ JOIN country
 ON city.CountryCode = country.Code
 WHERE country.Region = "Southern Europe"
 ORDER BY Population DESC
-LIMIT N;
+LIMIT 10;

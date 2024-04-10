@@ -1,5 +1,4 @@
 package com.napier.sem;
-
 import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class CountryReport {
-    private final Connection con;
+    private Connection con;
 
     public CountryReport(Connection con) {
         this.con = con;
@@ -84,14 +83,23 @@ public class CountryReport {
         }
     }
 
-    public void printCountriesFromWorld(String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile);
-            executeQuery(query, "Country Report By World");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
+        public void printCountriesFromWorld(String queryFile) {
+            try {
+                String query = readQueryFromFile(queryFile);
+                executeQuery(query, "Country Report By World");
+            } catch (IOException e) {
+                System.out.println("Error reading SQL file: " + e.getMessage());
+            }
         }
-    }
+
+        public void printTopNCountriesFromWorld(String queryFile) {
+            try {
+                String query = readQueryFromFile(queryFile);
+                executeQuery(query, "Top N Country Report By World");
+            } catch (IOException e) {
+                System.out.println("Error reading SQL file: " + e.getMessage());
+            }
+        }
 
     public void printCountriesFromContinent(String queryFile) {
         try {
@@ -102,7 +110,16 @@ public class CountryReport {
         }
     }
 
-    public void printCountriesFromRegion(String queryFile) {
+    public void printTopNCountriesFromContinent(String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile);
+            executeQuery(query, "Top N Country Report By Continent");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
+    public void printCountriesFromRegion( String queryFile) {
         try {
             String query = readQueryFromFile(queryFile);
             executeQuery(query, "Country Report By Region");
@@ -110,7 +127,17 @@ public class CountryReport {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
+
+    public void printTopNCountriesFromRegion(String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile);
+            executeQuery(query, "Top N Country Report By Region");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
 }
+
 //public void generateCountryReportFromResultSet(ResultSet resultSet, String filename) {
 //    try {
 //        ArrayList<Country> countries = new ArrayList<>();
