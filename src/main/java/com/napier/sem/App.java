@@ -205,6 +205,47 @@ public class App {
         CountryReport countryReport = new CountryReport(con);
         countryReport.printTopNCountriesFromContinent(queryFile);
     }
+
+
+    public void generateCapitalCityReportFromResultSet(ResultSet resultSet, String filename) {
+        try {
+            ArrayList<CapitalCities> capitalcities = new ArrayList<>();
+            while (resultSet.next()) {
+                CapitalCities capitalcity = new CapitalCities();
+//                capitalcity.ID = resultSet.getInt("ID");
+                capitalcity.Name = resultSet.getString("Name");
+//                city.CountryCode = resultSet.getString("CountryCode");
+                capitalcity.CountryCode = resultSet.getString("Country");
+//                capitalcity.District = resultSet.getString("District");
+                capitalcity.Population = resultSet.getInt("Population");
+                capitalcities.add(capitalcity);
+            }
+            if (!capitalcities.isEmpty()) {
+                generateCapitalCityReportMarkdown(capitalcities, filename);
+            } else {
+                System.out.println("No capital cities found for generating report: " + filename);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error generating Capital city report from ResultSet: " + e.getMessage());
+        }
+    }
+
+    public void generateCapitalCityReportMarkdown(ArrayList<CapitalCities> capitalcities, String filename) {
+        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
+        capitalcitiesreport.generateCapitalCityReportMarkdown(capitalcities, filename);
+    }
+
+    public void printCapitalCitiesFromContinent(String continent, String queryFile) {
+        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
+        capitalcitiesreport.printCapitalCitiesFromContinent(continent, queryFile);
+    }
+
+
+
+
+
+
+
 }
 
 

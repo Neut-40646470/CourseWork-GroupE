@@ -91,6 +91,14 @@ public class CitiesReport {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
+    public void printTopNCitiesFromContinent(String continent, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", continent);
+            executeQuery(query, "Top N City Report By continent");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
     
     public void printCitiesFromCountry(String country, String queryFile) {
         try {
