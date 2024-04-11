@@ -1,3 +1,5 @@
+-- Fetch all CITIES from SELECTED REGION
+
 SELECT city.Name, country.Name AS Country, city.District, city.Population
 FROM city
 JOIN country
