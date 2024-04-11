@@ -100,10 +100,28 @@ public class CitiesReport {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
     }
+
+    public void printTopNCitiesFromCountry(String country, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", country);
+            executeQuery(query, "Top N City Report By Country");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
     public void printCitiesFromDistrict(String district, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", district);
             executeQuery(query, "City Report By District");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
+    public void printTopNCitiesFromDistrict(String district, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", district);
+            executeQuery(query, "Top N City Report By District");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
@@ -118,6 +136,15 @@ public class CitiesReport {
         }
     }
 
+    public void printTopNCitiesFromRegion(String region, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", region);
+            executeQuery(query, "Top N City Report By Region");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
     public void printCitiesFromWorld(String world, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", world);
@@ -127,5 +154,13 @@ public class CitiesReport {
         }
     }
 
+    public void printTopNCitiesFromWorld(String world, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", world);
+            executeQuery(query, "Top N City Report By World");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
 
 }
