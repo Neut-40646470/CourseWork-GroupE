@@ -33,16 +33,6 @@ public class AppTest {
 
     }
 
-
-//    this is just to see if anything comes up in github actions
-
-    @Test
-    void example(){
-        app = new App();
-        app.connect(DB_LOCATION, DELAY);
-        app.printCitiesFromWorld("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
-    }
-
     @Test
     void connectionFailedTest() {
         app = new App();
