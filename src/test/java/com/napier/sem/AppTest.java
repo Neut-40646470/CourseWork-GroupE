@@ -35,8 +35,8 @@ public class AppTest {
     void testPrintCities(){
         app = new App();
         app.connect(DB_LOCATION,DELAY);
-//        app.getAllCities();
-        app.printCities(app.getAllCities());
+        app.getAllCities();
+//        app.printCities(app.getAllCities());
     }
 
 //    @Test

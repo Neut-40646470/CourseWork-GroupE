@@ -278,6 +278,7 @@ public class App {
                 city.Population = rset.getInt("Population");
                 cities.add(city);
             }
+            printCities(cities);
         } catch (SQLException e) {
             System.out.println("Failed to get city array");
             System.out.println(e.getMessage());
