@@ -278,7 +278,6 @@ public class App {
                 city.Population = rset.getInt("Population");
                 cities.add(city);
             }
-            printCities(cities);
         } catch (SQLException e) {
             System.out.println("Failed to get city array");
             System.out.println(e.getMessage());
@@ -290,10 +289,6 @@ public class App {
     }
 
     public void printCities(ArrayList<Cities> cities) {
-        if (cities == null || cities.isEmpty()) {
-            System.out.println("No cities");
-            return;
-        }
 
         System.out.println(String.format("%-10s %-20s %-15s %-12s", "City ID", "City Name", "Country", "Population"));
         for (Cities city : cities) {

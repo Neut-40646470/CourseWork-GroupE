@@ -20,24 +20,54 @@ public class AppTest {
         app = new App();
         app.connect(DB_LOCATION,DELAY);
     }
-    @Test
-    void connectionFailedTest() {
-        app = new App();
-        assertThrows(NullPointerException.class, this::throwsException);
-    }
+
 
     @Test
     void testDisconnect(){
+
         app = new App();
+
         app.disconnect();
     }
     @Test
     void testPrintCities(){
         app = new App();
         app.connect(DB_LOCATION,DELAY);
+        ArrayList<Cities> cities = new ArrayList<>();
         app.getAllCities();
-//        app.printCities(app.getAllCities());
+
+//        app.printCities(cities);
     }
+
+    @Test
+    void citiesPrintingTest() {
+        app = new App();
+        app.connect(DB_LOCATION, DELAY);
+        ResultSet allCitiesByWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql");
+        if(allCitiesByWorld != null){
+            app.generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
+            app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
+
+        }
+    }
+
+
+
+    @Test
+    void connectionFailedTest() {
+        app = new App();
+        assertThrows(NullPointerException.class, this::throwsException);
+    }
+
+
+
+//    @Test
+//    void testPrintCities(){
+//        app = new App();
+//        app.connect(DB_LOCATION,DELAY);
+//        app.getAllCities();
+////        app.printCities(app.getAllCities());
+//    }
 
 //    @Test
 //    void citiesPrintingTest() {

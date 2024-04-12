@@ -22,6 +22,7 @@ public class Main {
             System.out.println("No cities found.");
         }
 
+
         ResultSet allCitiesByWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql"); // Print Report for allCitiesByWorld taking the file path
         ResultSet TopNCitiesByWorld = app.executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromWORLD.sql");
         ResultSet allCitiesByContinent = app.executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
