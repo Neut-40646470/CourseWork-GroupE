@@ -1,12 +1,13 @@
 package com.napier.sem;
-
 import org.junit.jupiter.api.Test;
-
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class AppTest {
 
@@ -15,10 +16,20 @@ public class AppTest {
     static final int DELAY = 0; // Adjust delay as needed
 
     @Test
-    void printCitiesTestNull() {
+    void testConnection(){
         app = new App();
-        app.connect(DB_LOCATION, DELAY);
-        app.printCitiesFromRegion("","src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
+        app.connect(DB_LOCATION,DELAY);
+    }
+    @Test
+    void connectionFailedTest() {
+        app = new App();
+        assertThrows(NullPointerException.class, this::throwsException);
+    }
+
+    @Test
+    void testDisconnect(){
+        app = new App();
+        app.disconnect();
     }
 
     @Test
@@ -33,11 +44,7 @@ public class AppTest {
 
     }
 
-    @Test
-    void connectionFailedTest() {
-        app = new App();
-        assertThrows(NullPointerException.class, this::throwsException);
-    }
+
 
     void throwsException() throws NullPointerException {
         throw new NullPointerException();
