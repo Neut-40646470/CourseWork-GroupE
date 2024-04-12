@@ -27,14 +27,17 @@ public class Main {
             app.generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
             app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
         }
+        // this checks if to
         if(TopNCitiesByWorld != null){
             app.generateCityReportFromResultSet(TopNCitiesByWorld, "Top_N_City_Report_World.md");
             app.printTopNCitiesFromWorld("", "src/main/resources/TopNpopulatedCITIESfromWORLD.sql");
         }
+
         if (allCitiesByContinent != null) {
             app.generateCityReportFromResultSet(allCitiesByContinent, "City_Report_Continent.md");
             app.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
         }
+        
         if (TopNCitiesByContinent != null) {
             app.generateCityReportFromResultSet(TopNCitiesByContinent, "Top_N_City_Report_Continent.md");
             app.printTopNCitiesFromContinent("", "src/main/resources/TopNpopulatedCITIESfromCONTINENT.sql");
