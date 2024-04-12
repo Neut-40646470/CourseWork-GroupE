@@ -78,15 +78,6 @@ public class CapitalCitiesReport {
         }
     }
 
-    public void printCapitalCitiesFromDistrict(String district, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", district);
-            executeQuery(query, "Capital City Report By District");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
-    }
-
     public void printCapitalCitiesFromWorld(String world, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", world);
