@@ -92,10 +92,18 @@ public class Main {
 
 
         //Capital Cities bellow
+        ResultSet allCapitalCitiesFromWorld = app.executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
         ResultSet allCapitalCitiesFromContinent = app.executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
+        ResultSet allCapitalCitiesFromRegion = app.executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
+
+        app.generateCapitalCityReportFromResultSet(allCapitalCitiesFromWorld, "All_Capital_Cities_Report_World.md");
+        app.printCapitalCitiesFromWorld("","src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
 
         app.generateCapitalCityReportFromResultSet(allCapitalCitiesFromContinent, "All_Capital_Cities_Report_Continent.md");
         app.printCapitalCitiesFromContinent("","src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
+
+        app.generateCapitalCityReportFromResultSet(allCapitalCitiesFromRegion, "All_Capital_Cities_Report_Region.md");
+        app.printCapitalCitiesFromRegion("","src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
 
         // Disconnect from the database
         app.disconnect();

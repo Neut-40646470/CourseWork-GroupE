@@ -235,11 +235,20 @@ public class App {
         capitalcitiesreport.generateCapitalCityReportMarkdown(capitalcities, filename);
     }
 
+    public void printCapitalCitiesFromWorld(String world, String queryFile) {
+        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
+        capitalcitiesreport.printCapitalCitiesFromWorld(world, queryFile);
+    }
+
     public void printCapitalCitiesFromContinent(String continent, String queryFile) {
         CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
         capitalcitiesreport.printCapitalCitiesFromContinent(continent, queryFile);
     }
 
+    public void printCapitalCitiesFromRegion(String region, String queryFile) {
+        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
+        capitalcitiesreport.printCapitalCitiesFromRegion(region, queryFile);
+    }
 
 
 
