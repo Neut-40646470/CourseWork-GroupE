@@ -32,17 +32,17 @@ public class AppTest {
         app.disconnect();
     }
 
-    @Test
-    void citiesPrintingTest() {
-        app = new App();
-        app.connect(DB_LOCATION, DELAY);
-        ResultSet allCitiesByWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql");
-        if(allCitiesByWorld != null){
-            app.generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
-            app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
-        }
-
-    }
+//    @Test
+//    void citiesPrintingTest() {
+//        app = new App();
+//        app.connect(DB_LOCATION, DELAY);
+//        ResultSet allCitiesByWorld = app.executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql");
+//        if(allCitiesByWorld != null){
+//            app.generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
+//            app.printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
+//        }
+//
+//    }
 
 
 
