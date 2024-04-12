@@ -162,7 +162,7 @@ public class App {
                 country.setContinent(resultSet.getString("Continent"));
                 country.setRegion(resultSet.getString("Region"));
                 country.setPopulation(resultSet.getInt("Population"));
-                country.setCapital(resultSet.getString("Capital")); ; // Use the alias as specified in your SQL query
+                country.setCapital(resultSet.getString("Capital")); // Use the alias as specified in your SQL query
                 String capitalName = resultSet.getString("Capital"); // Ensure this matches the alias in your SQL query.
                 System.out.println("Capital Name: " + capitalName); // Debug print to verify if you're getting the correct data.
                 countries.add(country);
@@ -245,10 +245,10 @@ public class App {
         capitalcitiesreport.printCapitalCitiesFromContinent(continent, queryFile);
     }
 
-    public void printCapitalCitiesFromRegion(String region, String queryFile) {
-        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
-        capitalcitiesreport.printCapitalCitiesFromRegion(region, queryFile);
-    }
+//    public void printCapitalCitiesFromRegion(String region, String queryFile) {
+//        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
+//        capitalcitiesreport.printCapitalCitiesFromRegion(region, queryFile);
+//    }
 
 }
 
