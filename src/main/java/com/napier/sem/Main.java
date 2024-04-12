@@ -37,7 +37,7 @@ public class Main {
             app.generateCityReportFromResultSet(allCitiesByContinent, "City_Report_Continent.md");
             app.printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
         }
-        
+
         if (TopNCitiesByContinent != null) {
             app.generateCityReportFromResultSet(TopNCitiesByContinent, "Top_N_City_Report_Continent.md");
             app.printTopNCitiesFromContinent("", "src/main/resources/TopNpopulatedCITIESfromCONTINENT.sql");

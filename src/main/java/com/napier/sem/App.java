@@ -250,11 +250,6 @@ public class App {
         capitalcitiesreport.printCapitalCitiesFromRegion(region, queryFile);
     }
 
-
-
-
-
-
 }
 
 
