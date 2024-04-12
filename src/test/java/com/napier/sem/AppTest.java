@@ -31,6 +31,13 @@ public class AppTest {
         app = new App();
         app.disconnect();
     }
+    @Test
+    void testPrintCities(){
+        app = new App();
+        app.connect(DB_LOCATION,DELAY);
+//        app.getAllCities();
+        app.printCities(app.getAllCities());
+    }
 
 //    @Test
 //    void citiesPrintingTest() {

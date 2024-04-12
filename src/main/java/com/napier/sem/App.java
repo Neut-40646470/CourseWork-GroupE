@@ -250,6 +250,57 @@ public class App {
 //        capitalcitiesreport.printCapitalCitiesFromRegion(region, queryFile);
 //    }
 
+
+
+
+
+
+
+
+
+
+
+    public ArrayList<Cities> getAllCities() {
+        ArrayList<Cities> cities = new ArrayList<>();
+        try (Statement stmt = con.createStatement()) {
+            String strSelect = "SELECT city.ID, city.Name AS Name, city.CountryCode, "
+                    + "country.Name AS Country, city.District, city.Population "
+                    + "FROM world.city "
+                    + "JOIN world.country ON city.CountryCode = country.Code";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            while (rset.next()) {
+                Cities city = new Cities();
+                city.ID = rset.getInt("ID");
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to get city array");
+            System.out.println(e.getMessage());
+            cities.clear();
+            cities = null;
+//            return cities; // Return null if SQLException occurs
+        }
+        return cities.isEmpty() ? null : cities; // Return null if cities list is empty
+    }
+
+    public void printCities(ArrayList<Cities> cities) {
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No cities");
+            return;
+        }
+
+        System.out.println(String.format("%-10s %-20s %-15s %-12s", "City ID", "City Name", "Country", "Population"));
+        for (Cities city : cities) {
+            String cityString = String.format("%-10s %-20s %-15s %-12s",
+                    city.ID, city.Name, city.CountryCode, city.Population);
+            System.out.println(cityString);
+        }
+    }
 }
 
 
