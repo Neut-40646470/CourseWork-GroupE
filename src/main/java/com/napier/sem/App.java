@@ -20,7 +20,7 @@ public class App {
         if (args.length < 1) {
             app.connect("localhost:33060", 0);
         } else {
-            app.connect(args[0], Integer.parseInt(args[1]));
+            app.connect("db:3306", 10000);
         }
         // Connect to database
 

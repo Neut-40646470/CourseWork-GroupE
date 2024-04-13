@@ -20,21 +20,21 @@ public class CapitalCitiesReport {
         App app = new App();
         try {
             //Capital City Report and Generation of Markdown file
-            ResultSet allCapitalCitiesFromWorld = executeQueryFromFile("/app/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
-            ResultSet allCapitalCitiesFromContinent = executeQueryFromFile("/app/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
-            ResultSet allCapitalCitiesFromRegion = executeQueryFromFile("/app/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
+            ResultSet allCapitalCitiesFromWorld = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
+            ResultSet allCapitalCitiesFromContinent = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
+            ResultSet allCapitalCitiesFromRegion = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
 
             if (allCapitalCitiesFromWorld != null) {
             generateCapitalCityReportFromResultSet(allCapitalCitiesFromWorld, "All_Capital_Cities_Report_World.md");
-            printCapitalCitiesFromWorld("","/app/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
+            printCapitalCitiesFromWorld("","src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
             }
             if (allCapitalCitiesFromContinent != null) {
                 generateCapitalCityReportFromResultSet(allCapitalCitiesFromContinent, "All_Capital_Cities_Report_Continent.md");
-                printCapitalCitiesFromContinent("", "/app/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
+                printCapitalCitiesFromContinent("", "src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
             }
             if (allCapitalCitiesFromRegion != null) {
                 generateCapitalCityReportFromResultSet(allCapitalCitiesFromRegion, "All_Capital_Cities_Report_Region.md");
-                printCapitalCitiesFromRegion("", "/app/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
+                printCapitalCitiesFromRegion("", "src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
             }
 
         }finally {
@@ -44,7 +44,7 @@ public class CapitalCitiesReport {
     public void generateCapitalCityReportFromResultSet(ResultSet resultSet, String filename) {
         if(resultSet == null)
         {
-            System.out.println("Capital Cities -- NO Data to precess, SQL file Might not exist offailed ****");
+            System.out.println("Capital Cities -- NO Data to precess, SQL file Might not exist or failed ****");
             return;
         }
         try {

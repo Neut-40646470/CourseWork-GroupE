@@ -20,55 +20,55 @@ public class CitiesReport {
         App app = new App();
         try {
 
-            ResultSet allCitiesByWorld = executeQueryFromFile("/app/resources/ALLCITIESfromWORLD.sql"); // Print Report for allCitiesByWorld taking the file path
+            ResultSet allCitiesByWorld = executeQueryFromFile("src/main/resources/ALLCITIESfromWORLD.sql"); // Print Report for allCitiesByWorld taking the file path
             if (allCitiesByWorld != null) {
                 generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
-                printCitiesFromWorld("", "/app/resources/ALLCITIESfromWORLD.sql");
+                printCitiesFromWorld("", "src/main/resources/ALLCITIESfromWORLD.sql");
             }
-            ResultSet TopNCitiesByWorld = executeQueryFromFile("/app/resources/TopNpopulatedCITIESfromWORLD.sql");
+            ResultSet TopNCitiesByWorld = executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromWORLD.sql");
             if (TopNCitiesByWorld != null) {
                 generateCityReportFromResultSet(TopNCitiesByWorld, "Top_N_City_Report_World.md");
-                printTopNCitiesFromWorld("", "/app/resources/TopNpopulatedCITIESfromWORLD.sql");
+                printTopNCitiesFromWorld("", "src/main/resources/TopNpopulatedCITIESfromWORLD.sql");
             }
-            ResultSet allCitiesByContinent = executeQueryFromFile("/app/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+            ResultSet allCitiesByContinent = executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
             if (allCitiesByContinent != null) {
                 generateCityReportFromResultSet(allCitiesByContinent, "City_Report_Continent.md");
-                printCitiesFromContinent("", "/app/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
+                printCitiesFromContinent("", "src/main/resources/ALLCITIESfromSELECTEDCONTINENT.sql");
             }
-            ResultSet TopNCitiesByContinent = executeQueryFromFile("/app/resources/TopNpopulatedCITIESfromCONTINENT.sql");
+            ResultSet TopNCitiesByContinent = executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromCONTINENT.sql");
             if (TopNCitiesByContinent != null) {
                 generateCityReportFromResultSet(TopNCitiesByContinent, "Top_N_City_Report_Continent.md");
-                printTopNCitiesFromContinent("", "/app/resources/TopNpopulatedCITIESfromCONTINENT.sql");
+                printTopNCitiesFromContinent("", "src/main/resources/TopNpopulatedCITIESfromCONTINENT.sql");
             }
-            ResultSet allCitiesByCountry = executeQueryFromFile("/app/resources/ALLCITIESfromSELECTEDCOUNTRY.sql");
+            ResultSet allCitiesByCountry = executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDCOUNTRY.sql");
             if (allCitiesByCountry != null) {
                 generateCityReportFromResultSet(allCitiesByCountry, "City_Report_Country.md");
-                printCitiesFromCountry("", "/app/resources/ALLCITIESfromSELECTEDCOUNTRY.sql");
+                printCitiesFromCountry("", "src/main/resources/ALLCITIESfromSELECTEDCOUNTRY.sql");
             }
-            ResultSet TopNCitiesByCountry = executeQueryFromFile("/app/resources/TopNpopulatedCITIESfromCOUNTRY.sql");
+            ResultSet TopNCitiesByCountry = executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromCOUNTRY.sql");
             if (TopNCitiesByCountry != null) {
                 generateCityReportFromResultSet(TopNCitiesByCountry, "Top_N_City_Report_Country.md");
-                printTopNCitiesFromCountry("", "/app/resources/TopNpopulatedCITIESfromCOUNTRY.sql");
+                printTopNCitiesFromCountry("", "src/main/resources/TopNpopulatedCITIESfromCOUNTRY.sql");
             }
-            ResultSet allCitiesByDistrict = executeQueryFromFile("/app/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
+            ResultSet allCitiesByDistrict = executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
             if (allCitiesByDistrict != null) {
                 generateCityReportFromResultSet(allCitiesByDistrict, "City_Report_District.md");
-                printCitiesFromDistrict("", "/app/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
+                printCitiesFromDistrict("", "src/main/resources/ALLCITIESfromSELECTEDDISTRICT.sql");
             }
-            ResultSet TopNCitiesByDistrict = executeQueryFromFile("/app/resources/TopNpopulatedCITIESfromDISTRICT.sql");
+            ResultSet TopNCitiesByDistrict = executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromDISTRICT.sql");
             if (TopNCitiesByDistrict != null) {
                 generateCityReportFromResultSet(TopNCitiesByDistrict, "Top_N_City_Report_District.md");
-                printTopNCitiesFromDistrict("", "/app/resources/TopNpopulatedCITIESfromDISTRICT.sql");
+                printTopNCitiesFromDistrict("", "src/main/resources/TopNpopulatedCITIESfromDISTRICT.sql");
             }
-            ResultSet allCitiesByRegion = executeQueryFromFile("/app/resources/ALLCITIESfromSELECTEDREGION.sql");
+            ResultSet allCitiesByRegion = executeQueryFromFile("src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
             if (allCitiesByRegion != null) {
                 generateCityReportFromResultSet(allCitiesByRegion, "City_Report_Region.md");
-                printCitiesFromRegion("", "/app/resources/ALLCITIESfromSELECTEDREGION.sql");
+                printCitiesFromRegion("", "src/main/resources/ALLCITIESfromSELECTEDREGION.sql");
             }
-            ResultSet TopNCitiesByRegion = executeQueryFromFile("/app/resources/TopNpopulatedCITIESfromREGION.sql");
+            ResultSet TopNCitiesByRegion = executeQueryFromFile("src/main/resources/TopNpopulatedCITIESfromREGION.sql");
             if (TopNCitiesByRegion != null) {
                 generateCityReportFromResultSet(TopNCitiesByRegion, "Top_N_City_Report_Region.md");
-                printTopNCitiesFromRegion("", "/app/resources/TopNpopulatedCITIESfromREGION.sql");
+                printTopNCitiesFromRegion("", "src/main/resources/TopNpopulatedCITIESfromREGION.sql");
             }
         }finally {
             app.disconnect();
