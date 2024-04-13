@@ -90,20 +90,31 @@ public class Main {
         app.printTopNCountriesFromWorld("src/main/resources/TopNpopulatedCOUNTRIESfromWORLD.sql");
 
 
-
         //Capital Cities bellow
         ResultSet allCapitalCitiesFromWorld = app.executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
+        ResultSet TopNCapitalCitiesFromWorld = app.executeQueryFromFile("src/main/resources/TopNPopulatedCapitalCities(World).sql");
         ResultSet allCapitalCitiesFromContinent = app.executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
+        ResultSet TopNCapitalCitiesFromContinent = app.executeQueryFromFile("src/main/resources/TopNPopulatedCapitalCities(Continent).sql");
         ResultSet allCapitalCitiesFromRegion = app.executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
+        ResultSet TopNCapitalCitiesFromRegion = app.executeQueryFromFile("src/main/resources/TopNPopulatedCapitalCities(Region).sql");
 
         app.generateCapitalCityReportFromResultSet(allCapitalCitiesFromWorld, "All_Capital_Cities_Report_World.md");
         app.printCapitalCitiesFromWorld("","src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
 
+        app.generateCapitalCityReportFromResultSet(TopNCapitalCitiesFromWorld, "Top_N_Capital_Cities_Report_World.md");
+        app.printTopNCapitalCitiesFromWorld("","src/main/resources/TopNPopulatedCapitalCities(World).sql");
+
         app.generateCapitalCityReportFromResultSet(allCapitalCitiesFromContinent, "All_Capital_Cities_Report_Continent.md");
         app.printCapitalCitiesFromContinent("","src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
 
+        app.generateCapitalCityReportFromResultSet(TopNCapitalCitiesFromContinent, "Top_N_Capital_Cities_Report_Continent.md");
+        app.printTopNCapitalCitiesFromContinent("","src/main/resources/TopNPopulatedCapitalCities(Continent).sql");
+
         app.generateCapitalCityReportFromResultSet(allCapitalCitiesFromRegion, "All_Capital_Cities_Report_Region.md");
         app.printCapitalCitiesFromRegion("","src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
+
+        app.generateCapitalCityReportFromResultSet(TopNCapitalCitiesFromRegion, "Top_N_Capital_Cities_Report_Region.md");
+        app.printTopNCapitalCitiesFromRegion("","src/main/resources/TopNCapitalCities(Region).sql");
 
         // Disconnect from the database
         app.disconnect();

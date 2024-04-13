@@ -240,14 +240,29 @@ public class App {
         capitalcitiesreport.printCapitalCitiesFromWorld(world, queryFile);
     }
 
+    public void printTopNCapitalCitiesFromWorld(String world, String queryFile) {
+        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
+        capitalcitiesreport.printTopNCapitalCitiesFromWorld(world, queryFile);
+    }
+
     public void printCapitalCitiesFromContinent(String continent, String queryFile) {
         CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
         capitalcitiesreport.printCapitalCitiesFromContinent(continent, queryFile);
     }
 
+    public void printTopNCapitalCitiesFromContinent(String continent, String queryFile) {
+        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
+        capitalcitiesreport.printTopNCapitalCitiesFromContinent(continent, queryFile);
+    }
+
     public void printCapitalCitiesFromRegion(String region, String queryFile) {
         CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
         capitalcitiesreport.printCapitalCitiesFromRegion(region, queryFile);
+    }
+
+    public void printTopNCapitalCitiesFromRegion(String region, String queryFile) {
+        CapitalCitiesReport capitalcitiesreport = new CapitalCitiesReport(con);
+        capitalcitiesreport.printTopNCapitalCitiesFromRegion(region, queryFile);
     }
 
 

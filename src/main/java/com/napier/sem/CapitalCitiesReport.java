@@ -87,10 +87,28 @@ public class CapitalCitiesReport {
         }
     }
 
+    public void printTopNCapitalCitiesFromWorld(String world, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", world);
+            executeQuery(query, "Top N Capital City Report By World");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
     public void printCapitalCitiesFromContinent(String continent, String queryFile) {
         try {
             String query = readQueryFromFile(queryFile).replace("", continent);
             executeQuery(query, "Capital City Report By Continent");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
+
+    public void printTopNCapitalCitiesFromContinent(String continent, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", continent);
+            executeQuery(query, "Top N Capital City Report By Continent");
         } catch (IOException e) {
             System.out.println("Error reading SQL file: " + e.getMessage());
         }
@@ -105,6 +123,14 @@ public class CapitalCitiesReport {
         }
     }
 
+    public void printTopNCapitalCitiesFromRegion(String region, String queryFile) {
+        try {
+            String query = readQueryFromFile(queryFile).replace("", region);
+            executeQuery(query, "Top N Capital City Report By Region");
+        } catch (IOException e) {
+            System.out.println("Error reading SQL file: " + e.getMessage());
+        }
+    }
 
 }
 

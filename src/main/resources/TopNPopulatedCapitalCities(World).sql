@@ -3,4 +3,4 @@ FROM world.city
 JOIN world.country ON city.CountryCode = country.Code
 WHERE city.ID = country.Capital
 ORDER BY city.Population DESC
-LIMIT N;
+LIMIT 10;
