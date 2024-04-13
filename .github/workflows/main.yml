@@ -1,4 +1,4 @@
-name: A workflow for my World App
+name: A workflow for World Domination
 on: push
 
 jobs:
@@ -35,4 +35,3 @@ jobs:
         run: |
           mvn package -DskipTests
           docker-compose up --abort-on-container-exit
-          
