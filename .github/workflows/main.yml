@@ -2,7 +2,7 @@ name: Build and Run Docker Image
 on:
   push:
     branches:
-      - workingSQLexample
+      - develop
 
 jobs:
   build:
