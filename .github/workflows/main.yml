@@ -16,7 +16,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - run: mvn -Dtest=com.napier.sem.AppTest test
-        
+
   IntegrationTests:
     name: Integration Tests
     runs-on: ubuntu-20.04
