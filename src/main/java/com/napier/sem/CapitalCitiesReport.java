@@ -18,28 +18,24 @@ public class CapitalCitiesReport {
     }
     public void processCapitalCityReport() {
         App app = new App();
-        try {
+
             //Capital City Report and Generation of Markdown file
-            ResultSet allCapitalCitiesFromWorld = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
-            ResultSet allCapitalCitiesFromContinent = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
-            ResultSet allCapitalCitiesFromRegion = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
+        ResultSet allCapitalCitiesFromWorld = executeQueryFromFile(App.sqlFileBasePath + "AllCapitalCitiesByLargestToSmallest(World).sql");
+        ResultSet allCapitalCitiesFromContinent = executeQueryFromFile(App.sqlFileBasePath+"AllCapitalCitiesByLargestToSmallest(Continent).sql");
+        ResultSet allCapitalCitiesFromRegion = executeQueryFromFile(App.sqlFileBasePath+"AllCapitalCitiesByLargestToSmallest(Region).sql");
 
             if (allCapitalCitiesFromWorld != null) {
             generateCapitalCityReportFromResultSet(allCapitalCitiesFromWorld, "All_Capital_Cities_Report_World.md");
-            printCapitalCitiesFromWorld("","src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
+            printCapitalCitiesFromWorld("",App.sqlFileBasePath + "AllCapitalCitiesByLargestToSmallest(World).sql");
             }
             if (allCapitalCitiesFromContinent != null) {
                 generateCapitalCityReportFromResultSet(allCapitalCitiesFromContinent, "All_Capital_Cities_Report_Continent.md");
-                printCapitalCitiesFromContinent("", "src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
+                printCapitalCitiesFromContinent("", App.sqlFileBasePath + "AllCapitalCitiesByLargestToSmallest(Continent).sql");
             }
             if (allCapitalCitiesFromRegion != null) {
                 generateCapitalCityReportFromResultSet(allCapitalCitiesFromRegion, "All_Capital_Cities_Report_Region.md");
-                printCapitalCitiesFromRegion("", "src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
+                printCapitalCitiesFromRegion("", App.sqlFileBasePath + "AllCapitalCitiesByLargestToSmallest(Region).sql");
             }
-
-        }finally {
-            app.disconnect();
-        }
     }
     public void generateCapitalCityReportFromResultSet(ResultSet resultSet, String filename) {
         if(resultSet == null)

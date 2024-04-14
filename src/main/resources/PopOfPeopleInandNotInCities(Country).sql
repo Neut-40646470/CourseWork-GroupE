@@ -20,4 +20,8 @@ FROM
 GROUP BY
     co.Name
 ORDER BY
+<<<<<<< HEAD
     co.Name;
+=======
+    co.Name;
+>>>>>>> feature/workingSQLexample

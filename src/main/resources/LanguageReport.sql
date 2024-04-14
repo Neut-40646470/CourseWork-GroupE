@@ -61,4 +61,8 @@ FROM
 WHERE
     cl.Language = 'Arabic'
 ORDER BY
+<<<<<<< HEAD
     TotalPopulation DESC;
+=======
+    TotalPopulation DESC;
+>>>>>>> feature/workingSQLexample

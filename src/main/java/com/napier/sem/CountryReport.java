@@ -15,14 +15,15 @@ public class CountryReport {
             this.con = con;
         }
     public void processCountryReport() {
+        App app = new App();
         try {
             //Country Report Printing and Creating Markdown
-            ResultSet allCountriesByWorld = executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromWORLD.sql");
-            ResultSet TopNCountriesByWorld = executeQueryFromFile("src/main/resources/TopNpopulatedCOUNTRIESfromWORLD.sql");
-            ResultSet allCountriesByContinent = executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
-            ResultSet TopNCountriesByContinent = executeQueryFromFile("src/main/resources/TopNpopulatedCOUNTRIESfromCONTINENT.sql");
-            ResultSet allCountriesByRegion = executeQueryFromFile("src/main/resources/ALLCOUNTRIESfromSELECTEDREGION.sql");
-            ResultSet TopNCountriesByRegion = executeQueryFromFile("src/main/resources/TopNpopulatedCOUNTRIESfromREGION.sql");
+            ResultSet allCountriesByWorld = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromWORLD.sql");
+            ResultSet TopNCountriesByWorld = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromWORLD.sql");
+            ResultSet allCountriesByContinent = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
+            ResultSet TopNCountriesByContinent = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromCONTINENT.sql");
+            ResultSet allCountriesByRegion = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromSELECTEDREGION.sql");
+            ResultSet TopNCountriesByRegion = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromREGION.sql");
             if(allCountriesByWorld != null){
                 displayAndGenerateReport(allCountriesByWorld, "Country_Report_World.md", "World Countries Report");
             }

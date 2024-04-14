@@ -20,4 +20,8 @@ FROM
 GROUP BY
     co.Region
 ORDER BY
+<<<<<<< HEAD
     co.Region;
+=======
+    co.Region;
+>>>>>>> feature/workingSQLexample

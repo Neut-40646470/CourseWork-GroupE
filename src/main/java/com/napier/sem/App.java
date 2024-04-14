@@ -12,17 +12,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 public class App {
+    public static String sqlFileBasePath;
     public static void main(String[] args) {
         // Create new Application
         App app = new App();
         System.out.println("World Population App");
         if (args.length < 1) {
+            sqlFileBasePath = "src/main/resources/";
             app.connect("localhost:33060", 0);
         } else {
+            sqlFileBasePath = "/tmp/src/main/resources/";
             app.connect("db:3306", 10000);
         }
-        // Connect to database
-
         app.processReports();
 
         app.connect("localhost:33060",0);

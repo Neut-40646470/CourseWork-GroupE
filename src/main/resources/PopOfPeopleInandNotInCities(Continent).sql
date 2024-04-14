@@ -20,4 +20,8 @@ FROM
 GROUP BY
     co.Continent
 ORDER BY
+<<<<<<< HEAD
     co.Continent;
+=======
+    co.Continent;
+>>>>>>> feature/workingSQLexample

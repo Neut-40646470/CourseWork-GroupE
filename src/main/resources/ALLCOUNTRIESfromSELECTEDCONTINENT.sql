@@ -3,4 +3,8 @@ SELECT c.Code, c.Name, c.Continent, c.Region, c.Population, COALESCE(cap.Name, '
 FROM country c
 LEFT JOIN city cap ON c.Capital = cap.ID
 WHERE c.Continent = 'Asia' AND c.Capital IS NOT NULL
+<<<<<<< HEAD
 ORDER BY c.Population DESC;
+=======
+ORDER BY c.Population DESC;
+>>>>>>> feature/workingSQLexample
