@@ -11,7 +11,7 @@ Develop Branch Status ![GitHub Actions Workflow Status](https://img.shields.io/g
 [![Releases](https://img.shields.io/github/release/Neut-40646470/CourseWork-GroupE/all.svg?style=flat-square)](https://github.com/Neut-40646470/CourseWork-GroupE/releases)
 
     
-            N requirements of 32 have been implemented, which is nn.nn%.    EDIT ME WHEN FIN
+            N requirements of 32 have been implemented, which is nn.nn%.    EDIT ME WHEN FIN 
 
 | ID | Name                                                                                                  | Met | Screenshot |
 |----|-------------------------------------------------------------------------------------------------------|-----|------------|
