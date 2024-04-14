@@ -21,17 +21,16 @@ public class CapitalCitiesReport {
         try {
             //Capital City Report and Generation of Markdown file
             ResultSet allCapitalCitiesFromWorld = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
-            ResultSet allCapitalCitiesFromContinent = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
-            ResultSet allCapitalCitiesFromRegion = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
-
             if (allCapitalCitiesFromWorld != null) {
             generateCapitalCityReportFromResultSet(allCapitalCitiesFromWorld, "All_Capital_Cities_Report_World.md");
             printCapitalCitiesFromWorld("","src/main/resources/AllCapitalCitiesByLargestToSmallest(World).sql");
             }
+            ResultSet allCapitalCitiesFromContinent = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
             if (allCapitalCitiesFromContinent != null) {
                 generateCapitalCityReportFromResultSet(allCapitalCitiesFromContinent, "All_Capital_Cities_Report_Continent.md");
                 printCapitalCitiesFromContinent("", "src/main/resources/AllCapitalCitiesByLargestToSmallest(Continent).sql");
             }
+            ResultSet allCapitalCitiesFromRegion = executeQueryFromFile("src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
             if (allCapitalCitiesFromRegion != null) {
                 generateCapitalCityReportFromResultSet(allCapitalCitiesFromRegion, "All_Capital_Cities_Report_Region.md");
                 printCapitalCitiesFromRegion("", "src/main/resources/AllCapitalCitiesByLargestToSmallest(Region).sql");
@@ -122,27 +121,38 @@ public class CapitalCitiesReport {
         try {
             String query = readQueryFromFile(filePath);
             Statement stmt = con.createStatement();
-            return stmt.executeQuery(query);
+            if (query.trim().toUpperCase().startsWith("SELECT")) {
+                return stmt.executeQuery(query);
+            } else {
+                stmt.executeUpdate(query);
+                System.out.println("Look Here For Breaks");
+                return null; // No result set for update operations
+            }
         } catch (IOException | SQLException e) {
             System.out.println("Error executing SQL query from file: " + e.getMessage());
             return null;
         }
     }
+
     private String readQueryFromFile(String filePath) throws IOException {
         File file = new File(filePath);
         if (!file.exists()) {
-            System.out.println("Attempted to read from: "+ file.getAbsolutePath());
+            System.out.println("Attempted to read from: " + file.getAbsolutePath());
             throw new FileNotFoundException("File does not exist: " + file.getAbsolutePath());
         }
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder queryBuilder = new StringBuilder();
         String line;
         while ((line = br.readLine()) != null) {
-            queryBuilder.append(line).append("\n");
+            line = line.trim(); // Trim whitespace
+            if (!line.startsWith("--")) { // Skip SQL comments
+                queryBuilder.append(line).append("\n");
+            }
         }
         br.close();
         return queryBuilder.toString();
     }
+
 
     public void printCapitalCitiesFromWorld(String world, String queryFile) {
         try {
