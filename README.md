@@ -1,10 +1,10 @@
+        # Course Work For Groupe E
+
 [![Java CI with Docker](https://github.com/Neut-40646470/CourseWork-GroupE/actions/workflows/main.yml/badge.svg)](https://github.com/Neut-40646470/CourseWork-GroupE/actions/workflows/main.yml)
 
-Here is the workflow set up
+Master Branch Status ![GitHub Actions Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Neut-40646470/CourseWork-GroupE/main.yml?branch=master)
 
-Master Branch Status ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Neut-40646470/CourseWork-GroupE/main.yml?branch=master)
-
-Develop Branch Status ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Neut-40646470/CourseWork-GroupE/main.yml?branch=workingSQLexample)
+Develop Branch Status ![GitHub Actions Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Neut-40646470/CourseWork-GroupE/main.yml?branch=develop)
 
 [![LICENSE](https://img.shields.io/github/license/Neut-40646470/CourseWork-GroupE.svg?style=flat-square)](https://github.com/Neut-40646470/CourseWork-GroupE/blob/master/LICENSE)
 
