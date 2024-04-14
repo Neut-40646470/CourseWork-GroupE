@@ -102,7 +102,7 @@ public class CitiesReport {
         }
     }
 
-    public void generateCityReportMarkdown(ArrayList<Cities> cities, String filename) {
+    public static void generateCityReportMarkdown(ArrayList<Cities> cities, String filename) {
         if (cities == null || cities.isEmpty()) {
             System.out.println("No cities to generate report.");
             return;
@@ -120,7 +120,7 @@ public class CitiesReport {
         saveReportToFile(sb.toString(), filename);
     }
 
-    private void saveReportToFile(String content, String filename) {
+    public static void saveReportToFile(String content, String filename) {
         try {
             File directory = new File("./reports");
             if (!directory.exists()) {

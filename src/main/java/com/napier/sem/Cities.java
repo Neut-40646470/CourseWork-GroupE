@@ -8,7 +8,7 @@ public class Cities {
     public int Population;
 
     // No-argument constructor
-    public Cities() {
+    public Cities( ) {
         // Initialize variables to default values
         this.ID = 0;
         this.Name = "";
