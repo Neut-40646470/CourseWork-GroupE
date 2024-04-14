@@ -21,7 +21,7 @@ public class App {
             sqlFileBasePath = "src/main/resources/";
             app.connect("localhost:33060", 0);
         } else {
-            sqlFileBasePath = "/tmp/src/main/resources/";
+            sqlFileBasePath = "/app/src/main/resources/";
             app.connect("db:3306", 10000);
         }
         app.processReports();

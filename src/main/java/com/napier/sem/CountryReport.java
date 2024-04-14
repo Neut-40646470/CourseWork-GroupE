@@ -19,30 +19,29 @@ public class CountryReport {
         try {
             //Country Report Printing and Creating Markdown
             ResultSet allCountriesByWorld = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromWORLD.sql");
-            ResultSet TopNCountriesByWorld = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromWORLD.sql");
-            ResultSet allCountriesByContinent = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
-            ResultSet TopNCountriesByContinent = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromCONTINENT.sql");
-            ResultSet allCountriesByRegion = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromSELECTEDREGION.sql");
-            ResultSet TopNCountriesByRegion = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromREGION.sql");
             if(allCountriesByWorld != null){
                 displayAndGenerateReport(allCountriesByWorld, "Country_Report_World.md", "World Countries Report");
             }
+            ResultSet TopNCountriesByWorld = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromWORLD.sql");
             if(TopNCountriesByWorld != null){
                 displayAndGenerateReport(TopNCountriesByWorld, "Top_N_Country_Report_World.md", "Top 10 Countries In The World");
             }
+            ResultSet allCountriesByContinent = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
             if(allCountriesByContinent != null){
                 displayAndGenerateReport(allCountriesByContinent, "Country_Report_Continent.md", "Countries by Continent");
             }
+            ResultSet TopNCountriesByContinent = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromCONTINENT.sql");
             if(TopNCountriesByContinent != null){
                 displayAndGenerateReport(TopNCountriesByContinent, "Top_N_Country_Report_Continent.md","Top 10 Countries by Continent");
             }
+            ResultSet allCountriesByRegion = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromSELECTEDREGION.sql");
             if(allCountriesByRegion != null){
                 displayAndGenerateReport(allCountriesByRegion, "Country_Report_Region.md","Countries By Region");
             }
+            ResultSet TopNCountriesByRegion = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromREGION.sql");
             if(TopNCountriesByRegion != null){
                 displayAndGenerateReport(TopNCountriesByRegion, "Top_N_Country_Report_Region.md","Top 10 Countries By Region");
             }
-
         } catch (SQLException e){
             System.out.println("Error processing Country Report: "+ e.getMessage());
         }finally {
