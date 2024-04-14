@@ -25,10 +25,6 @@ public class App {
             app.connect("db:3306", 10000);
         }
         app.processReports();
-
-        app.connect("localhost:33060",0);
-        ArrayList<Cities> cities = app.getAllCities();
-        app.printCities(cities);
         // Disconnect from database
         app.disconnect();
     }
@@ -87,6 +83,9 @@ public class App {
         capitalCitiesReport.processCapitalCityReport();
         citiesReport.processCityReport(); // Placeholder for actual method call
         countryReport.processCountryReport(); // Placeholder for actual method call
+
+        ArrayList<Cities> cities = getAllCities();
+        printCities(cities);
     }
     public ArrayList<Cities> getAllCities() {
         if (con == null) {
