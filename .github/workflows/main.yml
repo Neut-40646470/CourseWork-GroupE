@@ -39,15 +39,15 @@ jobs:
       - name: Package without running tests
         run: mvn package -DskipTests
 
-      - name: List output files
-        run: ls -l target/
+      - name: List JAR
+        run: ls -l ./target/
 
       - name: Build and Run Docker Compose
         run: docker-compose up --build --abort-on-container-exit
 
       - name: Stop Docker Compose
         run: docker-compose down
-  
+
 
   CreateRelease:
     name: Create Release and Generate Reports
