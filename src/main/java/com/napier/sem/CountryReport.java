@@ -1,140 +1,101 @@
 package com.napier.sem;
-import java.io.*;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CountryReport {
     private Connection con;
+
     public CountryReport(Connection con) {
-            this.con = con;
-        }
-    public void processCountryReport() {
-        App app = new App();
-        try {
-            //Country Report Printing and Creating Markdown
-            ResultSet allCountriesByWorld = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromWORLD.sql");
-            if(allCountriesByWorld != null){
-                displayAndGenerateReport(allCountriesByWorld, "Country_Report_World.md", "World Countries Report");
-            }
-            ResultSet TopNCountriesByWorld = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromWORLD.sql");
-            if(TopNCountriesByWorld != null){
-                displayAndGenerateReport(TopNCountriesByWorld, "Top_N_Country_Report_World.md", "Top 10 Countries In The World");
-            }
-            ResultSet allCountriesByContinent = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromSELECTEDCONTINENT.sql");
-            if(allCountriesByContinent != null){
-                displayAndGenerateReport(allCountriesByContinent, "Country_Report_Continent.md", "Countries by Continent");
-            }
-            ResultSet TopNCountriesByContinent = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromCONTINENT.sql");
-            if(TopNCountriesByContinent != null){
-                displayAndGenerateReport(TopNCountriesByContinent, "Top_N_Country_Report_Continent.md","Top 10 Countries by Continent");
-            }
-            ResultSet allCountriesByRegion = executeQueryFromFile(App.sqlFileBasePath + "ALLCOUNTRIESfromSELECTEDREGION.sql");
-            if(allCountriesByRegion != null){
-                displayAndGenerateReport(allCountriesByRegion, "Country_Report_Region.md","Countries By Region");
-            }
-            ResultSet TopNCountriesByRegion = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCOUNTRIESfromREGION.sql");
-            if(TopNCountriesByRegion != null){
-                displayAndGenerateReport(TopNCountriesByRegion, "Top_N_Country_Report_Region.md","Top 10 Countries By Region");
-            }
-        } catch (SQLException e){
-            System.out.println("Error processing Country Report: "+ e.getMessage());
-        }finally {
-            try {
-                if (con != null) con.close();
-            } catch (SQLException e) {
-                System.out.println("Error closing connection: " + e.getMessage());
-            }
-        }
+        this.con = con;
     }
-    private void displayAndGenerateReport(ResultSet resultSet, String filename, String reportTitle) throws SQLException {
+
+    public void generateWorldCountryReport() {
+        ArrayList<Country> countries = getAllCountries(); 
+        MarkdownGenerator.generateCountryReportMarkdown(countries, "World_Country_Report.md");
+    }
+
+    public void generateContinentCountryReport(String continent) {
+        ArrayList<Country> countries = getCountriesByContinent(continent); 
+        MarkdownGenerator.generateCountryReportMarkdown(countries, "Continent_Country_Report_" + continent + ".md");
+    }
+
+    public void generateRegionCountryReport(String region) {
+        ArrayList<Country> countries = getCountriesByRegion(region);
+        MarkdownGenerator.generateCountryReportMarkdown(countries, "Region_Country_Report_" + region + ".md");
+    }
+
+    public void generateTopNPopulatedCountriesReport(int N) {
+        ArrayList<Country> countries = getTopPopulationCountriesInWorld(N);
+        MarkdownGenerator.generateCountryReportMarkdown(countries, "Top_"+ N +"_Populated_Countries_Report.md");
+    }
+
+    public void generateTopNPopulatedCountriesInEurope(int N) {
+        ArrayList<Country> countries = getTopPopulationCountriesInContinent("Europe", N);
+        MarkdownGenerator.generateCountryReportMarkdown(countries, "Top_"+ N +"_Populated_Countries_In_Europe_Report.md");
+    }
+
+    public void generateTopNPopulatedCountriesInSouthernEurope(int N) {
+        ArrayList<Country> countries = getTopPopulationCountriesInRegion("Southern Europe", N);
+        MarkdownGenerator.generateCountryReportMarkdown(countries, "Top_"+ N +"_Populated_Countries_In_Southern_Europe_Report.md");
+    }
+
+    private ArrayList<Country> getAllCountries() {
+        return getCountriesByQuery("SELECT * FROM country");
+    }
+
+    private ArrayList<Country> getCountriesByContinent(String continent) {
+        String query = "SELECT * FROM country WHERE Continent = ?";
+        return getCountriesByQuery(query, continent);
+    }
+
+    private ArrayList<Country> getCountriesByRegion(String region) {
+        String query = "SELECT * FROM country WHERE Region = ?";
+        return getCountriesByQuery(query, region);
+    }
+
+    private ArrayList<Country> getTopPopulationCountriesInWorld(int N) {
+        ArrayList<Country> countries = getAllCountries();
+        Collections.sort(countries, Comparator.comparingInt(Country::getPopulation).reversed());
+        return new ArrayList<>(countries.subList(0, Math.min(N, countries.size())));
+    }
+
+    private ArrayList<Country> getTopPopulationCountriesInContinent(String continent, int N) {
+        ArrayList<Country> countries = getCountriesByContinent(continent);
+        Collections.sort(countries, Comparator.comparingInt(Country::getPopulation).reversed());
+        return new ArrayList<>(countries.subList(0, Math.min(N, countries.size())));
+    }
+
+    private ArrayList<Country> getTopPopulationCountriesInRegion(String region, int N) {
+        ArrayList<Country> countries = getCountriesByRegion(region);
+        Collections.sort(countries, Comparator.comparingInt(Country::getPopulation).reversed());
+        return new ArrayList<>(countries.subList(0, Math.min(N, countries.size())));
+    }
+
+    private ArrayList<Country> getCountriesByQuery(String query, String... parameters) {
         ArrayList<Country> countries = new ArrayList<>();
-        System.out.println(reportTitle + "\n");
-        System.out.println(String.format("%-5s %-35s %-18s %-26s %-12s %-7s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
-        System.out.println("-----------------------------------------------------------------------------------------------------------------");
-
-        while (resultSet.next()) {
-            String code = resultSet.getString("Code");
-            String name = resultSet.getString("Name");
-            String continent = resultSet.getString("Continent");
-            String region = resultSet.getString("Region");
-            int population = resultSet.getInt("Population");
-            String capital = resultSet.getString("Capital");
-            System.out.println(String.format("%-5s %-35s %-18s %-26s %-12d %-7s", code, name, continent, region, population, capital));
-
-            // Add to list for markdown generation
-            countries.add(new Country(code, name, continent, region, population, capital));
-        }
-
-        if (!countries.isEmpty()) {
-            generateCountryReportMarkdown(countries, filename);
-        } else {
-            System.out.println("No countries found for generating report.");
-        }
-    }
-
-    public void generateCountryReportMarkdown(ArrayList<Country> countries, String filename) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("# Country Report\n\n");
-        sb.append("| Code | Name | Continent | Region | Population | Capital |\n");
-        sb.append("| ---- | ---- | --------- | ------ | ---------- | ------- |\n");
-        for (Country country : countries) {
-            sb.append("| ")
-                    .append(country.getCode()).append(" | ")
-                    .append(country.getName()).append(" | ")
-                    .append(country.getContinent()).append(" | ")
-                    .append(country.getRegion()).append(" | ")
-                    .append(country.getPopulation()).append(" | ")
-                    .append(country.getCapital() != null ? country.getCapital() : "N/A")
-                    .append(" |\n");
-        }
-
-        saveReportToFile(sb.toString(), filename);
-    }
-
-    private void saveReportToFile(String content, String filename) {
-        try {
-            File directory = new File("./reports");
-            if (!directory.exists()) {
-                directory.mkdir();
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            for (int i = 0; i < parameters.length; i++) {
+                stmt.setString(i + 1, parameters[i]);
             }
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(directory, filename)));
-            writer.write(content);
-            writer.close();
-            System.out.println("Report generated: " + filename);
-        } catch (IOException e) {
-            System.out.println("Error generating country report: " + e.getMessage());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String code = rs.getString("Code");
+                String name = rs.getString("Name");
+                String continent = rs.getString("Continent");
+                String region = rs.getString("Region");
+                int population = rs.getInt("Population");
+                String capital = rs.getString("Capital");
+                countries.add(new Country(code, name, continent, region, population, capital));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving countries: " + e.getMessage());
         }
-    }
-
-    public ResultSet executeQueryFromFile(String filePath) {
-        try {
-            String query = readQueryFromFile(filePath);
-            Statement stmt = con.createStatement();
-            return stmt.executeQuery(query);
-        } catch (IOException | SQLException e) {
-            System.out.println("Error executing SQL query from file: " + e.getMessage());
-            return null;
-        }
-    }
-
-    private String readQueryFromFile(String filePath) throws IOException {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            throw new FileNotFoundException("File does not exist: " + file.getAbsolutePath());
-        }
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        StringBuilder queryBuilder = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null) {
-            queryBuilder.append(line).append("\n");
-        }
-        br.close();
-        return queryBuilder.toString();
+        return countries;
     }
 }
