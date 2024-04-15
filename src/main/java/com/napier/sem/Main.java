@@ -36,6 +36,15 @@ public class Main {
             citiesReport.generateTopNPopulatedCitiesInCountryReport("ITA", 7);
             citiesReport.generateTopNPopulatedCitiesInDistrictReport("Lombardia", 4);
 
+            // Generate Capital Cities Reports
+            citiesReport.generateAllCapitalCitiesInWorldReport();
+            citiesReport.generateAllCapitalCitiesInCountryReport("");
+            citiesReport.generateAllCapitalCitiesInContinentReport("");
+            citiesReport.generateAllCapitalCitiesInRegionReport("");
+            citiesReport.generateTopNPopulatedCapitalCitiesInWorldReport(69);
+            citiesReport.generateTopNPopulatedCapitalCitiesInContinentReport("",3);
+            citiesReport.generateTopNPopulatedCapitalCitiesInRegionReport("",20);
+
             // Generate population statistics reports
             populationReport.generatePopulationStatisticsByContinent("Europe");
             populationReport.generatePopulationStatisticsByRegion("Central Africa");
