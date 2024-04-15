@@ -69,13 +69,13 @@ public class CitiesReport {
     }
 
     // Generate report for all capital cities in a country
-    public void generateAllCapitalCitiesInCountryReport(String country) {
-        // Retrieve capital cities in the specified country
-        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTableByCountry(country);
-        // Generate Markdown report for capital cities in the country
-        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
-                "All_Capital_Cities_In_" + country + "_Report.md");
-    }
+//    public void generateAllCapitalCitiesInCountryReport(String country) {
+//        // Retrieve capital cities in the specified country
+//        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTableByCountry(country);
+//        // Generate Markdown report for capital cities in the country
+//        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
+//                "All_Capital_Cities_In_" + country + "_Report.md");
+//    }
 
 
     // Methods for generating reports for top N populated cities
@@ -222,19 +222,19 @@ public class CitiesReport {
     public ArrayList<City> getCapitalCitiesFromCountryTableByContinent(String continent) {
         ArrayList<City> capitalCities = new ArrayList<>();
         try (PreparedStatement stmt = con.prepareStatement(
-                "SELECT ci.Name, ci.CountryCode, ci.District, ci.Population " +
-                        "FROM city ci " +
-                        "JOIN country co ON ci.ID = co.Capital " +
-                        "WHERE co.Continent = ?")) {
+                "SELECT ci.Name AS Name, ci.Name AS Country, ci.Population AS Population " +
+                        "FROM world.city ci " +
+                        "JOIN world.country co ON ci.CountryCode = co.Code " +
+                        "WHERE co.Continent = ? AND ci.ID = co.Capital " +
+                        "ORDER BY ci.Population DESC; ")){
             stmt.setString(1, continent);
             ResultSet rs = stmt.executeQuery();
             // Process query results
             while (rs.next()) {
                 String name = rs.getString("Name");
-                String countryCode = rs.getString("CountryCode");
-                String district = rs.getString("District");
+                String countryCode = rs.getString("Country");
                 int population = rs.getInt("Population");
-                capitalCities.add(new City(name, countryCode, district, population));
+                capitalCities.add(new City(name, countryCode, population));
             }
         } catch (SQLException e) {
             // Print stack trace in case of database error
@@ -247,19 +247,19 @@ public class CitiesReport {
     public ArrayList<City> getCapitalCitiesFromCountryTableByRegion(String region) {
         ArrayList<City> capitalCities = new ArrayList<>();
         try (PreparedStatement stmt = con.prepareStatement(
-                "SELECT ci.Name, ci.CountryCode, ci.District, ci.Population " +
-                        "FROM city ci " +
-                        "JOIN country co ON ci.ID = co.Capital " +
-                        "WHERE co.Region = ?")) {
+                "SELECT ci.Name AS Name, ci.Name AS Country, ci.Population AS Population " +
+                        "FROM world.city ci " +
+                        "JOIN world.country co ON ci.CountryCode = co.Code " +
+                        "WHERE co.Region = ? AND ci.ID = co.Capital " +
+                        "ORDER BY ci.Population DESC; ")) {
             stmt.setString(1, region);
             ResultSet rs = stmt.executeQuery();
             // Process query results
             while (rs.next()) {
                 String name = rs.getString("Name");
-                String countryCode = rs.getString("CountryCode");
-                String district = rs.getString("District");
+                String countryCode = rs.getString("Country");
                 int population = rs.getInt("Population");
-                capitalCities.add(new City(name, countryCode, district, population));
+                capitalCities.add(new City(name, countryCode, population));
             }
         } catch (SQLException e) {
             // Print stack trace in case of database error
@@ -269,45 +269,46 @@ public class CitiesReport {
     }
 
     // Retrieve capital cities by country
-    public ArrayList<City> getCapitalCitiesFromCountryTableByCountry(String country) {
-        ArrayList<City> capitalCities = new ArrayList<>();
-        try (PreparedStatement stmt = con.prepareStatement(
-                "SELECT ci.Name, ci.CountryCode, ci.District, ci.Population " +
-                        "FROM city ci " +
-                        "JOIN country co ON ci.ID = co.Capital " +
-                        "WHERE co.Name = ?")) {
-            stmt.setString(1, country);
-            ResultSet rs = stmt.executeQuery();
-            // Process query results
-            while (rs.next()) {
-                String name = rs.getString("Name");
-                String countryCode = rs.getString("CountryCode");
-                String district = rs.getString("District");
-                int population = rs.getInt("Population");
-                capitalCities.add(new City(name, countryCode, district, population));
-            }
-        } catch (SQLException e) {
-            // Print stack trace in case of database error
-            e.printStackTrace();
-        }
-        return capitalCities;
-    }
+//    public ArrayList<City> getCapitalCitiesFromCountryTableByCountry(String country) {
+//        ArrayList<City> capitalCities = new ArrayList<>();
+//        try (PreparedStatement stmt = con.prepareStatement(
+//                "SELECT ci.Name, ci.CountryCode, ci.District, ci.Population " +
+//                        "FROM city ci " +
+//                        "JOIN country co ON ci.ID = co.Capital " +
+//                        "WHERE co.Name = ?")) {
+//            stmt.setString(1, country);
+//            ResultSet rs = stmt.executeQuery();
+//            // Process query results
+//            while (rs.next()) {
+//                String name = rs.getString("Name");
+//                String countryCode = rs.getString("CountryCode");
+//                String district = rs.getString("District");
+//                int population = rs.getInt("Population");
+//                capitalCities.add(new City(name, countryCode, district, population));
+//            }
+//        } catch (SQLException e) {
+//            // Print stack trace in case of database error
+//            e.printStackTrace();
+//        }
+//        return capitalCities;
+//    }
 
     // Retrieve all capital cities
     public ArrayList<City> getCapitalCitiesFromCountryTable() {
         ArrayList<City> capitalCities = new ArrayList<>();
         try (PreparedStatement stmt = con.prepareStatement(
-                "SELECT ci.Name, ci.CountryCode, ci.District, ci.Population " +
-                        "FROM city ci " +
-                        "JOIN country co ON ci.ID = co.Capital")) {
+                "SELECT ci.Name AS Name, ci.Name AS Country, ci.Population AS Population " +
+                        "FROM world.city ci " +
+                        "JOIN world.country co ON ci.CountryCode = co.Code " +
+                        "WHERE ci.ID = co.Capital " +
+                        "ORDER BY ci.Population DESC; ")) {
             ResultSet rs = stmt.executeQuery();
             // Process query results
             while (rs.next()) {
                 String name = rs.getString("Name");
-                String countryCode = rs.getString("CountryCode");
-                String district = rs.getString("District");
+                String countryCode = rs.getString("Country");
                 int population = rs.getInt("Population");
-                capitalCities.add(new City(name, countryCode, district, population));
+                capitalCities.add(new City(name, countryCode, population));
             }
         } catch (SQLException e) {
             // Print stack trace in case of database error

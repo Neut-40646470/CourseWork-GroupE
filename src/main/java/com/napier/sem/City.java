@@ -14,6 +14,12 @@ public class City {
         this.population = population;
     }
 
+    public City(String name, String country, int population ){
+        this.name = name;
+        this.country = country;
+        this.population = population;
+    }
+
     public String getName() {
         return name;
     }

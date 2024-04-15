@@ -9,10 +9,10 @@ import org.mockito.Mockito;
 public class TestManager {
 
     // Method to generate a mock database connection
-    public static Connection generateMockDatabaseConnection() throws SQLException {
-        Connection connection = Mockito.mock(Connection.class);
-        return connection;
-    }
+//    public static Connection generateMockDatabaseConnection() throws SQLException {
+//        Connection connection = Mockito.mock(Connection.class);
+//        return connection;
+//    }
 
     // Method to generate mock population data for a country
     public static ArrayList<PopulationStatistics> generateMockPopulationDataForCountry() {

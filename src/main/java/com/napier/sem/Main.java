@@ -38,7 +38,7 @@ public class Main {
 
             // Generate Capital Cities Reports
             citiesReport.generateAllCapitalCitiesInWorldReport();
-            citiesReport.generateAllCapitalCitiesInCountryReport("");
+            //citiesReport.generateAllCapitalCitiesInCountryReport("");
             citiesReport.generateAllCapitalCitiesInContinentReport("");
             citiesReport.generateAllCapitalCitiesInRegionReport("");
             citiesReport.generateTopNPopulatedCapitalCitiesInWorldReport(69);

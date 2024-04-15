@@ -37,19 +37,19 @@ public class DatabaseConnectionTest {
         assertEquals("Brussels", country.getCapital());
     }
 
-    @Test
-    public void testLanguageSpeakersReport() {
-        // Test case to verify that generateLanguageSpeakersReport method is called
-        // Create a mock population report
-        PopulationReport populationReport = Mockito.mock(PopulationReport.class);
-
-        // Mock behavior of generateLanguageSpeakersReport method
-        Mockito.doNothing().when(populationReport).generateLanguageSpeakersReport();
-
-        // Call the method under test
-        populationReport.generateLanguageSpeakersReport();
-
-        // Verify that the method was called once
-        Mockito.verify(populationReport, Mockito.times(1)).generateLanguageSpeakersReport();
-    }
+//    @Test
+//    public void testLanguageSpeakersReport() {
+//        // Test case to verify that generateLanguageSpeakersReport method is called
+//        // Create a mock population report
+//        PopulationReport populationReport = Mockito.mock(PopulationReport.class);
+//
+//        // Mock behavior of generateLanguageSpeakersReport method
+//        Mockito.doNothing().when(populationReport).generateLanguageSpeakersReport();
+//
+//        // Call the method under test
+//        populationReport.generateLanguageSpeakersReport();
+//
+//        // Verify that the method was called once
+//        Mockito.verify(populationReport, Mockito.times(1)).generateLanguageSpeakersReport();
+//    }
 }

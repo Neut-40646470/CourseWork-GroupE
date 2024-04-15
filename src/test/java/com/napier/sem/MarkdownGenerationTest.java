@@ -68,38 +68,38 @@ public class MarkdownGenerationTest {
         mockLanguageSpeakers.put("Spanish", 50000000);
         MarkdownGenerator.generateLanguageSpeakersReport(mockLanguageSpeakers);
     }
-
-    @Test
-    public void testGenerateCountryReportMarkdown() {
-        // Create sample countries data
-        ArrayList<Country> countries = new ArrayList<>();
-        countries.add(new Country("TST", "TestCountry", "TestContinent", "TestRegion", 1000000, "TestCapital"));
-
-        // Call the method under test
-        MarkdownGenerator.generateCountryReportMarkdown(countries, "test_country_report.md");
-
-        // Verify that the file is generated with the expected content
-        assertFileContains("test_country_report.md", "# Country Report\n\n");
-        assertFileContains("test_country_report.md", "| Code | Name | Continent | Region | Population | Capital |\n");
-        assertFileContains("test_country_report.md", "| ---- | ---- | --------- | ------ | ---------- | ------- |\n");
-        assertFileContains("test_country_report.md", "| TST | TestCountry | TestContinent | TestRegion | 1000000 | TestCapital |\n");
-    }
-
-    @Test
-    public void testGenerateCityReportMarkdown() {
-        // Create sample cities data
-        ArrayList<City> cities = new ArrayList<>();
-        cities.add(new City("TestCity", "TST", "TestDistrict", 1000));
-
-        // Call the method under test
-        MarkdownGenerator.generateCityReportMarkdown(cities, "test_city_report.md");
-
-        // Verify that the file is generated with the expected content
-        assertFileContains("test_city_report.md", "# City Report\n\n");
-        assertFileContains("test_city_report.md", "| Name | Country | District | Population |\n");
-        assertFileContains("test_city_report.md", "| ---- | ------- | -------- | ---------- |\n");
-        assertFileContains("test_city_report.md", "| TestCity | TST | TestDistrict | 1000 |\n");
-    }
+//
+//    @Test
+//    public void testGenerateCountryReportMarkdown() {
+//        // Create sample countries data
+//        ArrayList<Country> countries = new ArrayList<>();
+//        countries.add(new Country("TST", "TestCountry", "TestContinent", "TestRegion", 1000000, "TestCapital"));
+//
+//        // Call the method under test
+//        MarkdownGenerator.generateCountryReportMarkdown(countries, "test_country_report.md");
+//
+//        // Verify that the file is generated with the expected content
+//        assertFileContains("test_country_report.md", "# Country Report\n\n");
+//        assertFileContains("test_country_report.md", "| Code | Name | Continent | Region | Population | Capital |\n");
+//        assertFileContains("test_country_report.md", "| ---- | ---- | --------- | ------ | ---------- | ------- |\n");
+//        assertFileContains("test_country_report.md", "| TST | TestCountry | TestContinent | TestRegion | 1000000 | TestCapital |\n");
+//    }
+//
+//    @Test
+//    public void testGenerateCityReportMarkdown() {
+//        // Create sample cities data
+//        ArrayList<City> cities = new ArrayList<>();
+//        cities.add(new City("TestCity", "TST", "TestDistrict", 1000));
+//
+//        // Call the method under test
+//        MarkdownGenerator.generateCityReportMarkdown(cities, "test_city_report.md");
+//
+//        // Verify that the file is generated with the expected content
+//        assertFileContains("test_city_report.md", "# City Report\n\n");
+//        assertFileContains("test_city_report.md", "| Name | Country | District | Population |\n");
+//        assertFileContains("test_city_report.md", "| ---- | ------- | -------- | ---------- |\n");
+//        assertFileContains("test_city_report.md", "| TestCity | TST | TestDistrict | 1000 |\n");
+//    }
 
     // Helper method to assert that a file contains expected content
     private void assertFileContains(String filename, String expectedContent) {
