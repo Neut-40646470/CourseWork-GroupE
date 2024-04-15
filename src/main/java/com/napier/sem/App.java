@@ -2,15 +2,9 @@ package com.napier.sem;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.io.*;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 public class App {
     public static String sqlFileBasePath;
     public static void main(String[] args) {
@@ -28,10 +22,8 @@ public class App {
         // Disconnect from database
         app.disconnect();
     }
-
     //Connect to database
     private Connection con = null;
-
     public void connect(String location, int delay) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -39,7 +31,6 @@ public class App {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
-
         int retries = 10;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
@@ -58,7 +49,6 @@ public class App {
             }
         }
     }
-
     public void disconnect() {
         //try disconnect from DB
         try {
@@ -78,7 +68,6 @@ public class App {
         CapitalCitiesReport capitalCitiesReport = new CapitalCitiesReport(con);
         CitiesReport citiesReport = new CitiesReport(con); // Assuming you have similar constructor
         CountryReport countryReport = new CountryReport(con); // Assuming you have similar constructor
-
         // Generate and print reports
         capitalCitiesReport.processCapitalCityReport();
         citiesReport.processCityReport(); // Placeholder for actual method call
@@ -92,7 +81,6 @@ public class App {
             System.out.println("Database connection is not established.");
             return null;
         }
-
         // Check if connection is closed
         try {
             if (con.isClosed()) {
@@ -132,7 +120,6 @@ public class App {
         }
         return cities;
     }
-
     public void printCities(ArrayList<Cities> cities) {
         if (cities == null || cities.isEmpty()) {
             System.out.println("No cities");
@@ -145,6 +132,4 @@ public class App {
             System.out.println(cityString);
         }
     }
-
-
 }
