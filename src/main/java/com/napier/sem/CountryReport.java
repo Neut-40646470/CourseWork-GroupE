@@ -16,12 +16,12 @@ public class CountryReport {
     }
 
     public void generateWorldCountryReport() {
-        ArrayList<Country> countries = getAllCountries(); 
+        ArrayList<Country> countries = getAllCountries();
         MarkdownGenerator.generateCountryReportMarkdown(countries, "World_Country_Report.md");
     }
 
     public void generateContinentCountryReport(String continent) {
-        ArrayList<Country> countries = getCountriesByContinent(continent); 
+        ArrayList<Country> countries = getCountriesByContinent(continent);
         MarkdownGenerator.generateCountryReportMarkdown(countries, "Continent_Country_Report_" + continent + ".md");
     }
 

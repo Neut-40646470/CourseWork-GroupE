@@ -1,13 +1,35 @@
-version: '3.8'
+version: '3'
 services:
-  # Application Dockerfile is in same folder which is .
-  app:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: '123'
+      MYSQL_DATABASE: 'world'
+    volumes:
+      - ./src/sql/world.sql:/docker-entrypoint-initdb.d/world.sql  # Mount the world.sql file
+
+    networks:
+      - mylocalnetwork # Connect to "mylocalnetwork" network bridge
+    ports:
+      - 3307:3306 # Map ports
+    healthcheck:
+      test: ["CMD", "mysqladmin", "-uroot", "-p123", "ping", "-h", "localhost"]
+      interval: 30s
+      retries: 30
+
+
+  db:
     build: .
 
-  # db is is db folder
-  db:
-    build: db/.
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    ports:
-      - "33060:3306"
+    environment:
+      - MYSQL_HOSTNAME=mysql  # Update MySQL hostname to 'mysql' (container name)
+    networks:
+      - mylocalnetwork
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./reports:/tmp/reports  # Mount a volume for the reports directory
+networks:
+  mylocalnetwork:
+    driver: bridge # Create network bridge

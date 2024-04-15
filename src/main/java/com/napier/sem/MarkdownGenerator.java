@@ -27,9 +27,9 @@ public class MarkdownGenerator {
         sb.append("| ---- | ---- | --------- | ------ | ---------- | ------- |\n");
         for (Country country : countries) {
             sb.append("| ").append(country.getCode()).append(" | ").append(country.getName()).append(" | ")
-              .append(country.getContinent()).append(" | ").append(country.getRegion()).append(" | ")
-              .append(country.getPopulation()).append(" | ").append(country.getCapital() != null ? country.getCapital() : "N/A")
-              .append(" |\n");
+                    .append(country.getContinent()).append(" | ").append(country.getRegion()).append(" | ")
+                    .append(country.getPopulation()).append(" | ").append(country.getCapital() != null ? country.getCapital() : "N/A")
+                    .append(" |\n");
         }
 
         saveReportToFile(sb.toString(), filename);
@@ -37,7 +37,7 @@ public class MarkdownGenerator {
 
 
     public static void appendTopNPopulatedCountriesReport(StringBuilder sb, ArrayList<Country> countries, int n) {
-       // Check if n has been set and if countries is empty
+        // Check if n has been set and if countries is empty
         if (n <= 0 || countries == null || countries.isEmpty()) {
             return;
         }
@@ -70,7 +70,7 @@ public class MarkdownGenerator {
         sb.append("| ---- | ------- | -------- | ---------- |\n");
         for (City city : cities) {
             sb.append("| ").append(city.getName()).append(" | ").append(city.getCountry()).append(" | ")
-              .append(city.getDistrict()).append(" | ").append(city.getPopulation()).append(" |\n");
+                    .append(city.getDistrict()).append(" | ").append(city.getPopulation()).append(" |\n");
         }
 
         saveReportToFile(sb.toString(), filename);
@@ -95,10 +95,10 @@ public class MarkdownGenerator {
         for (int i = 0; i < n && i < cities.size(); i++) {
             City city = cities.get(i);
             sb.append("| ").append(i + 1).append(" | ").append(city.getName()).append(" | ")
-              .append(city.getCountry()).append(" | ").append(city.getDistrict()).append(" | ")
-              .append(city.getPopulation()).append(" |\n");
+                    .append(city.getCountry()).append(" | ").append(city.getDistrict()).append(" | ")
+                    .append(city.getPopulation()).append(" |\n");
         }
-    
+
         saveReportToFile(sb.toString(), filename);
     }
 
@@ -135,7 +135,7 @@ public class MarkdownGenerator {
             File directory = new File(REPORTS_DIRECTORY);
             // Check if the directory exists
             if (!directory.exists()) {
-            // If not, create directory
+                // If not, create directory
                 directory.mkdirs();
             }
 

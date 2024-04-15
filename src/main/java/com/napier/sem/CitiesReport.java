@@ -14,49 +14,56 @@ public class CitiesReport {
         this.con = con;
     }
 
+    // Methods for generating reports based on various criteria
+
+    // Generate report for all cities in the world
     public void generateAllCitiesInWorldReport() {
         // Retrieve cities ordered by population
         ArrayList<City> cities = getCitiesByQuery("SELECT * FROM city ORDER BY Population DESC");
-        // Generate markdown report for all cities in the world
+        // Generate Markdown report for all cities in the world
         MarkdownGenerator.generateCityReportMarkdown(cities, "All_Cities_In_World_Report.md");
     }
 
+    // Generate report for all cities in a continent
     public void generateAllCitiesInContinentReport(String continent) {
         // Retrieve cities in the specified continent
         ArrayList<City> cities = getCitiesByQuery(
                 "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Continent = ?) ORDER BY Population DESC",
                 continent);
-        // Generate markdown report for cities in the continent
+        // Generate Markdown report for cities in the continent
         MarkdownGenerator.generateCityReportMarkdown(cities,
                 "All_Cities_In_" + continent + "_Report.md");
     }
 
+    // Generate report for all cities in a region
     public void generateAllCitiesInRegionReport(String region) {
         // Retrieve cities in the specified region
         ArrayList<City> cities = getCitiesByQuery(
-            "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Region = ?) ORDER BY Population DESC",
-            region);
-        // Generate markdown report for cities in the region
+                "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Region = ?) ORDER BY Population DESC",
+                region);
+        // Generate Markdown report for cities in the region
         MarkdownGenerator.generateCityReportMarkdown(cities,
                 "All_Cities_In_" + region + "_Report.md");
     }
 
+    // Generate report for all cities in a country
     public void generateAllCitiesInCountryReport(String country) {
         // Retrieve cities in the specified country
         ArrayList<City> cities = getCitiesByQuery(
-            "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Name = ?) ORDER BY Population DESC",
-            country);
-        // Generate markdown report for cities in the country
+                "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Name = ?) ORDER BY Population DESC",
+                country);
+        // Generate Markdown report for cities in the country
         MarkdownGenerator.generateCityReportMarkdown(cities,
                 "All_Cities_In_" + country + "_Report.md");
     }
 
+    // Generate report for all cities in a district
     public void generateAllCitiesInDistrictReport(String district) {
         // Retrieve cities in the specified district
         ArrayList<City> cities = getCitiesByQuery(
-            "SELECT * FROM city WHERE District = ? ORDER BY Population DESC",
-            district);
-        // Generate markdown report for cities in the district
+                "SELECT * FROM city WHERE District = ? ORDER BY Population DESC",
+                district);
+        // Generate Markdown report for cities in the district
         MarkdownGenerator.generateCityReportMarkdown(cities,
                 "All_Cities_In_" + district + "_Report.md");
     }
@@ -97,14 +104,14 @@ public class CitiesReport {
     public void generateTopNPopulatedCitiesInRegionReport(String region, int N) {
         // Retrieve top N populated cities in the specified region
         ArrayList<City> cities = getCitiesByQuery(
-            "SELECT ci.* FROM city ci " +
-            "JOIN country co ON ci.CountryCode = co.Code " +
-            "WHERE co.Region = ? " +
-            "ORDER BY ci.Population DESC LIMIT " + N,
-            region);
+                "SELECT ci.* FROM city ci " +
+                        "JOIN country co ON ci.CountryCode = co.Code " +
+                        "WHERE co.Region = ? " +
+                        "ORDER BY ci.Population DESC LIMIT " + N,
+                region);
         // Generate Markdown report for top N populated cities in the region
         MarkdownGenerator.generateCityReportMarkdown(cities,
-            "Top_" + N + "_Populated_Cities_In_" + region + "_Report.md");
+                "Top_" + N + "_Populated_Cities_In_" + region + "_Report.md");
     }
 
     // Generate report for top N populated cities in a country
@@ -166,7 +173,7 @@ public class CitiesReport {
         MarkdownGenerator.generateCityReportMarkdown(capitalCities,
                 "Top_" + N + "_Populated_Capital_Cities_In_World_Report.md");
     }
-    
+
     // Generate report for top N populated capital cities in a continent
     public void generateTopNPopulatedCapitalCitiesInContinentReport(String continent, int N) {
         // Retrieve top N populated capital cities in the specified continent
@@ -175,7 +182,7 @@ public class CitiesReport {
         MarkdownGenerator.generateCityReportMarkdown(capitalCities,
                 "Top_" + N + "_Populated_Capital_Cities_In_" + continent + "_Report.md");
     }
-    
+
     // Generate report for top N populated capital cities in a region
     public void generateTopNPopulatedCapitalCitiesInRegionReport(String region, int N) {
         // Retrieve top N populated capital cities in the specified region
@@ -285,7 +292,7 @@ public class CitiesReport {
         }
         return capitalCities;
     }
-    
+
     // Retrieve all capital cities
     public ArrayList<City> getCapitalCitiesFromCountryTable() {
         ArrayList<City> capitalCities = new ArrayList<>();

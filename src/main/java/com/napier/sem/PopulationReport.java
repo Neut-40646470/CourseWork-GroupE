@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PopulationReport {
+
     private Connection con;
 
     public PopulationReport(Connection con) {
         this.con = con;
     }
 
-    // Method to generate report of population statistics for each continent
     public void generatePopulationStatisticsByContinent(String continent) {
         try {
             // Query to calculate population statistics for each continent
@@ -47,7 +47,6 @@ public class PopulationReport {
         }
     }
 
-    // Method to generate report of population statistics for each region
     public void generatePopulationStatisticsByRegion(String region) {
         try {
             // Query to calculate population statistics for each region
@@ -70,8 +69,6 @@ public class PopulationReport {
                 rs.getInt("TotalPopulation");
                 rs.getInt("PopulationInCities");
                 rs.getInt("PopulationNotInCities");
-
-                // Process the data as needed
             }
 
             // Close the statement and result set
@@ -82,7 +79,6 @@ public class PopulationReport {
         }
     }
 
-    // Method to generate report of population statistics for each country
     public void generatePopulationStatisticsByCountry(String country) {
         try {
             // Query to calculate population statistics for each country
@@ -103,7 +99,6 @@ public class PopulationReport {
                 rs.getInt("TotalPopulation");
                 rs.getInt("PopulationInCities");
                 rs.getInt("PopulationNotInCities");
-
             }
 
             // Close the statement and result set
@@ -114,7 +109,6 @@ public class PopulationReport {
         }
     }
 
-    // Method to generate report of language speakers
     public void generateLanguageSpeakersReport() {
         try {
             // Query to get the number of speakers for each language
@@ -135,6 +129,7 @@ public class PopulationReport {
             // Map to store language and total speakers
             Map<String, Integer> languageSpeakers = new HashMap<>();
 
+            // Process the result set
             while (rs.next()) {
                 String language = rs.getString("Language");
                 int totalSpeakers = rs.getInt("TotalSpeakers");
