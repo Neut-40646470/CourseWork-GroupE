@@ -20,26 +20,34 @@ public class DatabaseConnector {
             return null;
         }
 
+        // Connection URLs
+        String[] connectionUrls = {
+                "jdbc:mysql://mysql:3306/world?useSSL=false&allowPublicKeyRetrieval=true", // Docker service URL
+                "jdbc:mysql://localhost:3307/world?useSSL=false&allowPublicKeyRetrieval=true" // Local fallback URL
+        };
+
         int retries = 30; // Number of retries for connecting to the database
         for (int i = 0; i < retries; ++i) {
-            System.out.println("Connecting to database...");
-            try {
-                Thread.sleep(1000);
-                // Attempt a connection to the database
-                connection = DriverManager.getConnection(
-                        "jdbc:mysql://mysql:3306/world?useSSL=false&allowPublicKeyRetrieval=true",
-                        "root", "123");
-                System.out.println("Successfully connected");
-                break; // Exit loop if connection is successful
-            } catch (SQLException | InterruptedException e) {
-                System.out.println("Failed to connect to database attempt " + i);
-                System.out.println(e.getMessage());
-                // Properly handle thread interruption
-                if (e instanceof InterruptedException) {
-                    Thread.currentThread().interrupt();
+            for (String url : connectionUrls) {
+                System.out.println("Connecting to database using URL: " + url);
+                try {
+                    Thread.sleep(1000); // Sleep before trying to connect
+                    connection = DriverManager.getConnection(
+                            url,
+                            "root", "123");
+                    System.out.println("Successfully connected using URL: " + url);
+                    return connection; // Successful connection, return it
+                } catch (SQLException | InterruptedException e) {
+                    System.out.println("Failed to connect using URL: " + url + ", attempt " + i);
+                    System.out.println(e.getMessage());
+                    // Properly handle thread interruption
+                    if (e instanceof InterruptedException) {
+                        Thread.currentThread().interrupt();
+                        return null; // Exit if thread is interrupted
+                    }
                 }
             }
         }
-        return connection; // Return the established connection or null if failed
+        return connection; // Return the connection or null if all retries failed
     }
 }

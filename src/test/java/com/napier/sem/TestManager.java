@@ -4,17 +4,20 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class TestManager {
 
-    // Method to generate a mock database connection
-//    public static Connection generateMockDatabaseConnection() throws SQLException {
-//        Connection connection = Mockito.mock(Connection.class);
-//        return connection;
-//    }
+   //  Method to generate a mock database connection
+    public static Connection generateMockDatabaseConnection() throws SQLException {
+        Connection connection = Mockito.mock(Connection.class);
+        return connection;
+    }
 
     // Method to generate mock population data for a country
+
     public static ArrayList<PopulationStatistics> generateMockPopulationDataForCountry() {
         ArrayList<PopulationStatistics> mockPopulationData = new ArrayList<>();
         // Create a mock population statistics object and add it to the list
