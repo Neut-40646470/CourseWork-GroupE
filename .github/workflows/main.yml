@@ -26,7 +26,6 @@ jobs:
 
       - name: Stop MySQL container
         run: docker-compose stop app
-
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
