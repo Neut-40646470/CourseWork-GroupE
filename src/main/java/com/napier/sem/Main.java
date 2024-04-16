@@ -1,62 +1,74 @@
 package com.napier.sem;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
-        try
-        {
-            // Load Database driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        }
-        catch (ClassNotFoundException e)
-        {
-            System.out.println("Could not load SQL driver");
-            System.exit(-1);
+public class Main {
+    public static void main(String[] args) {
+        Connection con = DatabaseConnector.connect();
+        try{
+        // Get a database connection
+
+        if (con == null) {
+            System.out.println("Failed to establish a database connection.");
+            return;
         }
 
-        // Connection to the database
-        Connection con = null;
-        int retries = 100;
-        for (int i = 0; i < retries; ++i)
-        {
-            System.out.println("Connecting to database...");
-            try
-            {
-                // Wait a bit for db to start
-                Thread.sleep(30000);
-                // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "123");
-                System.out.println("Successfully connected");
-                // Wait a bit
-                Thread.sleep(10000);
-                // Exit for loop
-                break;
-            }
-            catch (SQLException sqle)
-            {
-                System.out.println("Failed to connect to database attempt " + i);
-                System.out.println(sqle.getMessage());
-            }
-            catch (InterruptedException ie)
-            {
-                System.out.println("Thread interrupted? Should not happen.");
-            }
-        }
+            System.out.println("|           Main Class Has Been Executed           |");
 
-        if (con != null)
-        {
-            try
-            {
-                // Close connection
-                con.close();
-            }
-            catch (Exception e)
-            {
-                System.out.println("Error closing connection to database");
+            // Create CitiesReport and CountryReport instances
+            CitiesReport citiesReport = new CitiesReport(con);
+            CountryReport countryReport = new CountryReport(con);
+            PopulationReport populationReport = new PopulationReport(con);
+
+            // Generate country report for the world, continent, and region
+            countryReport.generateWorldCountryReport();
+            countryReport.generateContinentCountryReport("Europe");
+            countryReport.generateRegionCountryReport("Central Africa");
+
+            // Generate additional reports for top N populated countries
+            countryReport.generateTopNPopulatedCountriesReport(5);
+            countryReport.generateTopNPopulatedCountriesInEurope(5);
+            countryReport.generateTopNPopulatedCountriesInSouthernEurope(5);
+
+            // Generate city reports
+            citiesReport.generateAllCitiesInWorldReport();
+            citiesReport.generateAllCitiesInContinentReport("Europe");
+            citiesReport.generateAllCitiesInRegionReport("Central Africa");
+            citiesReport.generateAllCitiesInCountryReport("France");
+            citiesReport.generateAllCitiesInDistrictReport("Lombardia");
+            citiesReport.generateTopNPopulatedCitiesInWorldReport(10);
+            citiesReport.generateTopNPopulatedCitiesInContinentReport("Europe", 5);
+            citiesReport.generateTopNPopulatedCitiesInRegionReport("Southern Europe", 3);
+            citiesReport.generateTopNPopulatedCitiesInCountryReport("ITA", 7);
+            citiesReport.generateTopNPopulatedCitiesInDistrictReport("Lombardia", 4);
+
+            // Generate Capital Cities Reports
+            citiesReport.generateAllCapitalCitiesInWorldReport();
+            citiesReport.generateAllCapitalCitiesInContinentReport("Oceania");
+            citiesReport.generateAllCapitalCitiesInRegionReport("Middle East");
+            citiesReport.generateTopNPopulatedCapitalCitiesInWorldReport(15);
+            citiesReport.generateTopNPopulatedCapitalCitiesInContinentReport("", 3);
+            citiesReport.generateTopNPopulatedCapitalCitiesInRegionReport("", 20);
+
+            // Generate population statistics reports
+            populationReport.generatePopulationStatisticsByContinent("Europe");
+            populationReport.generatePopulationStatisticsByRegion("Central Africa");
+            populationReport.generatePopulationStatisticsByCountry("Germany");
+
+            // Generate language speakers report
+            populationReport.generateLanguageSpeakersReport();
+
+        } finally {
+            try {
+                if (con != null) con.close();
+            }catch (SQLException e){
+                System.err.println("|           Main Class Could Not Be Executed           |");
+                System.err.println("Failed to close the database connection.");
+                e.printStackTrace();
             }
         }
     }
 }
+
