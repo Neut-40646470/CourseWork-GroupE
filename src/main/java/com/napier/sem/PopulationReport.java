@@ -16,40 +16,37 @@ public class PopulationReport {
     }
 
     public void generatePopulationStatisticsByContinent(String continent) {
-        try {
-            // Query to calculate population statistics for each continent
-            String query = "SELECT Continent, " +
-                    "SUM(c.Population) AS TotalPopulation, " +
-                    "SUM(CASE WHEN c.ID = co.Capital THEN c.Population ELSE 0 END) AS PopulationInCities, " +
-                    "SUM(CASE WHEN c.ID != co.Capital THEN c.Population ELSE 0 END) AS PopulationNotInCities " +
-                    "FROM country co " +
-                    "JOIN city c ON co.Capital = c.ID " +
-                    "WHERE Continent = ? " +
-                    "GROUP BY Continent";
+    try {
+        String query = "SELECT Continent, " +
+                "SUM(c.Population) AS TotalPopulation, " +
+                "SUM(CASE WHEN c.ID = co.Capital THEN c.Population ELSE 0 END) AS PopulationInCities, " +
+                "SUM(CASE WHEN c.ID != co.Capital THEN c.Population ELSE 0 END) AS PopulationNotInCities " +
+                "FROM country co " +
+                "JOIN city c ON co.Capital = c.ID " +
+                "WHERE Continent = ? " +
+                "GROUP BY Continent";
 
-            // Execute the query
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setString(1, continent);
-            ResultSet rs = stmt.executeQuery();
+        PreparedStatement stmt = con.prepareStatement(query);
+        stmt.setString(1, continent);
+        ResultSet rs = stmt.executeQuery();
 
-            // Process the result set
-            while (rs.next()) {
-                rs.getInt("TotalPopulation");
-                rs.getInt("PopulationInCities");
-                rs.getInt("PopulationNotInCities");
-            }
+        if (rs.next()) {
+            int totalPopulation = rs.getInt("TotalPopulation");
+            int populationInCities = rs.getInt("PopulationInCities");
+            int populationNotInCities = rs.getInt("PopulationNotInCities");
 
-            // Close the statement and result set
-            stmt.close();
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            MarkdownGenerator.generatePopulationStatisticsMarkdown(continent, totalPopulation, populationInCities, populationNotInCities);
         }
-    }
 
-    public void generatePopulationStatisticsByRegion(String region) {
+        stmt.close();
+        rs.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+        public void generatePopulationStatisticsByRegion(String region) {
         try {
-            // Query to calculate population statistics for each region
             String query = "SELECT Region, " +
                     "SUM(c.Population) AS TotalPopulation, " +
                     "SUM(CASE WHEN c.ID = co.Capital THEN c.Population ELSE 0 END) AS PopulationInCities, " +
@@ -59,19 +56,18 @@ public class PopulationReport {
                     "WHERE Region = ? " +
                     "GROUP BY Region";
 
-            // Execute the query
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, region);
             ResultSet rs = stmt.executeQuery();
 
-            // Process the result set
-            while (rs.next()) {
-                rs.getInt("TotalPopulation");
-                rs.getInt("PopulationInCities");
-                rs.getInt("PopulationNotInCities");
+            if (rs.next()) {
+                int totalPopulation = rs.getInt("TotalPopulation");
+                int populationInCities = rs.getInt("PopulationInCities");
+                int populationNotInCities = rs.getInt("PopulationNotInCities");
+
+                MarkdownGenerator.generatePopulationStatisticsMarkdown(region, totalPopulation, populationInCities, populationNotInCities);
             }
 
-            // Close the statement and result set
             stmt.close();
             rs.close();
         } catch (SQLException e) {
@@ -81,7 +77,6 @@ public class PopulationReport {
 
     public void generatePopulationStatisticsByCountry(String country) {
         try {
-            // Query to calculate population statistics for each country
             String query = "SELECT Name AS Country, " +
                     "Population AS TotalPopulation, " +
                     "Population AS PopulationInCities, " +
@@ -89,19 +84,18 @@ public class PopulationReport {
                     "FROM country " +
                     "WHERE Name = ?";
 
-            // Execute the query
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, country);
             ResultSet rs = stmt.executeQuery();
 
-            // Process the result set
-            while (rs.next()) {
-                rs.getInt("TotalPopulation");
-                rs.getInt("PopulationInCities");
-                rs.getInt("PopulationNotInCities");
+            if (rs.next()) {
+                int totalPopulation = rs.getInt("TotalPopulation");
+                int populationInCities = rs.getInt("PopulationInCities"); // This will always be equal to TotalPopulation
+                int populationNotInCities = rs.getInt("PopulationNotInCities");
+
+                MarkdownGenerator.generatePopulationStatisticsMarkdown(country, totalPopulation, populationInCities, populationNotInCities);
             }
 
-            // Close the statement and result set
             stmt.close();
             rs.close();
         } catch (SQLException e) {
@@ -109,14 +103,15 @@ public class PopulationReport {
         }
     }
 
+
     public void generateLanguageSpeakersReport() {
         try {
             // Query to get the number of speakers for each language
             String query = "SELECT Language, SUM(Percentage) AS TotalSpeakers " +
-                    "FROM countrylanguage " +
-                    "WHERE Language IN (?, ?, ?, ?, ?) " +
-                    "GROUP BY Language";
-
+                           "FROM countrylanguage " +
+                           "WHERE Language IN (?, ?, ?, ?, ?) " +
+                           "GROUP BY Language";
+    
             // Execute the query
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, "Chinese");
@@ -125,20 +120,20 @@ public class PopulationReport {
             stmt.setString(4, "Spanish");
             stmt.setString(5, "Arabic");
             ResultSet rs = stmt.executeQuery();
-
+    
             // Map to store language and total speakers
             Map<String, Integer> languageSpeakers = new HashMap<>();
-
+    
             // Process the result set
             while (rs.next()) {
                 String language = rs.getString("Language");
                 int totalSpeakers = rs.getInt("TotalSpeakers");
                 languageSpeakers.put(language, totalSpeakers);
             }
-
+    
             // Generate markdown report for language speakers
             MarkdownGenerator.generateLanguageSpeakersReport(languageSpeakers);
-
+    
             // Close the statement and result set
             stmt.close();
             rs.close();
