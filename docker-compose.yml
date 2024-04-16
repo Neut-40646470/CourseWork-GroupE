@@ -19,9 +19,10 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile # Ensure your Dockerfile is correctly pointed at
+      dockerfile: Dockerfile
     environment:
       - MYSQL_HOSTNAME=mysql
+      - MYSQL_PORT=3306
     networks:
       - mylocalnetwork
     depends_on:
