@@ -1,5 +1,5 @@
                                                   
-# Stage 1: Build stage
+# Stage 1: Build-stage
 FROM openjdk:17 as builder
 
 WORKDIR /app
@@ -15,7 +15,7 @@ RUN jar cvfe seMethods.jar com.napier.sem.Main -C /app .
 # Download mysql connector
 RUN curl -o /tmp/mysql-connector-java.jar https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.28/mysql-connector-java-8.0.28.jar
 
-# Stage 2: Runtime stage
+# Stage 2: Runtime-stage
 FROM openjdk:17
 
 WORKDIR /tmp
