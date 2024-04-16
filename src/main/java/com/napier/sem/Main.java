@@ -1,18 +1,21 @@
 package com.napier.sem;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        Connection con = DatabaseConnector.connect();
-        try{
         // Get a database connection
-
+        Connection con = DatabaseConnector.getConnection();
+        try{
+        // Check if the connection is null and attempt to connect to the secondary source
         if (con == null) {
-            System.out.println("Failed to establish a database connection.");
-            return;
+            System.out.println("Primary database connection failed. Attempting secondary connection...");
+            con = DatabaseConnector.getConnection1();
+            if (con == null) {
+                System.err.println("Failed to establish any database connection.");
+                return; // Exit if no connection could be established
+            }
         }
 
             System.out.println("|           Main Class Has Been Executed           |");
@@ -61,15 +64,18 @@ public class Main {
             // Generate language speakers report
             populationReport.generateLanguageSpeakersReport();
 
-        } finally {
-            try {
-                if (con != null) con.close();
-            }catch (SQLException e){
-                System.err.println("|           Main Class Could Not Be Executed           |");
-                System.err.println("Failed to close the database connection.");
-                e.printStackTrace();
+        }
+
+        finally {
+            // Ensure the connection is closed after use
+            if (con != null) {
+                try {
+                    con.close();}
+                catch (SQLException e) {
+                        System.err.println("|           Main Class Could Not Be Executed           |");
+                        e.printStackTrace();
+                    }
             }
         }
     }
 }
-
