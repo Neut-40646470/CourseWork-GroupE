@@ -1,0 +1,9 @@
+blank_issues_enabled: false  # Disables the ability to open blank issues
+
+# Template configuration
+issue_templates:
+  - name: Bug Report
+    about: Create a report to help us fix issues you're experiencing.
+    title: "[BUG]: " # Prefills the title with a bug tag
+    labels: bug # Automatically adds these labels
+    template: bug_report.md
