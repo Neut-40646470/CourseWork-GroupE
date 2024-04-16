@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '17'
+          java-version: '11'
 
       - name: Build / Package - Artifacts Maven
         run: mvn clean package -DskipTests=true
@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '17'
+          java-version: '11'
 
       - name: Run Unit Tests
         run: mvn -Dtest=com.napier.sem.*Test test -e
@@ -57,7 +57,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '17'
+          java-version: '11'
 
       - name: Build / Package - Artifacts Maven
         run: mvn clean package -DskipTests=true
