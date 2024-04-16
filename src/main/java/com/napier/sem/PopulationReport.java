@@ -17,7 +17,6 @@ public class PopulationReport {
 
     public void generatePopulationStatisticsByContinent(String continent) {
         try {
-            // Query to calculate population statistics for each continent
             String query = "SELECT Continent, " +
                     "SUM(c.Population) AS TotalPopulation, " +
                     "SUM(CASE WHEN c.ID = co.Capital THEN c.Population ELSE 0 END) AS PopulationInCities, " +
@@ -27,19 +26,18 @@ public class PopulationReport {
                     "WHERE Continent = ? " +
                     "GROUP BY Continent";
 
-            // Execute the query
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, continent);
             ResultSet rs = stmt.executeQuery();
 
-            // Process the result set
-            while (rs.next()) {
-                rs.getInt("TotalPopulation");
-                rs.getInt("PopulationInCities");
-                rs.getInt("PopulationNotInCities");
+            if (rs.next()) {
+                int totalPopulation = rs.getInt("TotalPopulation");
+                int populationInCities = rs.getInt("PopulationInCities");
+                int populationNotInCities = rs.getInt("PopulationNotInCities");
+
+                MarkdownGenerator.generatePopulationStatisticsMarkdown(continent, totalPopulation, populationInCities, populationNotInCities);
             }
 
-            // Close the statement and result set
             stmt.close();
             rs.close();
         } catch (SQLException e) {
@@ -49,7 +47,6 @@ public class PopulationReport {
 
     public void generatePopulationStatisticsByRegion(String region) {
         try {
-            // Query to calculate population statistics for each region
             String query = "SELECT Region, " +
                     "SUM(c.Population) AS TotalPopulation, " +
                     "SUM(CASE WHEN c.ID = co.Capital THEN c.Population ELSE 0 END) AS PopulationInCities, " +
@@ -59,19 +56,18 @@ public class PopulationReport {
                     "WHERE Region = ? " +
                     "GROUP BY Region";
 
-            // Execute the query
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, region);
             ResultSet rs = stmt.executeQuery();
 
-            // Process the result set
-            while (rs.next()) {
-                rs.getInt("TotalPopulation");
-                rs.getInt("PopulationInCities");
-                rs.getInt("PopulationNotInCities");
+            if (rs.next()) {
+                int totalPopulation = rs.getInt("TotalPopulation");
+                int populationInCities = rs.getInt("PopulationInCities");
+                int populationNotInCities = rs.getInt("PopulationNotInCities");
+
+                MarkdownGenerator.generatePopulationStatisticsMarkdown(region, totalPopulation, populationInCities, populationNotInCities);
             }
 
-            // Close the statement and result set
             stmt.close();
             rs.close();
         } catch (SQLException e) {
@@ -81,7 +77,6 @@ public class PopulationReport {
 
     public void generatePopulationStatisticsByCountry(String country) {
         try {
-            // Query to calculate population statistics for each country
             String query = "SELECT Name AS Country, " +
                     "Population AS TotalPopulation, " +
                     "Population AS PopulationInCities, " +
@@ -89,25 +84,25 @@ public class PopulationReport {
                     "FROM country " +
                     "WHERE Name = ?";
 
-            // Execute the query
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, country);
             ResultSet rs = stmt.executeQuery();
 
-            // Process the result set
-            while (rs.next()) {
-                rs.getInt("TotalPopulation");
-                rs.getInt("PopulationInCities");
-                rs.getInt("PopulationNotInCities");
+            if (rs.next()) {
+                int totalPopulation = rs.getInt("TotalPopulation");
+                int populationInCities = rs.getInt("PopulationInCities"); // This will always be equal to TotalPopulation
+                int populationNotInCities = rs.getInt("PopulationNotInCities");
+
+                MarkdownGenerator.generatePopulationStatisticsMarkdown(country, totalPopulation, populationInCities, populationNotInCities);
             }
 
-            // Close the statement and result set
             stmt.close();
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void generateLanguageSpeakersReport() {
         try {

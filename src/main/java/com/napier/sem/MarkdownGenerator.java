@@ -31,7 +31,7 @@ public class MarkdownGenerator {
                     .append(country.getPopulation()).append(" | ").append(country.getCapital() != null ? country.getCapital() : "N/A")
                     .append(" |\n");
         }
-
+        //Send build report to saveReportToFile()
         saveReportToFile(sb.toString(), filename);
     }
 
@@ -72,7 +72,7 @@ public class MarkdownGenerator {
             sb.append("| ").append(city.getName()).append(" | ").append(city.getCountry()).append(" | ")
                     .append(city.getDistrict()).append(" | ").append(city.getPopulation()).append(" |\n");
         }
-
+        //Send build report to saveReportToFile()
         saveReportToFile(sb.toString(), filename);
     }
 
@@ -87,7 +87,7 @@ public class MarkdownGenerator {
         // Sort cities list in descending order
         Collections.sort(cities, Comparator.comparingInt(City::getPopulation).reversed());
 
-        // Build report
+        // Build report using StringBuilder to layout the markdown file
         StringBuilder sb = new StringBuilder();
         sb.append("# Top ").append(n).append(" Cities Report\n\n");
         sb.append("| Rank | Name | Country | District | Population |\n");
@@ -98,26 +98,28 @@ public class MarkdownGenerator {
                     .append(city.getCountry()).append(" | ").append(city.getDistrict()).append(" | ")
                     .append(city.getPopulation()).append(" |\n");
         }
-
+        //Send StringBuilder report to saveReportToFile()
         saveReportToFile(sb.toString(), filename);
     }
-
+// Method that build the strings for the markdown file for Population Statistics
     public static void generatePopulationStatisticsMarkdown(String location, int totalPopulation, int populationInCities, int populationNotInCities) {
+
         StringBuilder sb = new StringBuilder();
         sb.append("# Population Statistics for ").append(location).append("\n\n");
-        sb.append("Total Population: ").append(totalPopulation).append("\n");
-        sb.append("Population Living in Cities: ").append(populationInCities).append("\n");
-        sb.append("Population Not Living in Cities: ").append(populationNotInCities).append("\n");
-
+        sb.append("| Name | Total Population | Population In city | Population Not In City |\n");
+        sb.append("| ---- | ---------------- | ------------------ | ---------------------- |\n");
+        sb.append("| ").append(location).append(" | ").append(totalPopulation).append(" | ").append(populationInCities).append(" | ").append(populationNotInCities);
+        // Send generated String Builder to saveReportToFile()
         saveReportToFile(sb.toString(), "Population_Statistics_" + location + ".md");
     }
-
+    // Method that build the strings for the markdown file for Language Speakers
     public static void generateLanguageSpeakersReport(Map<String, Integer> languageSpeakers) {
+        // Check if Language Speakers is null or empty and returns error messag
         if (languageSpeakers == null || languageSpeakers.isEmpty()) {
             System.out.println("No language speakers data available.");
             return;
         }
-
+// String Builder to set up the markdown file for Language report
         StringBuilder sb = new StringBuilder();
         sb.append("# Language Speakers Report\n\n");
         sb.append("| Language | Number of Speakers |\n");
@@ -125,13 +127,13 @@ public class MarkdownGenerator {
         for (Map.Entry<String, Integer> entry : languageSpeakers.entrySet()) {
             sb.append("| ").append(entry.getKey()).append(" | ").append(entry.getValue()).append(" |\n");
         }
-
+        //Take StringBuilder and send it to saveReportToFile()
         saveReportToFile(sb.toString(), "Language_Speakers_Report.md");
     }
-
+// Method to safe the report files and store then in the folder report
     private static void saveReportToFile(String content, String filename) {
         try {
-
+// set file variable "directory" to REPORT_DIRECTORY
             File directory = new File(REPORTS_DIRECTORY);
             // Check if the directory exists
             if (!directory.exists()) {
