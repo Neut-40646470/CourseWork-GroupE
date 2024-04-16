@@ -69,16 +69,6 @@ public class CitiesReport {
                 "All_Cities_In_" + district + "_Report.md");
     }
 
-    // Generate report for all capital cities in a country
-//    public void generateAllCapitalCitiesInCountryReport(String country) {
-//        // Retrieve capital cities in the specified country
-//        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTableByCountry(country);
-//        // Generate Markdown report for capital cities in the country
-//        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
-//                "All_Capital_Cities_In_" + country + "_Report.md");
-//    }
-
-
     // Methods for generating reports for top N populated cities
 
     // Generate report for top N populated cities in the world
@@ -268,31 +258,6 @@ public class CitiesReport {
         }
         return capitalCities;
     }
-
-    // Retrieve capital cities by country
-//    public ArrayList<City> getCapitalCitiesFromCountryTableByCountry(String country) {
-//        ArrayList<City> capitalCities = new ArrayList<>();
-//        try (PreparedStatement stmt = con.prepareStatement(
-//                "SELECT ci.Name, ci.CountryCode, ci.District, ci.Population " +
-//                        "FROM city ci " +
-//                        "JOIN country co ON ci.ID = co.Capital " +
-//                        "WHERE co.Name = ?")) {
-//            stmt.setString(1, country);
-//            ResultSet rs = stmt.executeQuery();
-//            // Process query results
-//            while (rs.next()) {
-//                String name = rs.getString("Name");
-//                String countryCode = rs.getString("CountryCode");
-//                String district = rs.getString("District");
-//                int population = rs.getInt("Population");
-//                capitalCities.add(new City(name, countryCode, district, population));
-//            }
-//        } catch (SQLException e) {
-//            // Print stack trace in case of database error
-//            e.printStackTrace();
-//        }
-//        return capitalCities;
-//    }
 
     // Retrieve all capital cities
     public ArrayList<City> getCapitalCitiesFromCountryTable() {
