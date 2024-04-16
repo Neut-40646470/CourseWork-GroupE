@@ -1,13 +1,11 @@
 package com.napier.sem;
-import java.io.*;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
 
 public class CitiesReport {
     private Connection con;
@@ -16,250 +14,272 @@ public class CitiesReport {
         this.con = con;
     }
 
-    public void processCityReport(){
-        App app = new App();
 
+    // Methods for generating reports based on various criteria
 
-            ResultSet allCitiesByWorld = executeQueryFromFile(App.sqlFileBasePath + "ALLCITIESfromWORLD.sql"); // Print Report for allCitiesByWorld taking the file path
-            if (allCitiesByWorld != null) {
-                generateCityReportFromResultSet(allCitiesByWorld, "City_Report_World.md");
-                printCitiesFromWorld("", App.sqlFileBasePath + "ALLCITIESfromWORLD.sql");
-            }
-            ResultSet TopNCitiesByWorld = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCITIESfromWORLD.sql");
-            if (TopNCitiesByWorld != null) {
-                generateCityReportFromResultSet(TopNCitiesByWorld, "Top_N_City_Report_World.md");
-                printTopNCitiesFromWorld("", App.sqlFileBasePath + "TopNpopulatedCITIESfromWORLD.sql");
-            }
-            ResultSet allCitiesByContinent = executeQueryFromFile(App.sqlFileBasePath + "ALLCITIESfromSELECTEDCONTINENT.sql");
-            if (allCitiesByContinent != null) {
-                generateCityReportFromResultSet(allCitiesByContinent, "City_Report_Continent.md");
-                printCitiesFromContinent("", App.sqlFileBasePath + "ALLCITIESfromSELECTEDCONTINENT.sql");
-            }
-            ResultSet TopNCitiesByContinent = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCITIESfromCONTINENT.sql");
-            if (TopNCitiesByContinent != null) {
-                generateCityReportFromResultSet(TopNCitiesByContinent, "Top_N_City_Report_Continent.md");
-                printTopNCitiesFromContinent("", App.sqlFileBasePath + "TopNpopulatedCITIESfromCONTINENT.sql");
-            }
-            ResultSet allCitiesByCountry = executeQueryFromFile(App.sqlFileBasePath + "ALLCITIESfromSELECTEDCOUNTRY.sql");
-            if (allCitiesByCountry != null) {
-                generateCityReportFromResultSet(allCitiesByCountry, "City_Report_Country.md");
-                printCitiesFromCountry("", App.sqlFileBasePath + "ALLCITIESfromSELECTEDCOUNTRY.sql");
-            }
-            ResultSet TopNCitiesByCountry = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCITIESfromCOUNTRY.sql");
-            if (TopNCitiesByCountry != null) {
-                generateCityReportFromResultSet(TopNCitiesByCountry, "Top_N_City_Report_Country.md");
-                printTopNCitiesFromCountry("", App.sqlFileBasePath + "TopNpopulatedCITIESfromCOUNTRY.sql");
-            }
-            ResultSet allCitiesByDistrict = executeQueryFromFile(App.sqlFileBasePath + "ALLCITIESfromSELECTEDDISTRICT.sql");
-            if (allCitiesByDistrict != null) {
-                generateCityReportFromResultSet(allCitiesByDistrict, "City_Report_District.md");
-                printCitiesFromDistrict("", App.sqlFileBasePath + "ALLCITIESfromSELECTEDDISTRICT.sql");
-            }
-            ResultSet TopNCitiesByDistrict = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCITIESfromDISTRICT.sql");
-            if (TopNCitiesByDistrict != null) {
-                generateCityReportFromResultSet(TopNCitiesByDistrict, "Top_N_City_Report_District.md");
-                printTopNCitiesFromDistrict("", App.sqlFileBasePath + "TopNpopulatedCITIESfromDISTRICT.sql");
-            }
-            ResultSet allCitiesByRegion = executeQueryFromFile(App.sqlFileBasePath + "ALLCITIESfromSELECTEDREGION.sql");
-            if (allCitiesByRegion != null) {
-                generateCityReportFromResultSet(allCitiesByRegion, "City_Report_Region.md");
-                printCitiesFromRegion("", App.sqlFileBasePath + "ALLCITIESfromSELECTEDREGION.sql");
-            }
-            ResultSet TopNCitiesByRegion = executeQueryFromFile(App.sqlFileBasePath + "TopNpopulatedCITIESfromREGION.sql");
-            if (TopNCitiesByRegion != null) {
-                generateCityReportFromResultSet(TopNCitiesByRegion, "Top_N_City_Report_Region.md");
-                printTopNCitiesFromRegion("", App.sqlFileBasePath + "TopNpopulatedCITIESfromREGION.sql");
-            }
-
-    }
-    public void generateCityReportFromResultSet(ResultSet resultSet, String filename) {
-        if(resultSet == null)
-        {
-            System.out.println("Cities -- NO Data to precess, SQL file Might not exist offailed ****");
-            return;
-        }
-        try {
-            ArrayList<Cities> cities = new ArrayList<>();
-            while (resultSet.next()) {
-                Cities city = new Cities();
-//                city.ID = resultSet.getInt("ID");
-                city.Name = resultSet.getString("Name");
-//                city.CountryCode = resultSet.getString("CountryCode");
-                city.CountryCode = resultSet.getString("Country");
-                city.District = resultSet.getString("District");
-                city.Population = resultSet.getInt("Population");
-                cities.add(city);
-            }
-            if (!cities.isEmpty()) {
-                generateCityReportMarkdown(cities, filename);
-            } else {
-                System.out.println("No cities found for generating report: " + filename);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error generating city report from ResultSet: " + e.getMessage());
-        }
+    // Generate report for all cities in the world
+    public void generateAllCitiesInWorldReport() {
+        // Retrieve cities ordered by population
+        ArrayList<City> cities = getCitiesByQuery("SELECT * FROM city ORDER BY Population DESC");
+        // Generate Markdown report for all cities in the world
+        MarkdownGenerator.generateCityReportMarkdown(cities, "All_Cities_In_World_Report.md");
     }
 
-    public static void generateCityReportMarkdown(ArrayList<Cities> cities, String filename) {
-        if (cities == null || cities.isEmpty()) {
-            System.out.println("No cities to generate report.");
-            return;
-        }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("# City Report\n\n");
-        sb.append("| Name | Country | District | Population |\n");
-        sb.append("| ---- | ------- | -------- | ---------- |\n");
-        for (Cities city : cities) {
-            sb.append("| " + city.getName() + " | " + city.getCountry() + " | " +
-                    city.getDistrict() + " | " + city.getPopulation() + " |\n");
-        }
-
-        saveReportToFile(sb.toString(), filename);
+    // Generate report for all cities in a continent
+    public void generateAllCitiesInContinentReport(String continent) {
+        // Retrieve cities in the specified continent
+        ArrayList<City> cities = getCitiesByQuery(
+                "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Continent = ?) ORDER BY Population DESC",
+                continent);
+        // Generate Markdown report for cities in the continent
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "All_Cities_In_" + continent + "_Report.md");
     }
 
-    public static void saveReportToFile(String content, String filename) {
-        try {
-            File directory = new File("./reports");
-            if (!directory.exists()) {
-                directory.mkdir();
+    // Generate report for all cities in a region
+    public void generateAllCitiesInRegionReport(String region) {
+        // Retrieve cities in the specified region
+        ArrayList<City> cities = getCitiesByQuery(
+                "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Region = ?) ORDER BY Population DESC",
+                region);
+        // Generate Markdown report for cities in the region
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "All_Cities_In_" + region + "_Report.md");
+    }
+
+    // Generate report for all cities in a country
+    public void generateAllCitiesInCountryReport(String country) {
+        // Retrieve cities in the specified country
+        ArrayList<City> cities = getCitiesByQuery(
+                "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Name = ?) ORDER BY Population DESC",
+                country);
+        // Generate Markdown report for cities in the country
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "All_Cities_In_" + country + "_Report.md");
+    }
+
+    // Generate report for all cities in a district
+    public void generateAllCitiesInDistrictReport(String district) {
+        // Retrieve cities in the specified district
+        ArrayList<City> cities = getCitiesByQuery(
+                "SELECT * FROM city WHERE District = ? ORDER BY Population DESC",
+                district);
+        // Generate Markdown report for cities in the district
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "All_Cities_In_" + district + "_Report.md");
+    }
+
+    // Methods for generating reports for top N populated cities
+
+    // Generate report for top N populated cities in the world
+    public void generateTopNPopulatedCitiesInWorldReport(int N) {
+        // Retrieve top N populated cities in the world
+        ArrayList<City> cities = getCitiesByQuery("SELECT * FROM city ORDER BY Population DESC LIMIT " + N);
+        // Generate Markdown report for top N populated cities in the world
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "Top_" + N + "_Populated_Cities_In_World_Report.md");
+    }
+
+    // Generate report for top N populated cities in a continent
+    public void generateTopNPopulatedCitiesInContinentReport(String continent, int N) {
+        // Retrieve top N populated cities in the specified continent
+        ArrayList<City> cities = getCitiesByQuery(
+                "SELECT * FROM city WHERE CountryCode IN (SELECT Code FROM country WHERE Continent = ?) ORDER BY Population DESC LIMIT " + N,
+                continent);
+        // Generate Markdown report for top N populated cities in the continent
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "Top_" + N + "_Populated_Cities_In_" + continent + "_Report.md");
+    }
+
+    // Generate report for top N populated cities in a region
+    public void generateTopNPopulatedCitiesInRegionReport(String region, int N) {
+        // Retrieve top N populated cities in the specified region
+        ArrayList<City> cities = getCitiesByQuery(
+                "SELECT ci.* FROM city ci " +
+                        "JOIN country co ON ci.CountryCode = co.Code " +
+                        "WHERE co.Region = ? " +
+                        "ORDER BY ci.Population DESC LIMIT " + N,
+                region);
+        // Generate Markdown report for top N populated cities in the region
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "Top_" + N + "_Populated_Cities_In_" + region + "_Report.md");
+    }
+
+    // Generate report for top N populated cities in a country
+    public void generateTopNPopulatedCitiesInCountryReport(String country, int N) {
+        // Retrieve top N populated cities in the specified country
+        ArrayList<City> cities = getCitiesByQuery(
+                "SELECT * FROM city WHERE CountryCode = ? ORDER BY Population DESC LIMIT " + N,
+                country);
+        // Generate Markdown report for top N populated cities in the country
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "Top_" + N + "_Populated_Cities_In_" + country + "_Report.md");
+    }
+
+    // Generate report for top N populated cities in a district
+    public void generateTopNPopulatedCitiesInDistrictReport(String district, int N) {
+        // Retrieve top N populated cities in the specified district
+        ArrayList<City> cities = getCitiesByQuery(
+                "SELECT * FROM city WHERE District = ? ORDER BY Population DESC LIMIT " + N,
+                district);
+        // Generate Markdown report for top N populated cities in the district
+        MarkdownGenerator.generateCityReportMarkdown(cities,
+                "Top_" + N + "_Populated_Cities_In_" + district + "_Report.md");
+    }
+
+    // Methods for generating reports for capital cities
+
+    // Generate report for all capital cities in the world
+    public void generateAllCapitalCitiesInWorldReport() {
+        // Retrieve all capital cities in the world
+        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTable();
+        // Generate Markdown report for all capital cities in the world
+        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
+                "All_Capital_Cities_In_World_Report.md");
+    }
+
+    // Generate report for all capital cities in a continent
+    public void generateAllCapitalCitiesInContinentReport(String continent) {
+        // Retrieve all capital cities in the specified continent
+        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTableByContinent(continent);
+        // Generate Markdown report for all capital cities in the continent
+        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
+                "All_Capital_Cities_In_" + continent + "_Report.md");
+    }
+
+    // Generate report for all capital cities in a region
+    public void generateAllCapitalCitiesInRegionReport(String region) {
+        // Retrieve all capital cities in the specified region
+        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTableByRegion(region);
+        // Generate Markdown report for all capital cities in the region
+        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
+                "All_Capital_Cities_In_" + region + "_Report.md");
+    }
+
+    // Generate report for top N populated capital cities in the world
+    public void generateTopNPopulatedCapitalCitiesInWorldReport(int N) {
+        // Retrieve top N populated capital cities in the world
+        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTable();
+        // Generate Markdown report for top N populated capital cities in the world
+        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
+                "Top_" + N + "_Populated_Capital_Cities_In_World_Report.md");
+    }
+
+    // Generate report for top N populated capital cities in a continent
+    public void generateTopNPopulatedCapitalCitiesInContinentReport(String continent, int N) {
+        // Retrieve top N populated capital cities in the specified continent
+        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTable();
+        // Generate Markdown report for top N populated capital cities in the continent
+        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
+                "Top_" + N + "_Populated_Capital_Cities_In_" + continent + "_Report.md");
+    }
+
+    // Generate report for top N populated capital cities in a region
+    public void generateTopNPopulatedCapitalCitiesInRegionReport(String region, int N) {
+        // Retrieve top N populated capital cities in the specified region
+        ArrayList<City> capitalCities = getCapitalCitiesFromCountryTable();
+        // Generate Markdown report for top N populated capital cities in the region
+        MarkdownGenerator.generateCityReportMarkdown(capitalCities,
+                "Top_" + N + "_Populated_Capital_Cities_In_" + region + "_Report.md");
+    }
+
+    // Private method to execute a SQL query and retrieve cities based on provided criteria
+    private ArrayList<City> getCitiesByQuery(String query, String... parameters) {
+        ArrayList<City> cities = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            // Set query parameters
+            for (int i = 0; i < parameters.length; i++) {
+                stmt.setString(i + 1, parameters[i]);
             }
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(directory, filename)));
-            writer.write(content);
-            writer.close();
-            System.out.println("\n\nCity report generated: " + filename);
-        } catch (IOException e) {
-            System.out.println("Error generating city report: " + e.getMessage());
-        }
-    }
-
-    private String readQueryFromFile(String filePath) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
-        StringBuilder queryBuilder = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null) {
-            queryBuilder.append(line).append("\n");
-        }
-        br.close();
-        return queryBuilder.toString();
-    }
-
-    private void executeQuery(String query, String reportTitle) {
-        try (Statement stmt = con.createStatement()) {
-            ResultSet rs = stmt.executeQuery(query);
-            // Print city report header
-            System.out.println(reportTitle + "\n");
-            System.out.println(String.format("%-30s %-30s %-20s %-15s", "Name", "Country", "District", "Population"));
-            System.out.println("----------------------------------------------------------------------------");
-            // Print cities from the ResultSet
+            ResultSet rs = stmt.executeQuery();
+            // Process query results
             while (rs.next()) {
                 String name = rs.getString("Name");
-                String country = rs.getString("Country");
+                String countryCode = rs.getString("CountryCode");
                 String district = rs.getString("District");
                 int population = rs.getInt("Population");
-                System.out.println(String.format("%-30s %-30s %-20s %-15d", name, country, district, population));
+                cities.add(new City(name, countryCode, district, population));
             }
         } catch (SQLException e) {
-            System.out.println("Error executing SQL query: " + e.getMessage());
+            // Print stack trace in case of database error
+            e.printStackTrace();
         }
+        return cities;
     }
 
-    public ResultSet executeQueryFromFile(String filePath) {
-        try {
-            String query = readQueryFromFile(filePath);
-            Statement stmt = con.createStatement();
-            return stmt.executeQuery(query);
-        } catch (IOException | SQLException e) {
-            System.out.println("Error executing SQL query from file: " + e.getMessage());
-            return null;
+    // Methods to retrieve capital cities from the country table based on different criteria
+
+    // Retrieve capital cities by continent
+    public ArrayList<City> getCapitalCitiesFromCountryTableByContinent(String continent) {
+        ArrayList<City> capitalCities = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(
+                "SELECT ci.Name AS Name, ci.Name AS Country, ci.Population AS Population " +
+                        "FROM world.city ci " +
+                        "JOIN world.country co ON ci.CountryCode = co.Code " +
+                        "WHERE co.Continent = ? AND ci.ID = co.Capital " +
+                        "ORDER BY ci.Population DESC; ")){
+            stmt.setString(1, continent);
+            ResultSet rs = stmt.executeQuery();
+            // Process query results
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String countryCode = rs.getString("Country");
+                int population = rs.getInt("Population");
+                capitalCities.add(new City(name, countryCode, population));
+            }
+        } catch (SQLException e) {
+            // Print stack trace in case of database error
+            e.printStackTrace();
         }
+        return capitalCities;
     }
 
-    public void printCitiesFromContinent(String continent, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", continent);
-            executeQuery(query, "City Report By Continent");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
+    // Retrieve capital cities by region
+    public ArrayList<City> getCapitalCitiesFromCountryTableByRegion(String region) {
+        ArrayList<City> capitalCities = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(
+                "SELECT ci.Name AS Name, ci.Name AS Country, ci.Population AS Population " +
+                        "FROM world.city ci " +
+                        "JOIN world.country co ON ci.CountryCode = co.Code " +
+                        "WHERE co.Region = ? AND ci.ID = co.Capital " +
+                        "ORDER BY ci.Population DESC; ")) {
+            stmt.setString(1, region);
+            ResultSet rs = stmt.executeQuery();
+            // Process query results
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String countryCode = rs.getString("Country");
+                int population = rs.getInt("Population");
+                capitalCities.add(new City(name, countryCode, population));
+            }
+        } catch (SQLException e) {
+            // Print stack trace in case of database error
+            e.printStackTrace();
         }
-    }
-    public void printTopNCitiesFromContinent(String continent, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", continent);
-            executeQuery(query, "Top N City Report By continent");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
-    }
-
-    public void printCitiesFromCountry(String country, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", country);
-            executeQuery(query, "City Report By Country");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
-    }
-
-    public void printTopNCitiesFromCountry(String country, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", country);
-            executeQuery(query, "Top N City Report By Country");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
-    }
-    public void printCitiesFromDistrict(String district, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", district);
-            executeQuery(query, "City Report By District");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
+        return capitalCities;
     }
 
-    public void printTopNCitiesFromDistrict(String district, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", district);
-            executeQuery(query, "Top N City Report By District");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
+    // Retrieve all capital cities
+    public ArrayList<City> getCapitalCitiesFromCountryTable() {
+        ArrayList<City> capitalCities = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(
+                "SELECT ci.Name AS Name, ci.Name AS Country, ci.Population AS Population " +
+                        "FROM world.city ci " +
+                        "JOIN world.country co ON ci.CountryCode = co.Code " +
+                        "WHERE ci.ID = co.Capital " +
+                        "ORDER BY ci.Population DESC; ")) {
+            ResultSet rs = stmt.executeQuery();
+            // Process query results
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String countryCode = rs.getString("Country");
+                int population = rs.getInt("Population");
+                capitalCities.add(new City(name, countryCode, population));
+            }
+        } catch (SQLException e) {
+            // Print stack trace in case of database error
+            e.printStackTrace();
         }
-    }
-
-    public void printCitiesFromRegion(String region, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", region);
-            executeQuery(query, "City Report By Region");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
-    }
-
-    public void printTopNCitiesFromRegion(String region, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", region);
-            executeQuery(query, "Top N City Report By Region");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
-    }
-
-    public void printCitiesFromWorld(String world, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", world);
-            executeQuery(query, "City Report By World");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
-    }
-
-    public void printTopNCitiesFromWorld(String world, String queryFile) {
-        try {
-            String query = readQueryFromFile(queryFile).replace("", world);
-            executeQuery(query, "Top N City Report By World");
-        } catch (IOException e) {
-            System.out.println("Error reading SQL file: " + e.getMessage());
-        }
+        return capitalCities;
     }
 }
