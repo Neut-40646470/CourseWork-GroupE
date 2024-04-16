@@ -31,24 +31,16 @@ public class Main {
             citiesReport.generateAllCitiesInCountryReport("France");
             citiesReport.generateAllCitiesInDistrictReport("Lombardia");
             citiesReport.generateTopNPopulatedCitiesInWorldReport(10);
-            citiesReport.generateTopNPopulatedCitiesInContinentReport("Europe", 5);
+            citiesReport.generateTopNPopulatedCitiesInContinentReport("Europe", 5); 
             citiesReport.generateTopNPopulatedCitiesInRegionReport("Southern Europe", 3);
-            citiesReport.generateTopNPopulatedCitiesInCountryReport("ITA", 7);
-            citiesReport.generateTopNPopulatedCitiesInDistrictReport("Lombardia", 4);
-
-            // Generate Capital Cities Reports
-            citiesReport.generateAllCapitalCitiesInWorldReport();
-            //citiesReport.generateAllCapitalCitiesInCountryReport("");
-            citiesReport.generateAllCapitalCitiesInContinentReport("");
-            citiesReport.generateAllCapitalCitiesInRegionReport("");
-            citiesReport.generateTopNPopulatedCapitalCitiesInWorldReport(69);
-            citiesReport.generateTopNPopulatedCapitalCitiesInContinentReport("",3);
-            citiesReport.generateTopNPopulatedCapitalCitiesInRegionReport("",20);
+            citiesReport.generateTopNPopulatedCitiesInCountryReport("ITA", 7); 
+            citiesReport.generateTopNPopulatedCitiesInDistrictReport("Lombardia", 4); 
 
             // Generate population statistics reports
             populationReport.generatePopulationStatisticsByContinent("Europe");
             populationReport.generatePopulationStatisticsByRegion("Central Africa");
             populationReport.generatePopulationStatisticsByCountry("Germany");
+            citiesReport.generateAllCapitalCitiesInWorldReport();
 
             // Generate language speakers report
             populationReport.generateLanguageSpeakersReport();
