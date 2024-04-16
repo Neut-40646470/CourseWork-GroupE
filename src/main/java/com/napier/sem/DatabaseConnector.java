@@ -10,18 +10,30 @@ public class DatabaseConnector {
 
 
     public static Connection getConnection() {
-        String JDBC_HOSTNAME = System.getenv("MYSQL_HOSTNAME");
-        String JDBC_URL = "jdbc:mysql://" + JDBC_HOSTNAME + ":3306/world";
-        String USERNAME = "root";
-        String PASSWORD = "123";
 
         try {
-            // Check if connection is null or closed and establish new connection if needed
-            if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Could not load SQL driver");
+            System.exit(-1);
+        }
+
+        int retries = 10;
+        for (int i = 0; i < retries; ++i) {
+            System.out.println("Connecting to database...");
+            try {
+                Thread.sleep(5000);
+                connection = DriverManager.getConnection(
+                        "jdbc:mysql://mysql:3306/world?allowPublicKeyRetrieval=true&useSSL=false",
+                        "root", "123");
+                System.out.println("Successfully connected");
+                break;
+            } catch (SQLException sqle) {
+                System.out.println("Failed to connect to database attempt " + i);
+                System.out.println(sqle.getMessage());
+            } catch (InterruptedException ie) {
+                System.out.println("Thread interrupted? Should not happen.");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return connection;
     }

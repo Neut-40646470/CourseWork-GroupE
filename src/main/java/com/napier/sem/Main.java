@@ -6,13 +6,18 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) {
         // Get a database connection
-        try (Connection connection = DatabaseConnector.getConnection()) {
+        Connection con = DatabaseConnector.getConnection();
+        try {
+            if (con == null) {
+                throw new SQLException("Failed to establish database connection.");
+            }
+
             System.out.println("|           Main Class Has Been Executed           |");
 
             // Create CitiesReport and CountryReport instances
-            CitiesReport citiesReport = new CitiesReport(connection);
-            CountryReport countryReport = new CountryReport(connection);
-            PopulationReport populationReport = new PopulationReport(connection);
+            CitiesReport citiesReport = new CitiesReport(con);
+            CountryReport countryReport = new CountryReport(con);
+            PopulationReport populationReport = new PopulationReport(con);
 
             // Generate country report for the world, continent, and region
             countryReport.generateWorldCountryReport();
@@ -42,8 +47,8 @@ public class Main {
             citiesReport.generateAllCapitalCitiesInContinentReport("");
             citiesReport.generateAllCapitalCitiesInRegionReport("");
             citiesReport.generateTopNPopulatedCapitalCitiesInWorldReport(69);
-            citiesReport.generateTopNPopulatedCapitalCitiesInContinentReport("",3);
-            citiesReport.generateTopNPopulatedCapitalCitiesInRegionReport("",20);
+            citiesReport.generateTopNPopulatedCapitalCitiesInContinentReport("", 3);
+            citiesReport.generateTopNPopulatedCapitalCitiesInRegionReport("", 20);
 
             // Generate population statistics reports
             populationReport.generatePopulationStatisticsByContinent("Europe");
@@ -59,3 +64,4 @@ public class Main {
         }
     }
 }
+

@@ -14,6 +14,7 @@ public class CitiesReport {
         this.con = con;
     }
 
+
     // Methods for generating reports based on various criteria
 
     // Generate report for all cities in the world
