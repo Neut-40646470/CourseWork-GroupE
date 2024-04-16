@@ -46,10 +46,9 @@ public class Main {
 
             // Generate Capital Cities Reports
             citiesReport.generateAllCapitalCitiesInWorldReport();
-            //citiesReport.generateAllCapitalCitiesInCountryReport("");
-            citiesReport.generateAllCapitalCitiesInContinentReport("");
-            citiesReport.generateAllCapitalCitiesInRegionReport("");
-            citiesReport.generateTopNPopulatedCapitalCitiesInWorldReport(69);
+            citiesReport.generateAllCapitalCitiesInContinentReport("Oceania");
+            citiesReport.generateAllCapitalCitiesInRegionReport("Middle East");
+            citiesReport.generateTopNPopulatedCapitalCitiesInWorldReport(15);
             citiesReport.generateTopNPopulatedCapitalCitiesInContinentReport("", 3);
             citiesReport.generateTopNPopulatedCapitalCitiesInRegionReport("", 20);
 
