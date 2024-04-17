@@ -1,9 +1,8 @@
----
 name: Bug Report
 description: File a bug report.
 title: "[Bug]: "
 labels: ["bug", "triage"]
----
+assignees: []
 
 body:
   - type: markdown
@@ -16,7 +15,7 @@ body:
     id: reproduce
     attributes:
       label: Steps to Reproduce
-      description: Steps to reproduce the behavior:
+      description: "Steps to reproduce the behavior:"
       placeholder: |
         1. Start the application '...'
         2. Navigate to '...'
@@ -29,8 +28,8 @@ body:
     id: expected-behavior
     attributes:
       label: Expected Behavior
-      description: A clear and concise description of what you expected to happen.
-      placeholder: What you expected to happen when you performed the actions listed above.
+      description: "A clear and concise description of what you expected to happen."
+      placeholder: "What you expected to happen when you performed the actions listed above."
     validations:
       required: true
 
@@ -38,8 +37,8 @@ body:
     id: actual-behavior
     attributes:
       label: Actual Behavior
-      description: Describe what actually happened instead of the expected outcome.
-      placeholder: The actual behavior.
+      description: "Describe what actually happened instead of the expected outcome."
+      placeholder: "The actual behavior."
     validations:
       required: true
 
@@ -47,8 +46,8 @@ body:
     id: screenshots
     attributes:
       label: Screenshots
-      description: If applicable, add screenshots to help explain your problem.
-      placeholder: Provide screenshots here.
+      description: "If applicable, add screenshots to help explain your problem."
+      placeholder: "Provide screenshots here."
     validations:
       required: false
 
@@ -56,7 +55,7 @@ body:
     id: environment
     attributes:
       label: Environment
-      description: Please complete the following information:
+      description: "Please complete the following information:"
       placeholder: |
         - Container (e.g., Docker, Anaconda, Webapp)
         - Application Version (e.g., 1.2.0)
@@ -66,13 +65,13 @@ body:
     id: logs
     attributes:
       label: Logs
-      description: If applicable, include excerpts from log files, error messages, or relevant entries that may help diagnose the issue.
+      description: "If applicable, include excerpts from log files, error messages, or relevant entries that may help diagnose the issue."
       render: shell
-      placeholder: Paste logs here.
+      placeholder: "Paste logs here."
 
   - type: textarea
     id: additional-context
     attributes:
       label: Additional Context
-      description: Add any other context about the problem here, such as the frequency of the issue, its impact on your workflow, or conditions under which the issue appears.
-      placeholder: More info...
+      description: "Add any other context about the problem here, such as the frequency of the issue, its impact on your workflow, or conditions under which the issue appears."
+      placeholder: "More info..."
