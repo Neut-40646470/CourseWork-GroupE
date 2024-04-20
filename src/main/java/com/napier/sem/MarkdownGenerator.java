@@ -56,21 +56,34 @@ public class MarkdownGenerator {
         }
     }
 
-    public static void generateCityReportMarkdown(ArrayList<City> cities, String filename) {
-        // Check if cities is empty
+        public static void generateCityReportMarkdown(ArrayList<City> cities, String filename) {
         if (cities == null || cities.isEmpty()) {
             System.out.println("No cities to generate report.");
             return;
         }
 
-        // Build report
+        // Determine if district information should be included by checking for district using java steam api
+        boolean includeDistrict = cities.stream().anyMatch(city -> city.getDistrict() != null && !city.getDistrict().isEmpty());
+
+        // Build the report
         StringBuilder sb = new StringBuilder();
         sb.append("# City Report\n\n");
-        sb.append("| Name | Country | District | Population |\n");
-        sb.append("| ---- | ------- | -------- | ---------- |\n");
+
+        if (includeDistrict) {
+            sb.append("| Name | Country | District | Population |\n");
+            sb.append("| ---- | ------- | -------- | ---------- |\n");
+        } else {
+            sb.append("| Name | Country | Population |\n");
+            sb.append("| ---- | ------- | ---------- |\n");
+        }
+
         for (City city : cities) {
-            sb.append("| ").append(city.getName()).append(" | ").append(city.getCountry()).append(" | ")
-                    .append(city.getDistrict()).append(" | ").append(city.getPopulation()).append(" |\n");
+            sb.append("| ").append(city.getName()).append(" | ")
+              .append(city.getCountry()).append(" | ");
+            if (includeDistrict) {
+                sb.append(city.getDistrict()).append(" | ");
+            }
+            sb.append(city.getPopulation()).append(" |\n");
         }
 
         saveReportToFile(sb.toString(), filename);
