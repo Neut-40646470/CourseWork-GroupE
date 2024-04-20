@@ -153,21 +153,19 @@ public class MarkdownGenerator {
 
     private static void saveReportToFile(String content, String filename) {
         try {
-
             File directory = new File(REPORTS_DIRECTORY);
-            // Check if the directory exists
-            if (!directory.exists()) {
-                // If not, create directory
-                directory.mkdirs();
-            }
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
 
-            // Create a BufferedWriter object to write to the file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(REPORTS_DIRECTORY + filename)));
+            File reportFile = new File(directory, filename);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(reportFile));
             writer.write(content);
             writer.close();
-            System.out.println("\n\nReport generated: " + REPORTS_DIRECTORY + filename);
+            System.out.println("Report generated: " + reportFile.getAbsolutePath());
         } catch (IOException e) {
             System.out.println("Error generating report: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
