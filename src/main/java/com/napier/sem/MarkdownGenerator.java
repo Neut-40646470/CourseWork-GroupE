@@ -62,22 +62,32 @@ public class MarkdownGenerator {
             return;
         }
 
-        // Start building the report
         StringBuilder sb = new StringBuilder();
         sb.append("# City Report\n\n");
-        sb.append("| Name | Country | District | Population |\n");
-        sb.append("| ---- | ------- | -------- | ---------- |\n");
+
+        // Check if the list contains instances of CapitalCity
+        boolean isCapitalReport = cities.get(0) instanceof CapitalCity;
+
+        if (isCapitalReport) {
+            sb.append("| Name | Country | Population |\n");
+            sb.append("| ---- | ------- | ---------- |\n");
+        } else {
+            sb.append("| Name | Country | District | Population |\n");
+            sb.append("| ---- | ------- | -------- | ---------- |\n");
+        }
 
         for (City city : cities) {
-            sb.append("| ")
-                    .append(city.getName()).append(" | ")
-                    .append(city.getCountry()).append(" | ")
-                    .append(city.getDistrict() != null ? city.getDistrict() : "N/A").append(" | ")
-                    .append(city.getPopulation()).append(" |\n");
+            sb.append("| ").append(city.getName()).append(" | ")
+                    .append(city.getCountry()).append(" | ");
+            if (!isCapitalReport) {
+                sb.append(city.getDistrict()).append(" | ");
+            }
+            sb.append(city.getPopulation()).append(" |\n");
         }
 
         saveReportToFile(sb.toString(), filename);
     }
+
 
     public static void generateCapitalCityReportMarkdown(ArrayList<CapitalCity> capitalCities, String filename) {
         if (capitalCities == null || capitalCities.isEmpty()) {
