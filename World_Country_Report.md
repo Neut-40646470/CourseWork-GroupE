@@ -2,7 +2,7 @@
 
 | Code | Name | Continent | Region | Population | Capital |
 | ---- | ---- | --------- | ------ | ---------- | ------- |
-| ABW | Aruba | North America | Caribbean | 103000 | 129 |
+| ABW | Aruba | North America | Caribbean | 103001 | 129 |
 | AFG | Afghanistan | Asia | Southern and Central Asia | 22720000 | 1 |
 | AGO | Angola | Africa | Central Africa | 12878000 | 56 |
 | AIA | Anguilla | North America | Caribbean | 8000 | 62 |
