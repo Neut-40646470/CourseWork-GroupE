@@ -66,10 +66,6 @@ jobs:
       - name: Build / Package - Artifacts Maven
         run: mvn clean package -DskipTests=true
 
-      - name: List reports
-        run: ls -la /tmp/reports/
-
-
       - name: Zip reports
         run: zip -r reports.zip reports/*.md
 
