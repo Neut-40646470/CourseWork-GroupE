@@ -49,8 +49,8 @@ public class Main {
             citiesReport.generateAllCapitalCitiesInContinentReport("Oceania");
             citiesReport.generateAllCapitalCitiesInRegionReport("Middle East");
             citiesReport.generateTopNPopulatedCapitalCitiesInWorldReport(15);
-            citiesReport.generateTopNPopulatedCapitalCitiesInContinentReport("", 3);
-            citiesReport.generateTopNPopulatedCapitalCitiesInRegionReport("", 20);
+            citiesReport.generateTopNPopulatedCapitalCitiesInContinentReport("Europe", 3);
+            citiesReport.generateTopNPopulatedCapitalCitiesInRegionReport("Lombardia", 20);
 
             // Generate population statistics reports
             populationReport.generatePopulationStatisticsByContinent("Europe");
