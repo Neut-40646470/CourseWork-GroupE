@@ -1,15 +1,13 @@
 package com.napier.sem;
 
-public class City {
+public class CapitalCity {
     private String name;
     private String country;
-    private String district;
     private int population;
 
-    public City(String name, String country, String district, int population) {
+    public CapitalCity(String name, String country, int population) {
         this.name = name;
         this.country = country;
-        this.district = district;
         this.population = population;
     }
 
@@ -17,15 +15,9 @@ public class City {
     public String getName() {
         return name;
     }
-
     public String getCountry() {
         return country;
     }
-
-    public String getDistrict() {
-        return district;
-    }
-
     public int getPopulation() {
         return population;
     }

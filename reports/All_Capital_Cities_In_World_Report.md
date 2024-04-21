@@ -1,236 +1,236 @@
-# City Report
+# Capital City Report
 
-| Name | Country | District | Population |
-| ---- | ------- | -------- | ---------- |
-| Seoul | Seoul | null | 9981619 |
-| Jakarta | Jakarta | null | 9604900 |
-| Ciudad de México | Ciudad de México | null | 8591309 |
-| Moscow | Moscow | null | 8389200 |
-| Tokyo | Tokyo | null | 7980230 |
-| Peking | Peking | null | 7472000 |
-| London | London | null | 7285000 |
-| Cairo | Cairo | null | 6789479 |
-| Teheran | Teheran | null | 6758845 |
-| Lima | Lima | null | 6464693 |
-| Bangkok | Bangkok | null | 6320174 |
-| Santafé de Bogotá | Santafé de Bogotá | null | 6260862 |
-| Kinshasa | Kinshasa | null | 5064000 |
-| Santiago de Chile | Santiago de Chile | null | 4703954 |
-| Baghdad | Baghdad | null | 4336000 |
-| Singapore | Singapore | null | 4017733 |
-| Dhaka | Dhaka | null | 3612850 |
-| Berlin | Berlin | null | 3386667 |
-| Rangoon (Yangon) | Rangoon (Yangon) | null | 3361700 |
-| Riyadh | Riyadh | null | 3324000 |
-| Ankara | Ankara | null | 3038159 |
-| Buenos Aires | Buenos Aires | null | 2982146 |
-| Madrid | Madrid | null | 2879052 |
-| Roma | Roma | null | 2643581 |
-| Taipei | Taipei | null | 2641312 |
-| Kyiv | Kyiv | null | 2624000 |
-| Addis Abeba | Addis Abeba | null | 2495000 |
-| Pyongyang | Pyongyang | null | 2484000 |
-| Nairobi | Nairobi | null | 2290000 |
-| La Habana | La Habana | null | 2256000 |
-| Alger | Alger | null | 2168000 |
-| Paris | Paris | null | 2125246 |
-| Toskent | Toskent | null | 2117500 |
-| Luanda | Luanda | null | 2022000 |
-| Bucuresti | Bucuresti | null | 2016131 |
-| Caracas | Caracas | null | 1975294 |
-| Brasília | Brasília | null | 1969868 |
-| Budapest | Budapest | null | 1811552 |
-| Bakı | Bakı | null | 1787800 |
-| Kabul | Kabul | null | 1780000 |
-| Tripoli | Tripoli | null | 1682000 |
-| Minsk | Minsk | null | 1674000 |
-| Warszawa | Warszawa | null | 1615369 |
-| Santo Domingo de Guzmán | Santo Domingo de Guzmán | null | 1609966 |
-| Wien | Wien | null | 1608144 |
-| Manila | Manila | null | 1581082 |
-| Quito | Quito | null | 1573458 |
-| Hanoi | Hanoi | null | 1410000 |
-| Harare | Harare | null | 1410000 |
-| Yaoundé | Yaoundé | null | 1372800 |
-| Damascus | Damascus | null | 1347000 |
-| Lusaka | Lusaka | null | 1317000 |
-| Victoria | Victoria | null | 1312637 |
-| Kuala Lumpur | Kuala Lumpur | null | 1297526 |
-| Yerevan | Yerevan | null | 1248700 |
-| Montevideo | Montevideo | null | 1236000 |
-| Tbilisi | Tbilisi | null | 1235200 |
-| Beograd | Beograd | null | 1204000 |
-| Praha | Praha | null | 1181126 |
-| Sofija | Sofija | null | 1122302 |
-| Beirut | Beirut | null | 1100000 |
-| Conakry | Conakry | null | 1090610 |
-| Accra | Accra | null | 1070000 |
-| Maputo | Maputo | null | 1018938 |
-| Amman | Amman | null | 1000000 |
-| Mogadishu | Mogadishu | null | 997000 |
-| Managua | Managua | null | 959000 |
-| Brazzaville | Brazzaville | null | 950000 |
-| Khartum | Khartum | null | 947483 |
-| Kampala | Kampala | null | 890800 |
-| Port-au-Prince | Port-au-Prince | null | 884472 |
-| Monrovia | Monrovia | null | 850000 |
-| Freetown | Freetown | null | 850000 |
-| Ouagadougou | Ouagadougou | null | 824000 |
-| Ciudad de Guatemala | Ciudad de Guatemala | null | 823301 |
-| Tegucigalpa | Tegucigalpa | null | 813900 |
-| Bamako | Bamako | null | 809552 |
-| Dakar | Dakar | null | 785071 |
-| Ulan Bator | Ulan Bator | null | 773700 |
-| Athenai | Athenai | null | 772072 |
-| Riga | Riga | null | 764328 |
-| La Paz | La Paz | null | 758141 |
-| Stockholm | Stockholm | null | 750348 |
-| Amsterdam | Amsterdam | null | 731200 |
-| Chisinau | Chisinau | null | 719900 |
-| Zagreb | Zagreb | null | 706770 |
-| Tunis | Tunis | null | 690600 |
-| Antananarivo | Antananarivo | null | 675669 |
-| Nouakchott | Nouakchott | null | 667300 |
-| Pretoria | Pretoria | null | 658630 |
-| Colombo | Colombo | null | 645000 |
-| Jerusalem | Jerusalem | null | 633700 |
-| Rabat | Rabat | null | 623457 |
-| Kathmandu | Kathmandu | null | 591835 |
-| Bishkek | Bishkek | null | 589400 |
-| Vilnius | Vilnius | null | 577969 |
-| Washington | Washington | null | 572059 |
-| Phnom Penh | Phnom Penh | null | 570155 |
-| Lisboa | Lisboa | null | 563210 |
-| Asunción | Asunción | null | 557776 |
-| Helsinki [Helsingfors] | Helsinki [Helsingfors] | null | 555474 |
-| Ashgabat | Ashgabat | null | 540600 |
-| Vientiane | Vientiane | null | 531800 |
-| N´Djaména | N´Djaména | null | 530965 |
-| Islamabad | Islamabad | null | 524500 |
-| Bangui | Bangui | null | 524000 |
-| Dushanbe | Dushanbe | null | 524000 |
-| Oslo | Oslo | null | 508726 |
-| Sanaa | Sanaa | null | 503600 |
-| København | København | null | 495699 |
-| Dublin | Dublin | null | 481854 |
-| Ciudad de Panamá | Ciudad de Panamá | null | 471373 |
-| Bratislava | Bratislava | null | 448292 |
-| Skopje | Skopje | null | 444299 |
-| Macao | Macao | null | 437500 |
-| Lilongwe | Lilongwe | null | 435964 |
-| San Juan | San Juan | null | 434374 |
-| Asmara | Asmara | null | 431000 |
-| Niamey | Niamey | null | 420000 |
-| Libreville | Libreville | null | 419000 |
-| San Salvador | San Salvador | null | 415346 |
-| Tallinn | Tallinn | null | 403981 |
-| Abu Dhabi | Abu Dhabi | null | 398695 |
-| Djibouti | Djibouti | null | 383000 |
-| Lomé | Lomé | null | 375000 |
-| Sarajevo | Sarajevo | null | 360000 |
-| Doha | Doha | null | 355000 |
-| Gaza | Gaza | null | 353632 |
-| Abuja | Abuja | null | 350100 |
-| San José | San José | null | 339131 |
-| Ottawa | Ottawa | null | 335277 |
-| Canberra | Canberra | null | 322723 |
-| Astana | Astana | null | 311200 |
-| New Delhi | New Delhi | null | 301297 |
-| Bujumbura | Bujumbura | null | 300000 |
-| Maseru | Maseru | null | 297000 |
-| Kigali | Kigali | null | 286000 |
-| Ljubljana | Ljubljana | null | 270986 |
-| Tirana | Tirana | null | 270000 |
-| Georgetown | Georgetown | null | 254000 |
-| Port Moresby | Port Moresby | null | 247000 |
-| Bissau | Bissau | null | 241000 |
-| Gaborone | Gaborone | null | 213017 |
-| Nicosia | Nicosia | null | 195000 |
-| Porto-Novo | Porto-Novo | null | 194000 |
-| Dodoma | Dodoma | null | 189000 |
-| Nassau | Nassau | null | 172000 |
-| El-Aaiún | El-Aaiún | null | 169000 |
-| Windhoek | Windhoek | null | 169000 |
-| Wellington | Wellington | null | 166700 |
-| al-Manama | al-Manama | null | 148000 |
-| Port-Louis | Port-Louis | null | 138200 |
-| Bruxelles [Brussel] | Bruxelles [Brussel] | null | 133859 |
-| Saint-Denis | Saint-Denis | null | 131480 |
-| Yamoussoukro | Yamoussoukro | null | 130000 |
-| Bern | Bern | null | 122700 |
-| Paramaribo | Paramaribo | null | 112000 |
-| Reykjavík | Reykjavík | null | 109184 |
-| Kingston | Kingston | null | 103962 |
-| Praia | Praia | null | 94800 |
-| Fort-de-France | Fort-de-France | null | 94050 |
-| Luxembourg [Luxemburg/Lëtzebuerg] | Luxembourg [Luxemburg/Lëtzebuerg] | null | 80700 |
-| Suva | Suva | null | 77366 |
-| Nouméa | Nouméa | null | 76293 |
-| Male | Male | null | 71000 |
-| Mbabane | Mbabane | null | 61000 |
-| Masqat | Masqat | null | 51969 |
-| Cayenne | Cayenne | null | 50699 |
-| Honiara | Honiara | null | 50100 |
-| São Tomé | São Tomé | null | 49541 |
-| Dili | Dili | null | 47900 |
-| Port-of-Spain | Port-of-Spain | null | 43396 |
-| Banjul | Banjul | null | 42326 |
-| Victoria | Victoria | null | 41000 |
-| Malabo | Malabo | null | 40000 |
-| Moroni | Moroni | null | 36000 |
-| Apia | Apia | null | 35900 |
-| Port-Vila | Port-Vila | null | 33700 |
-| Oranjestad | Oranjestad | null | 29034 |
-| Kuwait | Kuwait | null | 28859 |
-| Dalap-Uliga-Darrit | Dalap-Uliga-Darrit | null | 28000 |
-| Gibraltar | Gibraltar | null | 27025 |
-| Papeete | Papeete | null | 25553 |
-| Saint John´s | Saint John´s | null | 24000 |
-| Nuku´alofa | Nuku´alofa | null | 22400 |
-| Thimphu | Thimphu | null | 22000 |
-| Bandar Seri Begawan | Bandar Seri Begawan | null | 21484 |
-| Andorra la Vella | Andorra la Vella | null | 21189 |
-| George Town | George Town | null | 19600 |
-| Kingstown | Kingstown | null | 17100 |
-| Roseau | Roseau | null | 16243 |
-| Tórshavn | Tórshavn | null | 14542 |
-| Nuuk | Nuuk | null | 13445 |
-| Charlotte Amalie | Charlotte Amalie | null | 13000 |
-| Basse-Terre | Basse-Terre | null | 12433 |
-| Mamoutzou | Mamoutzou | null | 12000 |
-| Koror | Koror | null | 12000 |
-| Avarua | Avarua | null | 11900 |
-| Basseterre | Basseterre | null | 11600 |
-| Garapan | Garapan | null | 9200 |
-| Palikir | Palikir | null | 8600 |
-| Road Town | Road Town | null | 8000 |
-| Belmopan | Belmopan | null | 7105 |
-| Valletta | Valletta | null | 7073 |
-| Bridgetown | Bridgetown | null | 6070 |
-| Saint-Pierre | Saint-Pierre | null | 5808 |
-| Vaduz | Vaduz | null | 5043 |
-| Cockburn Town | Cockburn Town | null | 4800 |
-| Saint George´s | Saint George´s | null | 4621 |
-| Funafuti | Funafuti | null | 4600 |
-| Willemstad | Willemstad | null | 2345 |
-| Fagatogo | Fagatogo | null | 2323 |
-| Castries | Castries | null | 2301 |
-| San Marino | San Marino | null | 2294 |
-| Bairiki | Bairiki | null | 2226 |
-| Plymouth | Plymouth | null | 2000 |
-| Stanley | Stanley | null | 1636 |
-| Jamestown | Jamestown | null | 1500 |
-| Longyearbyen | Longyearbyen | null | 1438 |
-| Monaco-Ville | Monaco-Ville | null | 1234 |
-| Hamilton | Hamilton | null | 1200 |
-| Agaña | Agaña | null | 1139 |
-| Mata-Utu | Mata-Utu | null | 1137 |
-| Kingston | Kingston | null | 800 |
-| Flying Fish Cove | Flying Fish Cove | null | 700 |
-| Alofi | Alofi | null | 682 |
-| The Valley | The Valley | null | 595 |
-| Yaren | Yaren | null | 559 |
-| Città del Vaticano | Città del Vaticano | null | 455 |
-| Fakaofo | Fakaofo | null | 300 |
-| West Island | West Island | null | 167 |
-| Adamstown | Adamstown | null | 42 |
+| Name | Country | Population |
+| ---- | ------- | ---------- |
+| Seoul | South Korea | 9981619 |
+| Jakarta | Indonesia | 9604900 |
+| Ciudad de México | Mexico | 8591309 |
+| Moscow | Russian Federation | 8389200 |
+| Tokyo | Japan | 7980230 |
+| Peking | China | 7472000 |
+| London | United Kingdom | 7285000 |
+| Cairo | Egypt | 6789479 |
+| Teheran | Iran | 6758845 |
+| Lima | Peru | 6464693 |
+| Bangkok | Thailand | 6320174 |
+| Santafé de Bogotá | Colombia | 6260862 |
+| Kinshasa | Congo, The Democratic Republic of the | 5064000 |
+| Santiago de Chile | Chile | 4703954 |
+| Baghdad | Iraq | 4336000 |
+| Singapore | Singapore | 4017733 |
+| Dhaka | Bangladesh | 3612850 |
+| Berlin | Germany | 3386667 |
+| Rangoon (Yangon) | Myanmar | 3361700 |
+| Riyadh | Saudi Arabia | 3324000 |
+| Ankara | Turkey | 3038159 |
+| Buenos Aires | Argentina | 2982146 |
+| Madrid | Spain | 2879052 |
+| Roma | Italy | 2643581 |
+| Taipei | Taiwan | 2641312 |
+| Kyiv | Ukraine | 2624000 |
+| Addis Abeba | Ethiopia | 2495000 |
+| Pyongyang | North Korea | 2484000 |
+| Nairobi | Kenya | 2290000 |
+| La Habana | Cuba | 2256000 |
+| Alger | Algeria | 2168000 |
+| Paris | France | 2125246 |
+| Toskent | Uzbekistan | 2117500 |
+| Luanda | Angola | 2022000 |
+| Bucuresti | Romania | 2016131 |
+| Caracas | Venezuela | 1975294 |
+| Brasília | Brazil | 1969868 |
+| Budapest | Hungary | 1811552 |
+| Bakı | Azerbaijan | 1787800 |
+| Kabul | Afghanistan | 1780000 |
+| Tripoli | Libyan Arab Jamahiriya | 1682000 |
+| Minsk | Belarus | 1674000 |
+| Warszawa | Poland | 1615369 |
+| Santo Domingo de Guzmán | Dominican Republic | 1609966 |
+| Wien | Austria | 1608144 |
+| Manila | Philippines | 1581082 |
+| Quito | Ecuador | 1573458 |
+| Harare | Zimbabwe | 1410000 |
+| Hanoi | Vietnam | 1410000 |
+| Yaoundé | Cameroon | 1372800 |
+| Damascus | Syria | 1347000 |
+| Lusaka | Zambia | 1317000 |
+| Victoria | Hong Kong | 1312637 |
+| Kuala Lumpur | Malaysia | 1297526 |
+| Yerevan | Armenia | 1248700 |
+| Montevideo | Uruguay | 1236000 |
+| Tbilisi | Georgia | 1235200 |
+| Beograd | Yugoslavia | 1204000 |
+| Praha | Czech Republic | 1181126 |
+| Sofija | Bulgaria | 1122302 |
+| Beirut | Lebanon | 1100000 |
+| Conakry | Guinea | 1090610 |
+| Accra | Ghana | 1070000 |
+| Maputo | Mozambique | 1018938 |
+| Amman | Jordan | 1000000 |
+| Mogadishu | Somalia | 997000 |
+| Managua | Nicaragua | 959000 |
+| Brazzaville | Congo | 950000 |
+| Khartum | Sudan | 947483 |
+| Kampala | Uganda | 890800 |
+| Port-au-Prince | Haiti | 884472 |
+| Monrovia | Liberia | 850000 |
+| Freetown | Sierra Leone | 850000 |
+| Ouagadougou | Burkina Faso | 824000 |
+| Ciudad de Guatemala | Guatemala | 823301 |
+| Tegucigalpa | Honduras | 813900 |
+| Bamako | Mali | 809552 |
+| Dakar | Senegal | 785071 |
+| Ulan Bator | Mongolia | 773700 |
+| Athenai | Greece | 772072 |
+| Riga | Latvia | 764328 |
+| La Paz | Bolivia | 758141 |
+| Stockholm | Sweden | 750348 |
+| Amsterdam | Netherlands | 731200 |
+| Chisinau | Moldova | 719900 |
+| Zagreb | Croatia | 706770 |
+| Tunis | Tunisia | 690600 |
+| Antananarivo | Madagascar | 675669 |
+| Nouakchott | Mauritania | 667300 |
+| Pretoria | South Africa | 658630 |
+| Colombo | Sri Lanka | 645000 |
+| Jerusalem | Israel | 633700 |
+| Rabat | Morocco | 623457 |
+| Kathmandu | Nepal | 591835 |
+| Bishkek | Kyrgyzstan | 589400 |
+| Vilnius | Lithuania | 577969 |
+| Washington | United States | 572059 |
+| Phnom Penh | Cambodia | 570155 |
+| Lisboa | Portugal | 563210 |
+| Asunción | Paraguay | 557776 |
+| Helsinki [Helsingfors] | Finland | 555474 |
+| Ashgabat | Turkmenistan | 540600 |
+| Vientiane | Laos | 531800 |
+| N´Djaména | Chad | 530965 |
+| Islamabad | Pakistan | 524500 |
+| Dushanbe | Tajikistan | 524000 |
+| Bangui | Central African Republic | 524000 |
+| Oslo | Norway | 508726 |
+| Sanaa | Yemen | 503600 |
+| København | Denmark | 495699 |
+| Dublin | Ireland | 481854 |
+| Ciudad de Panamá | Panama | 471373 |
+| Bratislava | Slovakia | 448292 |
+| Skopje | Macedonia | 444299 |
+| Macao | Macao | 437500 |
+| Lilongwe | Malawi | 435964 |
+| San Juan | Puerto Rico | 434374 |
+| Asmara | Eritrea | 431000 |
+| Niamey | Niger | 420000 |
+| Libreville | Gabon | 419000 |
+| San Salvador | El Salvador | 415346 |
+| Tallinn | Estonia | 403981 |
+| Abu Dhabi | United Arab Emirates | 398695 |
+| Djibouti | Djibouti | 383000 |
+| Lomé | Togo | 375000 |
+| Sarajevo | Bosnia and Herzegovina | 360000 |
+| Doha | Qatar | 355000 |
+| Gaza | Palestine | 353632 |
+| Abuja | Nigeria | 350100 |
+| San José | Costa Rica | 339131 |
+| Ottawa | Canada | 335277 |
+| Canberra | Australia | 322723 |
+| Astana | Kazakstan | 311200 |
+| New Delhi | India | 301297 |
+| Bujumbura | Burundi | 300000 |
+| Maseru | Lesotho | 297000 |
+| Kigali | Rwanda | 286000 |
+| Ljubljana | Slovenia | 270986 |
+| Tirana | Albania | 270000 |
+| Georgetown | Guyana | 254000 |
+| Port Moresby | Papua New Guinea | 247000 |
+| Bissau | Guinea-Bissau | 241000 |
+| Gaborone | Botswana | 213017 |
+| Nicosia | Cyprus | 195000 |
+| Porto-Novo | Benin | 194000 |
+| Dodoma | Tanzania | 189000 |
+| Nassau | Bahamas | 172000 |
+| El-Aaiún | Western Sahara | 169000 |
+| Windhoek | Namibia | 169000 |
+| Wellington | New Zealand | 166700 |
+| al-Manama | Bahrain | 148000 |
+| Port-Louis | Mauritius | 138200 |
+| Bruxelles [Brussel] | Belgium | 133859 |
+| Saint-Denis | Réunion | 131480 |
+| Yamoussoukro | Côte d’Ivoire | 130000 |
+| Bern | Switzerland | 122700 |
+| Paramaribo | Suriname | 112000 |
+| Reykjavík | Iceland | 109184 |
+| Kingston | Jamaica | 103962 |
+| Praia | Cape Verde | 94800 |
+| Fort-de-France | Martinique | 94050 |
+| Luxembourg [Luxemburg/Lëtzebuerg] | Luxembourg | 80700 |
+| Suva | Fiji Islands | 77366 |
+| Nouméa | New Caledonia | 76293 |
+| Male | Maldives | 71000 |
+| Mbabane | Swaziland | 61000 |
+| Masqat | Oman | 51969 |
+| Cayenne | French Guiana | 50699 |
+| Honiara | Solomon Islands | 50100 |
+| São Tomé | Sao Tome and Principe | 49541 |
+| Dili | East Timor | 47900 |
+| Port-of-Spain | Trinidad and Tobago | 43396 |
+| Banjul | Gambia | 42326 |
+| Victoria | Seychelles | 41000 |
+| Malabo | Equatorial Guinea | 40000 |
+| Moroni | Comoros | 36000 |
+| Apia | Samoa | 35900 |
+| Port-Vila | Vanuatu | 33700 |
+| Oranjestad | Aruba | 29034 |
+| Kuwait | Kuwait | 28859 |
+| Dalap-Uliga-Darrit | Marshall Islands | 28000 |
+| Gibraltar | Gibraltar | 27025 |
+| Papeete | French Polynesia | 25553 |
+| Saint John´s | Antigua and Barbuda | 24000 |
+| Nuku´alofa | Tonga | 22400 |
+| Thimphu | Bhutan | 22000 |
+| Bandar Seri Begawan | Brunei | 21484 |
+| Andorra la Vella | Andorra | 21189 |
+| George Town | Cayman Islands | 19600 |
+| Kingstown | Saint Vincent and the Grenadines | 17100 |
+| Roseau | Dominica | 16243 |
+| Tórshavn | Faroe Islands | 14542 |
+| Nuuk | Greenland | 13445 |
+| Charlotte Amalie | Virgin Islands, U.S. | 13000 |
+| Basse-Terre | Guadeloupe | 12433 |
+| Mamoutzou | Mayotte | 12000 |
+| Koror | Palau | 12000 |
+| Avarua | Cook Islands | 11900 |
+| Basseterre | Saint Kitts and Nevis | 11600 |
+| Garapan | Northern Mariana Islands | 9200 |
+| Palikir | Micronesia, Federated States of | 8600 |
+| Road Town | Virgin Islands, British | 8000 |
+| Belmopan | Belize | 7105 |
+| Valletta | Malta | 7073 |
+| Bridgetown | Barbados | 6070 |
+| Saint-Pierre | Saint Pierre and Miquelon | 5808 |
+| Vaduz | Liechtenstein | 5043 |
+| Cockburn Town | Turks and Caicos Islands | 4800 |
+| Saint George´s | Grenada | 4621 |
+| Funafuti | Tuvalu | 4600 |
+| Willemstad | Netherlands Antilles | 2345 |
+| Fagatogo | American Samoa | 2323 |
+| Castries | Saint Lucia | 2301 |
+| San Marino | San Marino | 2294 |
+| Bairiki | Kiribati | 2226 |
+| Plymouth | Montserrat | 2000 |
+| Stanley | Falkland Islands | 1636 |
+| Jamestown | Saint Helena | 1500 |
+| Longyearbyen | Svalbard and Jan Mayen | 1438 |
+| Monaco-Ville | Monaco | 1234 |
+| Hamilton | Bermuda | 1200 |
+| Agaña | Guam | 1139 |
+| Mata-Utu | Wallis and Futuna | 1137 |
+| Kingston | Norfolk Island | 800 |
+| Flying Fish Cove | Christmas Island | 700 |
+| Alofi | Niue | 682 |
+| The Valley | Anguilla | 595 |
+| Yaren | Nauru | 559 |
+| Città del Vaticano | Holy See (Vatican City State) | 455 |
+| Fakaofo | Tokelau | 300 |
+| West Island | Cocos (Keeling) Islands | 167 |
+| Adamstown | Pitcairn | 42 |

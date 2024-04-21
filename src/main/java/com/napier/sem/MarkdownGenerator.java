@@ -57,25 +57,43 @@ public class MarkdownGenerator {
     }
 
     public static void generateCityReportMarkdown(ArrayList<City> cities, String filename) {
-        // Check if cities is empty
         if (cities == null || cities.isEmpty()) {
             System.out.println("No cities to generate report.");
             return;
         }
 
-        // Build report
         StringBuilder sb = new StringBuilder();
         sb.append("# City Report\n\n");
         sb.append("| Name | Country | District | Population |\n");
         sb.append("| ---- | ------- | -------- | ---------- |\n");
+
         for (City city : cities) {
-            sb.append("| ").append(city.getName()).append(" | ").append(city.getCountry()).append(" | ")
-                    .append(city.getDistrict()).append(" | ").append(city.getPopulation()).append(" |\n");
+            sb.append("| ")
+                    .append(city.getName()).append(" | ")
+                    .append(city.getCountry()).append(" | ")
+                    .append(city.getDistrict()).append(" | ")
+                    .append(city.getPopulation()).append(" |\n");
         }
 
         saveReportToFile(sb.toString(), filename);
     }
 
+    public static void generateCapitalCityReportMarkdown(ArrayList<CapitalCity> capitalCities, String filename) {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("# Capital City Report\n\n");
+        sb.append("| Name | Country | Population |\n");
+        sb.append("| ---- | ------- | ---------- |\n");
+
+        for (CapitalCity city : capitalCities) {
+            sb.append("| ")
+                    .append(city.getName()).append(" | ")
+                    .append(city.getCountry()).append(" | ")
+                    .append(city.getPopulation()).append(" |\n");
+        }
+
+        saveReportToFile(sb.toString(), filename);
+    }
 
     public static void generateTopNCitiesReportMarkdown(ArrayList<City> cities, String filename, int n) {
         // Check if n has been set and if cities is empty
@@ -131,21 +149,19 @@ public class MarkdownGenerator {
 
     private static void saveReportToFile(String content, String filename) {
         try {
-
             File directory = new File(REPORTS_DIRECTORY);
-            // Check if the directory exists
-            if (!directory.exists()) {
-                // If not, create directory
-                directory.mkdirs();
-            }
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
 
-            // Create a BufferedWriter object to write to the file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(REPORTS_DIRECTORY + filename)));
+            File reportFile = new File(directory, filename);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(reportFile));
             writer.write(content);
             writer.close();
-            System.out.println("\n\nReport generated: " + REPORTS_DIRECTORY + filename);
+            System.out.println("Report generated: " + reportFile.getAbsolutePath());
         } catch (IOException e) {
             System.out.println("Error generating report: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
