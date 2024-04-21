@@ -24,9 +24,6 @@ jobs:
       - name: Start Docker Compose
         run: docker-compose up --build --abort-on-container-exit
 
-      - name: List reports
-        run: ls -la /tmp/reports/
-
 
       - name: Stop MySQL container
         run: docker-compose stop mysql
