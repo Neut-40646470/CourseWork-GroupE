@@ -79,10 +79,6 @@ public class MarkdownGenerator {
     }
 
     public static void generateCapitalCityReportMarkdown(ArrayList<CapitalCity> capitalCities, String filename) {
-        if (capitalCities == null || capitalCities.isEmpty()) {
-            System.out.println("No capital cities to generate report.");
-            return;
-        }
 
         StringBuilder sb = new StringBuilder();
         sb.append("# Capital City Report\n\n");
